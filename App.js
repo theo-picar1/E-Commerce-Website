@@ -1,9 +1,8 @@
 import React, {Component} from "react"
 
-import "bootstrap/dist/css/bootstrap.css"
 import "./css/App.css"
 
-import CountriesForm from "./components/CountriesForm"
+import ECommerceForm from "./components/CountriesForm"
     
 export default class App extends Component 
 {
@@ -11,7 +10,7 @@ export default class App extends Component
     {
         return (
             <div>  
-                <CountriesForm/>
+                <ECommerceForm />
             </div>         
         )
     }
