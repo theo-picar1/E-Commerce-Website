@@ -1,0 +1,155 @@
+#countriesTable
+{
+    width:90%;
+    margin-left:auto;
+    margin-right:auto;
+    border-collapse:collapse;
+}
+
+#countriesTable th
+{
+    text-align: left;
+    background-color:red;
+    color:#fff;
+}
+
+#countriesTable th:first-of-type
+{
+    border-top-left-radius:10px;
+}
+
+#countriesTable th:last-of-type
+{
+    border-top-right-radius:10px;
+}
+
+#countriesTable th,
+#countriesTable td
+{
+    padding:5px;
+}
+
+#countriesTable .population
+{
+    text-align:right;
+}
+
+#countriesTable tbody
+{
+    border:thin solid #aaa;
+}
+
+#countriesTable tbody tr:nth-child(odd)
+{
+    background-color: #ffa;
+}
+
+#countriesTable th:hover
+{
+    cursor:pointer;
+    color:#fff;
+    background-color: #f99;
+    font-weight: bolder;
+}
+
+#countriesTable tbody tr:hover
+{
+    background-color: #faf;
+    cursor:pointer;
+}
+
+#modal 
+{
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    background-color: rgba(0,0,0, 0.7);
+}
+
+#modalContent 
+{
+    animation: modal_load both 0.2s linear;
+    overflow:hidden;
+    position: absolute;
+    left: 15%;
+    right: 15%;
+    top: 15%;
+    bottom: 15%;
+    margin: auto;
+    background: white;
+    border-radius:10px;
+    padding:5px;
+    border:thin solid black;
+}
+
+#modalContent h1
+{
+    font-size: 1.5em; 
+}
+
+#modalContent h2
+{
+    font-size: 1em; 
+    margin:0px;
+    padding:0px;
+    margin-top: 0.5em;
+}
+
+#modalContent p
+{
+    font-size: 1em; 
+    margin:0px;
+    padding:0px;
+}
+
+#modalContent #exitButton
+{
+    position:absolute;
+    top: 5px;
+    right:5px;
+    width:20px;
+    height:20px;
+}
+
+#modalContent #exitButton img
+{
+    width:100%;
+    height:100%;
+}
+
+#modalContent #exitButton img:hover
+{
+    filter:brightness(150%);
+    transform: scale(1.2);
+    cursor:pointer;
+}
+
+#modalContent #flag
+{
+    width:60px;
+    height:40px;
+}
+
+#modalContent #flag img
+{
+    width:100%;
+    height:100%;
+}
+@keyframes modal_load
+{
+   from 
+   {
+       width: 0%;
+       height:0%
+   }
+   to 
+   {
+       width: 75%;
+       height: 75%
+   }
+}
