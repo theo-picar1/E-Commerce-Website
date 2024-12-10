@@ -15,12 +15,12 @@
 
 #countriesTable th:first-of-type
 {
-    border-top-left-radius:10px;
+    border-top-left-radius:100px;
 }
 
 #countriesTable th:last-of-type
 {
-    border-top-right-radius:10px;
+    border-top-right-radius:100px;
 }
 
 #countriesTable th,
