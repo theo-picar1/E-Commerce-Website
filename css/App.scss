@@ -10,4 +10,10 @@ header {
     height: 100px;
     background-color: blue;
     width: 100%;
+    padding: 20px 30px;
 }
+
+footer {
+    @extend header;
+}
+
