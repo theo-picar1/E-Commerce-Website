@@ -1,13 +1,13 @@
 * {
-    margin: 0;
-    padding: 0;
+  margin: 0;
+  padding: 0;
 }
 
 header {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    height: 100px;
-    background-color: blue;
-    width: 100%;
-}
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  height: 100px;
+  background-color: blue;
+  width: 100%;
+}/*# sourceMappingURL=App.css.map */
