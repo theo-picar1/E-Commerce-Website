@@ -2,27 +2,33 @@
   * {
     margin: 0;
     padding: 0;
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: "Open Sans", serif;
   }
   .website-icon {
-    width: 16px;
-    height: auto;
+    height: 20px;
+    width: auto;
+  }
+  .website-logo {
+    height: 75px;
+    width: auto;
   }
   #header {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
     background-color: #2C3A57;
-    padding: 10px 75px;
-    margin: auto;
+    padding: 10px 110px;
   }
   #header .header-section {
     display: flex;
     flex-direction: row;
     justify-content: center;
+    align-items: center;
     gap: 5px;
     font-size: 14px;
-    text-align: center;
     color: rgb(255, 255, 255);
+    width: 400px;
   }
   #header #nav-tabs {
     gap: 20px;
@@ -33,5 +39,65 @@
   #header #nav-tabs p:hover {
     cursor: pointer;
     color: rgb(223, 65, 52);
+  }
+  #toolbar {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    padding: 20px 110px;
+  }
+  #toolbar #left-content {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 20px;
+  }
+  #toolbar #left-content #website-title {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+  #toolbar #left-content #website-title h1 {
+    font-weight: 800;
+  }
+  #toolbar #left-content #website-title #sound-h1 {
+    color: red;
+  }
+  #toolbar #left-content #searchbar-container {
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+    align-items: center;
+    background-color: rgb(245, 245, 245);
+    padding: 10px 15px;
+    height: -moz-min-content;
+    height: min-content;
+    border: thin solid rgba(0, 0, 0, 0);
+  }
+  #toolbar #left-content #searchbar-container:focus-within {
+    border: thin solid rgba(0, 0, 0, 0.25);
+  }
+  #toolbar #left-content #searchbar-container #searchbar {
+    background-color: rgba(0, 0, 0, 0);
+    border: none;
+    width: 155px;
+  }
+  #toolbar #left-content #searchbar-container #searchbar:focus {
+    outline: none;
+  }
+  #toolbar #left-content #searchbar-container #search-icon {
+    width: 18px;
+    height: auto;
+  }
+  #toolbar #right-content {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+  #toolbar #right-content div {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 30px;
   }
 }/*# sourceMappingURL=App.css.map */
