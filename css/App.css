@@ -2,7 +2,7 @@
   * {
     margin: 0;
     padding: 0;
-    font-family: "Open Sans", serif;
+    font-family: "Open Sans";
   }
   .website-icon {
     height: 20px;
@@ -13,60 +13,71 @@
     width: auto;
   }
   #header {
+    background-color: #2C3A57;
+  }
+  #header #header-content {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    background-color: #2C3A57;
-    padding: 10px 110px;
+    margin: auto;
+    padding: 10px 0;
+    width: 80%;
   }
-  #header .header-section {
+  #header #header-content .header-section {
     display: flex;
     flex-direction: row;
-    justify-content: center;
     align-items: center;
     gap: 5px;
     font-size: 14px;
     color: rgb(255, 255, 255);
     width: 400px;
   }
-  #header #nav-tabs {
+  #header #header-content .header-section:nth-child(2) {
+    justify-content: center;
+  }
+  #header #header-content .header-section:nth-child(3) {
+    justify-content: end;
+  }
+  #header #header-content #nav-tabs {
     gap: 20px;
   }
-  #header #nav-tabs p {
+  #header #header-content #nav-tabs p {
     transition: 0.3s color ease;
   }
-  #header #nav-tabs p:hover {
+  #header #header-content #nav-tabs p:hover {
     cursor: pointer;
     color: rgb(223, 65, 52);
   }
-  #toolbar {
+  #toolbar #toolbar-content {
+    width: 80%;
+    margin: auto;
     display: flex;
     justify-content: space-between;
     flex-direction: row;
-    padding: 20px 110px;
+    padding: 10px 0;
   }
-  #toolbar #left-content {
+  #toolbar #toolbar-content #left-content {
     display: flex;
     flex-direction: row;
     align-items: center;
     gap: 20px;
   }
-  #toolbar #left-content #website-title {
+  #toolbar #toolbar-content #left-content #website-title {
     display: flex;
     flex-direction: row;
     align-items: center;
   }
-  #toolbar #left-content #website-title h1 {
+  #toolbar #toolbar-content #left-content #website-title h1 {
     font-weight: 800;
   }
-  #toolbar #left-content #website-title #sound-h1 {
-    color: red;
+  #toolbar #toolbar-content #left-content #website-title #sound-h1 {
+    color: rgb(223, 65, 52);
   }
-  #toolbar #left-content #searchbar-container {
+  #toolbar #toolbar-content #left-content #searchbar-container {
     display: flex;
     flex-direction: row;
-    gap: 5px;
+    gap: 10px;
     align-items: center;
     background-color: rgb(245, 245, 245);
     padding: 10px 15px;
@@ -74,30 +85,64 @@
     height: min-content;
     border: thin solid rgba(0, 0, 0, 0);
   }
-  #toolbar #left-content #searchbar-container:focus-within {
+  #toolbar #toolbar-content #left-content #searchbar-container:focus-within {
     border: thin solid rgba(0, 0, 0, 0.25);
   }
-  #toolbar #left-content #searchbar-container #searchbar {
+  #toolbar #toolbar-content #left-content #searchbar-container #searchbar {
     background-color: rgba(0, 0, 0, 0);
     border: none;
     width: 155px;
   }
-  #toolbar #left-content #searchbar-container #searchbar:focus {
+  #toolbar #toolbar-content #left-content #searchbar-container #searchbar:focus {
     outline: none;
   }
-  #toolbar #left-content #searchbar-container #search-icon {
+  #toolbar #toolbar-content #left-content #searchbar-container #search-icon {
     width: 18px;
     height: auto;
   }
-  #toolbar #right-content {
+  #toolbar #toolbar-content #right-content {
     display: flex;
     flex-direction: row;
     align-items: center;
   }
-  #toolbar #right-content div {
+  #toolbar #toolbar-content #right-content div {
     display: flex;
     flex-direction: row;
     align-items: center;
     gap: 30px;
+  }
+  #product-filters {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    width: 80%;
+    background-color: rgb(255, 255, 255);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 45px;
+    margin: auto;
+    border-top: 2px solid rgb(245, 245, 245);
+    border-bottom: 2px solid rgb(245, 245, 245);
+    padding: 10px 0;
+  }
+  #product-filters p {
+    font-size: 14px;
+    font-weight: 700;
+    transition: 0.3s color ease;
+  }
+  #product-filters p:hover {
+    color: rgb(223, 65, 52);
+    cursor: pointer;
+  }
+  #content {
+    width: 80%;
+    margin: auto;
+    background-color: blue;
+  }
+  #footer {
+    width: 80%;
+    margin: auto;
+    background-color: purple;
   }
 }/*# sourceMappingURL=App.css.map */
