@@ -2,50 +2,41 @@ $white-font-color: rgb(255, 255, 255);
 $black-font-color: rgb(0, 0, 0);
 $red-font-color: rgb(223, 65, 52);
 
-<<<<<<< Updated upstream
-header {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    height: 100px;
-    background-color: blue;
-    width: 100%;
-    padding: 20px 30px;
-}
-
-footer {
-    @extend header;
-}
-
-=======
 // MOBILE LAYOUT
 @media screen AND (min-width: 0px) {
     * {
         margin: 0;
         padding: 0;
-        font-family: Arial, Helvetica, sans-serif;
+        font-family: "Open Sans", serif
     }
 
     .website-icon {
-        width: 16px;
-        height: auto;
+        height: 20px;
+        width: auto;
+    }
+
+    .website-logo {
+        height: 75px; 
+        width: auto;
     }
     
     #header {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
         background-color: #2C3A57;
-        padding: 10px 75px;
-        margin: auto;
+        padding: 10px 110px;
     
         .header-section {
             display: flex;
             flex-direction: row;
             justify-content: center;
+            align-items: center;
             gap: 5px;
             font-size: 14px;
-            text-align: center;
-            color: $white-font-color
+            color: $white-font-color;
+            width: 400px;
         }
     
         #nav-tabs {
@@ -61,5 +52,75 @@ footer {
             }
         }
     }
+
+    #toolbar {
+        display: flex;
+        justify-content: space-between;
+        flex-direction: row;
+        padding: 20px 110px;
+
+        #left-content {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            gap: 20px;
+
+            #website-title {
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+
+                h1 {
+                    font-weight: 800;
+                }
+
+                #sound-h1 {
+                    color: red;
+                }
+            }
+
+            #searchbar-container {
+                display: flex;
+                flex-direction: row;
+                gap: 5px;
+                align-items: center;
+                background-color: rgb(245, 245, 245);
+                padding: 10px 15px;
+                height: min-content;
+                border: thin solid rgb(0, 0, 0, 0);
+
+                &:focus-within {
+                    border: thin solid rgb(0, 0, 0, 0.25);
+                }
+
+                #searchbar {
+                    background-color: rgb(0, 0, 0, 0);
+                    border: none;
+                    width: 155px;
+
+                    &:focus {
+                        outline: none;
+                    }
+                }
+
+                #search-icon {
+                    width: 18px;
+                    height: auto;
+                }
+            }
+        }
+
+        #right-content {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+
+            div {
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                gap: 30px;
+            }
+        }
+    }
 }
->>>>>>> Stashed changes
