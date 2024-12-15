@@ -1,11 +1,19 @@
-$website-white: rgb(255, 255, 255);
-$website-black: rgb(0, 0, 0);
-$website-red: rgb(223, 65, 52);
-$website-gray: rgb(245, 245, 245);
+$website-white: #ffffff;
+$website-black: #000000;
+$website-red: #df4134;
+$website-light-gray: #f5f5f5;
+$website-navy: #2c3a57;
 
-$invisible: rgb(0, 0, 0, 0);
-$high-translucence: rgb(0, 0, 0, 0.25);
+$invisible: #00000000;
+$high-translucence: #00000040;
 
+@mixin flex-direction($direction, $justify, $align, $gap) {
+    display: flex;
+    flex-direction: $direction;
+    justify-content: $justify;
+    align-items: $align;
+    gap: $gap;
+}
 
 // MOBILE LAYOUT
 @media screen AND (min-width: 0px) {
@@ -26,22 +34,16 @@ $high-translucence: rgb(0, 0, 0, 0.25);
     }
     
     #header {
-        background-color: #2C3A57;
+        background-color: $website-navy;
         
         #header-content {
-            display: flex;
-            flex-direction: row;
-            justify-content: space-between;
-            align-items: center;
+            @include flex-direction(row, space-between, center, 0);
             margin: auto;
             padding: 10px 0;
             width: 80%;
     
             .header-section {
-                display: flex;
-                flex-direction: row;
-                align-items: center;
-                gap: 5px;
+                @include flex-direction(row, unset, center, 5px);
                 font-size: 14px;
                 color: $website-white;
                 width: 400px;
@@ -73,23 +75,16 @@ $high-translucence: rgb(0, 0, 0, 0.25);
     #toolbar {
         
         #toolbar-content {
+            @include flex-direction(row, space-between, center, 0);
             width: 80%;
             margin: auto;
-            display: flex;
-            justify-content: space-between;
-            flex-direction: row;
             padding: 10px 0;
 
             #left-content {
-                display: flex;
-                flex-direction: row;
-                align-items: center;
-                gap: 20px;
+                @include flex-direction(row, unset, center, 20px);
 
                 #website-title {
-                    display: flex;
-                    flex-direction: row;
-                    align-items: center;
+                    @include flex-direction(row, unset, center, 0);
 
                     h1 {
                         font-weight: 800;
@@ -101,11 +96,8 @@ $high-translucence: rgb(0, 0, 0, 0.25);
                 }
 
                 #searchbar-container {
-                    display: flex;
-                    flex-direction: row;
-                    gap: 10px;
-                    align-items: center;
-                    background-color: $website-gray;
+                    @include flex-direction(row, unset, center, 10px);
+                    background-color: $website-light-gray;
                     padding: 10px 15px;
                     height: min-content;
                     border: thin solid $invisible;
@@ -132,33 +124,25 @@ $high-translucence: rgb(0, 0, 0, 0.25);
             }
 
             #right-content {
-                display: flex;
-                flex-direction: row;
-                align-items: center;
+                @include flex-direction(row, unset, center, 0);
 
                 div {
-                    display: flex;
-                    flex-direction: row;
-                    align-items: center;
-                    gap: 30px;
+                    @include flex-direction(row, unset, center, 30px);
                 }
             }
         }
     }
 
     #product-filters {
+        @include flex-direction(row, unset, center, 45px);
         position: sticky;
         top: 0;
         z-index: 1; 
         width: 80%; 
         background-color: $website-white; 
-        display: flex;
-        flex-direction: row;
-        align-items: center; 
-        gap: 45px;
         margin: auto;
-        border-top: 2px solid $website-gray;
-        border-bottom: 2px solid $website-gray;
+        border-top: 2px solid $website-light-gray;
+        border-bottom: 2px solid $website-light-gray;
         padding: 10px 0;
         
         p {

@@ -13,13 +13,14 @@
     width: auto;
   }
   #header {
-    background-color: #2C3A57;
+    background-color: #2c3a57;
   }
   #header #header-content {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+    gap: 0;
     margin: auto;
     padding: 10px 0;
     width: 80%;
@@ -27,10 +28,11 @@
   #header #header-content .header-section {
     display: flex;
     flex-direction: row;
+    justify-content: unset;
     align-items: center;
     gap: 5px;
     font-size: 14px;
-    color: rgb(255, 255, 255);
+    color: #ffffff;
     width: 400px;
   }
   #header #header-content .header-section:nth-child(2) {
@@ -47,46 +49,52 @@
   }
   #header #header-content #nav-tabs p:hover {
     cursor: pointer;
-    color: rgb(223, 65, 52);
+    color: #df4134;
   }
   #toolbar #toolbar-content {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0;
     width: 80%;
     margin: auto;
-    display: flex;
-    justify-content: space-between;
-    flex-direction: row;
     padding: 10px 0;
   }
   #toolbar #toolbar-content #left-content {
     display: flex;
     flex-direction: row;
+    justify-content: unset;
     align-items: center;
     gap: 20px;
   }
   #toolbar #toolbar-content #left-content #website-title {
     display: flex;
     flex-direction: row;
+    justify-content: unset;
     align-items: center;
+    gap: 0;
   }
   #toolbar #toolbar-content #left-content #website-title h1 {
     font-weight: 800;
   }
   #toolbar #toolbar-content #left-content #website-title #sound-h1 {
-    color: rgb(223, 65, 52);
+    color: #df4134;
   }
   #toolbar #toolbar-content #left-content #searchbar-container {
     display: flex;
     flex-direction: row;
-    gap: 10px;
+    justify-content: unset;
     align-items: center;
-    background-color: rgb(245, 245, 245);
+    gap: 10px;
+    background-color: #f5f5f5;
     padding: 10px 15px;
     height: -moz-min-content;
     height: min-content;
     border: thin solid rgba(0, 0, 0, 0);
   }
   #toolbar #toolbar-content #left-content #searchbar-container:focus-within {
-    border: thin solid rgba(0, 0, 0, 0.25);
+    border: thin solid rgba(0, 0, 0, 0.2509803922);
   }
   #toolbar #toolbar-content #left-content #searchbar-container #searchbar {
     background-color: rgba(0, 0, 0, 0);
@@ -103,27 +111,31 @@
   #toolbar #toolbar-content #right-content {
     display: flex;
     flex-direction: row;
+    justify-content: unset;
     align-items: center;
+    gap: 0;
   }
   #toolbar #toolbar-content #right-content div {
     display: flex;
     flex-direction: row;
+    justify-content: unset;
     align-items: center;
     gap: 30px;
   }
   #product-filters {
+    display: flex;
+    flex-direction: row;
+    justify-content: unset;
+    align-items: center;
+    gap: 45px;
     position: sticky;
     top: 0;
     z-index: 1;
     width: 80%;
-    background-color: rgb(255, 255, 255);
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: 45px;
+    background-color: #ffffff;
     margin: auto;
-    border-top: 2px solid rgb(245, 245, 245);
-    border-bottom: 2px solid rgb(245, 245, 245);
+    border-top: 2px solid #f5f5f5;
+    border-bottom: 2px solid #f5f5f5;
     padding: 10px 0;
   }
   #product-filters p {
@@ -132,7 +144,7 @@
     transition: 0.3s color ease;
   }
   #product-filters p:hover {
-    color: rgb(223, 65, 52);
+    color: #df4134;
     cursor: pointer;
   }
   #content {
