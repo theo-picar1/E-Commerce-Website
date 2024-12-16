@@ -27,7 +27,7 @@ $translucent: #00000080;
     }
 
     p {
-        letter-spacing: -1.1px;
+        letter-spacing: -1px;
         transform: scale(1, 1.05); 
         transform-origin: center; 
     }
@@ -54,6 +54,12 @@ $translucent: #00000080;
     .website-logo {
         height: 75px; 
         width: auto;
+    }
+
+    .page-content {
+        width: 80%;
+        margin: auto;
+        padding: 20px 0;
     }
 
     .shop-now-button-red {
@@ -124,7 +130,9 @@ $translucent: #00000080;
             #nav-tabs {
                 gap: 20px;
                 
-                p {
+                .page-link {
+                    text-decoration: none;
+                    color: $website-white;
                     transition: 0.3s color ease;
         
                     &:hover {
@@ -140,8 +148,6 @@ $translucent: #00000080;
         
         #toolbar-content {
             @include flex-direction(row, space-between, center, 0);
-            width: 80%;
-            margin: auto;
             padding: 10px 0;
 
             #left-content {
@@ -198,9 +204,7 @@ $translucent: #00000080;
         position: sticky;
         top: 0;
         z-index: 5; 
-        width: 80%; 
         background-color: $website-white; 
-        margin: auto;
         border-top: 2px solid $website-light-gray;
         border-bottom: 2px solid $website-light-gray;
         padding: 10px 0;
@@ -218,8 +222,6 @@ $translucent: #00000080;
     }
 
     #content {
-        width: 80%;
-        margin: auto;
 
         // SECTION ONE
         #products-gallery {
@@ -414,8 +416,6 @@ $translucent: #00000080;
     }
 
     #footer {
-        width: 80%;
-        margin: auto;
 
         #newsletter-section {
             @include flex-direction(row, space-between, center, 0);
@@ -478,10 +478,11 @@ $translucent: #00000080;
                     font-size: 14px;
                 }
 
-                p:not(:first-child) {
+                .link {
                     color: $website-red;
                     font-size: 12px;
                     transition: 0.3s color ease;
+                    text-decoration: none;
 
                     &:hover {
                         color: $website-navy;

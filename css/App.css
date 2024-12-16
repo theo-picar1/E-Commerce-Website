@@ -6,7 +6,7 @@
     box-sizing: border-box;
   }
   p {
-    letter-spacing: -1.1px;
+    letter-spacing: -1px;
     transform: scale(1, 1.05);
     transform-origin: center;
   }
@@ -28,6 +28,11 @@
   .website-logo {
     height: 75px;
     width: auto;
+  }
+  .page-content {
+    width: 80%;
+    margin: auto;
+    padding: 20px 0;
   }
   .shop-now-button-red, .shop-now-button-gray, .shop-now-button-white {
     -webkit-appearance: none;
@@ -96,10 +101,12 @@
   #header #header-content #nav-tabs {
     gap: 20px;
   }
-  #header #header-content #nav-tabs p {
+  #header #header-content #nav-tabs .page-link {
+    text-decoration: none;
+    color: #ffffff;
     transition: 0.3s color ease;
   }
-  #header #header-content #nav-tabs p:hover {
+  #header #header-content #nav-tabs .page-link:hover {
     cursor: pointer;
     color: #df4134;
   }
@@ -109,8 +116,6 @@
     justify-content: space-between;
     align-items: center;
     gap: 0;
-    width: 80%;
-    margin: auto;
     padding: 10px 0;
   }
   #toolbar #toolbar-content #left-content {
@@ -180,9 +185,7 @@
     position: sticky;
     top: 0;
     z-index: 5;
-    width: 80%;
     background-color: #ffffff;
-    margin: auto;
     border-top: 2px solid #f5f5f5;
     border-bottom: 2px solid #f5f5f5;
     padding: 10px 0;
@@ -195,10 +198,6 @@
   #product-filters p:hover {
     color: #df4134;
     cursor: pointer;
-  }
-  #content {
-    width: 80%;
-    margin: auto;
   }
   #content #products-gallery {
     width: 100%;
@@ -390,10 +389,6 @@
     width: auto;
     padding: 10px 15px;
   }
-  #footer {
-    width: 80%;
-    margin: auto;
-  }
   #footer #newsletter-section {
     display: flex;
     flex-direction: row;
@@ -466,12 +461,13 @@
     font-weight: 700;
     font-size: 14px;
   }
-  #footer #main-content div p:not(:first-child) {
+  #footer #main-content div .link {
     color: #df4134;
     font-size: 12px;
     transition: 0.3s color ease;
+    text-decoration: none;
   }
-  #footer #main-content div p:not(:first-child):hover {
+  #footer #main-content div .link:hover {
     color: #2c3a57;
     cursor: pointer;
   }
