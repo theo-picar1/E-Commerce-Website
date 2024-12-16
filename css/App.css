@@ -13,7 +13,7 @@
     height: 75px;
     width: auto;
   }
-  .shop-now-button-red, .shop-now-button-white {
+  .shop-now-button-red, .shop-now-button-gray, .shop-now-button-white {
     -webkit-appearance: none;
        -moz-appearance: none;
             appearance: none;
@@ -28,7 +28,7 @@
     transition: 0.3s all ease;
     border-radius: 5px;
   }
-  .shop-now-button-red:hover, .shop-now-button-white:hover {
+  .shop-now-button-red:hover, .shop-now-button-gray:hover, .shop-now-button-white:hover {
     background-color: #2c3a57;
     cursor: pointer;
   }
@@ -39,6 +39,15 @@
   }
   .shop-now-button-white:hover {
     color: #ffffff;
+  }
+  .shop-now-button-gray {
+    background-color: #f5f5f5;
+    color: #272727;
+    width: 125px;
+  }
+  .shop-now-button-gray:hover {
+    color: #ffffff;
+    background-color: #df4134;
   }
   #header {
     background-color: #2c3a57;
@@ -178,7 +187,6 @@
   #content {
     width: 80%;
     margin: auto;
-    background-color: blue;
   }
   #content #products-gallery {
     width: 100%;
@@ -192,10 +200,11 @@
   }
   #content #products-gallery #top-section {
     display: grid;
-    grid-template-columns: 857px 265px;
+    grid-template-columns: 3fr 1fr;
     gap: 30px;
   }
   #content #products-gallery #top-section #image-slideshow {
+    width: 100%;
     height: 425px;
     display: flex;
     flex-direction: row;
@@ -210,7 +219,7 @@
     position: relative;
   }
   #content #products-gallery #top-section #image-slideshow .image-container {
-    width: 857px;
+    width: 100%;
     scroll-snap-align: start;
     position: relative;
   }
@@ -218,7 +227,7 @@
     position: absolute;
     background-color: rgba(0, 0, 0, 0.5019607843);
     z-index: 1;
-    width: inherit;
+    width: 100%;
     height: 425px;
   }
   #content #products-gallery #top-section #image-slideshow .image-container .image-content-container .image-content-left, #content #products-gallery #top-section #image-slideshow .image-container .image-content-container .image-content-right {
@@ -271,7 +280,7 @@
   }
   #content #products-gallery #bottom-section {
     display: grid;
-    grid-template-columns: 265.5px 265.5px 265.5px 265.5px;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
     gap: 30px;
   }
   #content #products-gallery #bottom-section .product-navigation-tab {
@@ -303,6 +312,71 @@
     transition: 0.3s transform ease;
     font-size: 35px;
     font-weight: 800;
+  }
+  #content #featured-products-container {
+    padding: 15px 0;
+  }
+  #content #featured-products-container #title {
+    font-weight: 800;
+    font-size: 24px;
+  }
+  #content #featured-products-container #featured-products-gallery {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 30px;
+    padding-top: 30px;
+  }
+  #content #featured-products-container #featured-products-gallery .featured-product {
+    width: inherit;
+    height: 430px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  #content #featured-products-container #featured-products-gallery .featured-product .product-image {
+    height: 65%;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+  #content #featured-products-container #featured-products-gallery .featured-product .product-image div {
+    display: flex;
+    flex-direction: unset;
+    justify-content: center;
+    align-items: center;
+    gap: 0;
+    height: 100%;
+    color: rgba(0, 0, 0, 0);
+    transition: 0.3s all ease;
+  }
+  #content #featured-products-container #featured-products-gallery .featured-product .product-image div p {
+    font-size: 40px;
+    font-weight: 800;
+  }
+  #content #featured-products-container #featured-products-gallery .featured-product .product-image div:hover {
+    background-color: rgba(0, 0, 0, 0.2509803922);
+    color: white;
+    cursor: pointer;
+  }
+  #content #featured-products-container #featured-products-gallery .featured-product .product-details {
+    display: flex;
+    flex-direction: column;
+    justify-content: unset;
+    align-items: flex-start;
+    gap: 10px;
+    white-space: nowrap;
+    padding: 10px 0;
+    height: 35%;
+  }
+  #content #featured-products-container #featured-products-gallery .featured-product .product-details .product-name {
+    font-size: 14px;
+  }
+  #content #featured-products-container #featured-products-gallery .featured-product .product-details .product-price {
+    font-size: 28px;
+    font-weight: 600;
+  }
+  #content #featured-products-container #featured-products-gallery .featured-product .product-details .shop-now-button-gray {
+    width: auto;
+    padding: 10px 15px;
   }
   #footer {
     width: 80%;

@@ -49,11 +49,11 @@ export default class ProductsGallery extends Component {
                     </div>
                     <div id="sale-banner">
                         <h1 id="sale-offer">BLACK FRIDAY IN DECEMBER 2025!</h1>
-                        <h1>GET UP TO 60% OFF ORDERS</h1>
+                        <h1>60% OFF ORDERS</h1>
                     </div>
                 </div>
                 <div id="bottom-section">
-                    <div className="product-navigation-tab" style={{backgroundImage: `url(/images/guitar-background-2.jpeg)`}}>
+                    <div className="product-navigation-tab" style={{backgroundImage: `url(/images/guitar-background-2.jpg)`}}>
                         <div>
                             <h1>GUITARS</h1>
                         </div>
@@ -68,7 +68,7 @@ export default class ProductsGallery extends Component {
                             <h1>DRUMS</h1>
                         </div>
                     </div>
-                    <div className="product-navigation-tab" style={{backgroundImage: `url(/images/amplifier-background-2.jpeg)`}}>
+                    <div className="product-navigation-tab" style={{backgroundImage: `url(/images/amplifier-background-2.jpg)`}}>
                         <div>
                             <h1>AMPLIFIERS</h1>
                         </div>

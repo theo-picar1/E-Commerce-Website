@@ -3,6 +3,7 @@ $website-black: #000000;
 $website-red: #df4134;
 $website-light-gray: #f5f5f5;
 $website-navy: #2c3a57;
+$website-light-black: #272727;
 
 $invisible: #00000000;
 $high-translucence: #00000040;
@@ -62,6 +63,18 @@ $translucent: #00000080;
 
         &:hover {
             color: $website-white;
+        }
+    }
+
+    .shop-now-button-gray {
+        @extend .shop-now-button-red;
+        background-color: $website-light-gray;
+        color: $website-light-black;
+        width: 125px;
+
+        &:hover {
+            color: $website-white;
+            background-color: $website-red;
         }
     }
     
@@ -192,8 +205,8 @@ $translucent: #00000080;
     #content {
         width: 80%;
         margin: auto;
-        background-color: blue;
 
+        // SECTION ONE
         #products-gallery {
             width: 100%;
             background-color: $website-white;
@@ -202,10 +215,11 @@ $translucent: #00000080;
 
             #top-section {
                 display: grid;
-                grid-template-columns: 857px 265px;
+                grid-template-columns: 3fr 1fr;
                 gap: 30px;
 
                 #image-slideshow {
+                    width: 100%;
                     height: 425px;
                     @include flex-direction(row, unset, center, 0);
                     overflow-x: scroll;
@@ -216,7 +230,7 @@ $translucent: #00000080;
                     position: relative;
 
                     .image-container {
-                        width: 857px;
+                        width: 100%;
                         scroll-snap-align: start;
                         position: relative;
 
@@ -224,7 +238,7 @@ $translucent: #00000080;
                             position: absolute;
                             background-color: $translucent;
                             z-index: 1;
-                            width: inherit;
+                            width: 100%;
                             height: 425px;
 
                             .image-content-left {
@@ -276,7 +290,7 @@ $translucent: #00000080;
 
             #bottom-section {
                 display: grid;
-                grid-template-columns: 265.5px 265.5px 265.5px 265.5px;
+                grid-template-columns: 1fr 1fr 1fr 1fr;
                 gap: 30px;
                 
                 .product-navigation-tab  {
@@ -307,6 +321,76 @@ $translucent: #00000080;
                             transition: 0.3s transform ease;
                             font-size: 35px;
                             font-weight: 800;
+                        }
+                    }
+                }
+            }
+        }
+
+        // SECTION TWO
+        #featured-products-container {
+            padding: 15px 0;
+            
+            #title {
+                font-weight: 800;
+                font-size: 24px;
+            }
+
+            #featured-products-gallery {
+                display: grid;
+                grid-template-columns: repeat(4, 1fr);
+                gap: 30px;
+                padding-top: 30px;
+
+                .featured-product {
+                    width: inherit;
+                    height: 430px;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+
+                    .product-image {
+                        height: 65%;
+                        background-size: contain;
+                        background-repeat: no-repeat;
+                        background-position: center;
+
+                        div {
+                            @include flex-direction(unset, center, center, 0);
+                            height: 100%;
+                            color: $invisible;
+                            transition: 0.3s all ease;
+
+                            p {
+                                font-size: 40px;
+                                font-weight: 800;
+                            }
+
+                            &:hover {
+                                background-color: $high-translucence;
+                                color: white;
+                                cursor: pointer;
+                            }
+                        }
+                    }
+
+                    .product-details {
+                        @include flex-direction(column, unset, flex-start, 10px);
+                        white-space: nowrap;
+                        padding: 10px 0;
+                        height: 35%;
+
+                        .product-name {
+                            font-size: 14px;
+                        }
+
+                        .product-price {
+                            font-size: 28px;
+                            font-weight: 600;
+                        }
+
+                        .shop-now-button-gray {
+                            width: auto;
+                            padding: 10px 15px;
                         }
                     }
                 }
