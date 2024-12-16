@@ -1,4 +1,5 @@
 import React, {Component} from "react"
+import { Link } from "react-router-dom/cjs/react-router-dom"
 
 export default class Footer extends Component {
     render() {
@@ -21,19 +22,19 @@ export default class Footer extends Component {
                     </div>
                     <div>
                         <p className="content-title">INFORMATION</p>
-                        <p>About Us</p>
-                        <p>Customer Service</p>
-                        <p>Privacy Policy</p>
-                        <p>Contact Us</p>
-                        <p>FAQ</p>
-                        <p>Blog</p>
+                        <Link className="link"  to="/nosuchpage">About Us</Link>
+                        <Link className="link"  to="/nosuchpage">Customer Service</Link>
+                        <Link className="link"  to="/nosuchpage">Privacy Policy</Link>
+                        <Link className="link"  to="/nosuchpage">Contact Us</Link>
+                        <Link className="link"  to="/nosuchpage">FAQ</Link>
+                        <Link className="link"  to="/nosuchpage">Blog</Link>
                     </div>
                     <div>
                         <p className="content-title">WHY BUY FROM US</p>
-                        <p>Shipping & Delivery</p>
-                        <p>Secure Payment</p>
-                        <p>Guarantee</p>
-                        <p>Terms & Conditions</p>
+                        <Link className="link"  to="/nosuchpage">Shipping & Delivery</Link>
+                        <Link className="link"  to="/nosuchpage">Secure Payment</Link>
+                        <Link className="link"  to="/nosuchpage">Guarantee</Link>
+                        <Link className="link"  to="/nosuchpage">Terms & Conditions</Link>
                     </div>
                 </div>
             </footer>         
