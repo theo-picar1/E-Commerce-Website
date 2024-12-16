@@ -4,7 +4,7 @@ export default class FeaturedProducts extends Component {
     render() {
         return (
             <div id="featured-products-container">
-                <h2 id="title">FEATURED PRODUCTS</h2>
+                <p className="subheading">FEATURED PRODUCTS</p>
                 <div id="featured-products-gallery">
                     <div className="featured-product">
                         <div className="product-image" style={{backgroundImage: `url(/images/sdp1-keyboard.webp)`}}>

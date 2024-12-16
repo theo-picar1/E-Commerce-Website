@@ -7,8 +7,8 @@ export default class Toolbar extends Component {
                 <div id="toolbar-content">  
                     <div id="left-content">
                         <div id="website-title">
-                            <h1 id="sound-h1">SUPER</h1>
-                            <h1 id="bizzare-h1">MENTS</h1>
+                            <p className="title" id="super">SUPER</p>
+                            <p className="title">MENTS</p>
                             <img src="/images/website-logo.jpg" className="website-logo"/>
                         </div>
                         <div id="searchbar-container">
