@@ -5,6 +5,22 @@
     font-family: "Open Sans";
     box-sizing: border-box;
   }
+  p {
+    letter-spacing: -1.1px;
+    transform: scale(1, 1.05);
+    transform-origin: center;
+  }
+  .title {
+    font-weight: 800;
+    font-size: 40px;
+  }
+  .subheading {
+    font-weight: 800;
+    font-size: 24px;
+  }
+  .small-body {
+    font-size: 14px;
+  }
   .website-icon {
     height: 20px;
     width: auto;
@@ -68,7 +84,6 @@
     justify-content: unset;
     align-items: center;
     gap: 5px;
-    font-size: 14px;
     color: #ffffff;
     width: 400px;
   }
@@ -112,10 +127,7 @@
     align-items: center;
     gap: 0;
   }
-  #toolbar #toolbar-content #left-content #website-title h1 {
-    font-weight: 800;
-  }
-  #toolbar #toolbar-content #left-content #website-title #sound-h1 {
+  #toolbar #toolbar-content #left-content #website-title #super {
     color: #df4134;
   }
   #toolbar #toolbar-content #left-content #searchbar-container {
@@ -381,6 +393,86 @@
   #footer {
     width: 80%;
     margin: auto;
-    background-color: purple;
+  }
+  #footer #newsletter-section {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0;
+    background-color: #2c3a57;
+    color: #ffffff;
+    padding: 25px 20px;
+  }
+  #footer #newsletter-section #right-section {
+    display: flex;
+    flex-direction: row;
+    justify-content: unset;
+    align-items: center;
+    gap: 10px;
+  }
+  #footer #newsletter-section #right-section input {
+    width: 400px;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 5px;
+    outline: none;
+  }
+  #footer #newsletter-section #right-section input::-moz-placeholder {
+    font-size: 12px;
+    color: #000000;
+  }
+  #footer #newsletter-section #right-section input::placeholder {
+    font-size: 12px;
+    color: #000000;
+  }
+  #footer #newsletter-section #right-section button {
+    background-color: #df4134;
+    padding: 13px 25px;
+    border: none;
+    border-radius: 5px;
+    font-size: 12px;
+    font-weight: 700;
+    color: #ffffff;
+    transition: all 0.3s ease;
+  }
+  #footer #newsletter-section #right-section button:hover {
+    color: #000000;
+    background-color: #ffffff;
+    cursor: pointer;
+  }
+  #footer #main-content {
+    display: flex;
+    flex-direction: row;
+    justify-content: unset;
+    align-items: flex-start;
+    gap: 75px;
+    padding: 30px 0;
+  }
+  #footer #main-content #about {
+    width: 30%;
+  }
+  #footer #main-content #about #about-text {
+    color: grey;
+  }
+  #footer #main-content div {
+    display: flex;
+    flex-direction: column;
+    justify-content: unset;
+    align-items: unset;
+    gap: 20px;
+  }
+  #footer #main-content div .content-title {
+    font-weight: 700;
+    font-size: 14px;
+  }
+  #footer #main-content div p:not(:first-child) {
+    color: #df4134;
+    font-size: 12px;
+    transition: 0.3s color ease;
+  }
+  #footer #main-content div p:not(:first-child):hover {
+    color: #2c3a57;
+    cursor: pointer;
   }
 }/*# sourceMappingURL=App.css.map */

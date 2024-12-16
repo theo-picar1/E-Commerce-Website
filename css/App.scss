@@ -26,6 +26,26 @@ $translucent: #00000080;
         box-sizing: border-box;
     }
 
+    p {
+        letter-spacing: -1.1px;
+        transform: scale(1, 1.05); 
+        transform-origin: center; 
+    }
+
+    .title {
+        font-weight: 800;
+        font-size: 40px;
+    }
+
+    .subheading {
+        font-weight: 800;
+        font-size: 24px;
+    }
+
+    .small-body {
+        font-size: 14px;
+    }
+
     .website-icon {
         height: 20px;
         width: auto;
@@ -89,7 +109,6 @@ $translucent: #00000080;
     
             .header-section {
                 @include flex-direction(row, unset, center, 5px);
-                font-size: 14px;
                 color: $website-white;
                 width: 400px;
             }
@@ -131,11 +150,7 @@ $translucent: #00000080;
                 #website-title {
                     @include flex-direction(row, unset, center, 0);
 
-                    h1 {
-                        font-weight: 800;
-                    }
-
-                    #sound-h1 {
+                    #super {
                         color: $website-red;
                     }
                 }
@@ -401,6 +416,79 @@ $translucent: #00000080;
     #footer {
         width: 80%;
         margin: auto;
-        background-color: purple;
+
+        #newsletter-section {
+            @include flex-direction(row, space-between, center, 0);
+            background-color: $website-navy;
+            color: $website-white;
+            padding: 25px 20px;
+
+            #right-section {
+                @include flex-direction(row, unset, center, 10px);
+
+                input {
+                    width: 400px;
+                    padding: 12px 25px;
+                    border: none;
+                    border-radius: 5px;
+                    outline: none;
+
+                    &::placeholder {
+                        font-size: 12px;
+                        color: $website-black;
+                    }
+                }
+
+                button {
+                    background-color: $website-red;
+                    padding: 13px 25px;
+                    border: none;
+                    border-radius: 5px;
+                    font-size: 12px;
+                    font-weight: 700;
+                    color: $website-white;
+                    transition: all 0.3s ease;
+
+                    &:hover {
+                        color: $website-black;
+                        background-color: $website-white;
+                        cursor: pointer;
+                    }
+                }
+            }
+        }
+
+        #main-content {
+            @include flex-direction(row, unset, flex-start, 75px);
+            padding: 30px 0;
+
+            #about {
+                width: 30%;
+
+                #about-text {
+                    color: grey;
+                }
+            }
+
+            div {
+                @include flex-direction(column, unset, unset, 20px);
+
+                .content-title {
+                    font-weight: 700;
+                    font-size: 14px;
+                }
+
+                p:not(:first-child) {
+                    color: $website-red;
+                    font-size: 12px;
+                    transition: 0.3s color ease;
+
+                    &:hover {
+                        color: $website-navy;
+                        cursor: pointer;
+                    }
+                }
+            }
+        }
     }
 }

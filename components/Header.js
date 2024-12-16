@@ -7,17 +7,17 @@ export default class Header extends Component {
                 <div id="header-content">
                     <div class="header-section">
                         <img src="/images/telephone.png" className="website-icon"/>
-                        <p>Round-the-clock free hotline (24/7)</p>
+                        <p className="small-body">Round-the-clock free hotline (24/7)</p>
                     </div>
                     <div class="header-section">
                         <img src="/images/clock.png" className="website-icon"/>
-                        <p>7 days a week from 9AM to 5PM</p>
+                        <p className="small-body">7 days a week from 9AM to 5PM</p>
                     </div>
                     <div class="header-section" id="nav-tabs">
-                        <p>Home</p>
-                        <p>About Us</p>
-                        <p>Contacts</p>
-                        <p>Blog</p>
+                        <p className="small-body">Home</p>
+                        <p className="small-body">About Us</p>
+                        <p className="small-body">Contacts</p>
+                        <p className="small-body">Blog</p>
                     </div>
                 </div>
             </header>         
