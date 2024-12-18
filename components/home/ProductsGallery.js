@@ -4,47 +4,35 @@ export default class ProductsGallery extends Component {
     render() {
         return (
             <div id="products-gallery">
-                <div id="top-section">
+                <div id="ads-section">
                     <div id="image-slideshow">
-                        <div className="image-container">
-                            <div className="image-content-container">
-                                <div className="image-content-left">
-                                    <h1>ACOUSTIC GUITARS</h1>
-                                    <p>OVER 100+ GUITARS FOR SALE</p>
-                                    <button className="shop-now-button-red">SHOP NOW!</button>
-                                </div>
+                        <div className="image-container" style={{backgroundImage: `url(/images/guitar-background.jpg)`}}>                    
+                            <div className="image-content">
+                                <p className="image-title">ACOUSTIC GUITARS</p>
+                                <p>OVER 100+ GUITARS FOR SALE</p>
+                                <button className="shop-now-button-red">SHOP NOW!</button>
                             </div>
-                            <img src="/images/guitar-background.jpg"/>
                         </div>
-                        <div className="image-container">
-                            <div className="image-content-container">
-                                <div className="image-content-right">
-                                    <h1>PREMIUM KEYBOARDS</h1>
-                                    <p>HIGH QUALITY KEYBOARDS FOR SALE</p>
-                                    <button className="shop-now-button-red">SHOP NOW!</button>
-                                </div>
+                        <div className="image-container" style={{backgroundImage: `url(/images/keyboard-background.webp)`}}>
+                            <div className="image-content">
+                                <p className="image-title">PREMIUM KEYBOARDS</p>
+                                <p>HIGH QUALITY KEYBOARDS</p>
+                                <button className="shop-now-button-red">SHOP NOW!</button>
                             </div>
-                            <img src="/images/keyboard-background.webp"/>
                         </div>
-                        <div className="image-container">
-                            <div className="image-content-container">
-                                <div className="image-content-right">
-                                    <h1>STURDY DRUMS</h1>
-                                    <p>ORDER NOW & GET 20% OFF</p>
-                                    <button className="shop-now-button-red">SHOP NOW!</button>
-                                </div>
-                            </div>
-                            <img src="/images/drums-background.jpg"/>
+                        <div className="image-container" style={{backgroundImage: `url(/images/drums-background.jpg)`}}>   
+                            <div className="image-content">
+                                <p className="image-title">STURDY DRUMS</p>
+                                <p>ORDER NOW & GET 20% OFF</p>
+                                <button className="shop-now-button-red">SHOP NOW!</button>        
+                            </div>                                   
                         </div>
-                        <div className="image-container">
-                            <div className="image-content-container">
-                                <div className="image-content-left">
-                                    <h1>POWERFUL AMPLIFIERS</h1>
-                                    <p>PERFECT FOR ANYTHING</p>
-                                    <button className="shop-now-button-red">SHOP NOW!</button>
-                                </div>
-                            </div>                            
-                            <img src="/images/amplifier-background.jpg"/>
+                        <div className="image-container" style={{backgroundImage: `url(/images/amplifier-background.jpg)`}}>  
+                            <div className="image-content">
+                                <p className="image-title">POWERFUL AMPLIFIERS</p>
+                                <p>PERFECT FOR ANYTHING</p>
+                                <button className="shop-now-button-red">SHOP NOW!</button> 
+                            </div>                                                    
                         </div>
                     </div>
                     <div id="sale-banner">
@@ -52,7 +40,7 @@ export default class ProductsGallery extends Component {
                         <h1>60% OFF ORDERS</h1>
                     </div>
                 </div>
-                <div id="bottom-section">
+                <div id="product-types-section">
                     <div className="product-navigation-tab" style={{backgroundImage: `url(/images/guitar-background-2.jpg)`}}>
                         <div>
                             <h1>GUITARS</h1>

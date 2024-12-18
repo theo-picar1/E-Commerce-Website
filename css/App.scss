@@ -1,7 +1,8 @@
 $website-white: #ffffff;
 $website-black: #000000;
 $website-red: #df4134;
-$website-light-gray: #f5f5f5;
+$website-light-gray: #d9ddd9;
+$website-gray: rgb(171, 171, 171);
 $website-navy: #2c3a57;
 $website-light-black: #272727;
 
@@ -32,9 +33,13 @@ $translucent: #00000080;
         transform-origin: center; 
     }
 
+    #root {
+        overflow-x: hidden;
+    }
+
     .title {
         font-weight: 800;
-        font-size: 40px;
+        font-size: 30px;
     }
 
     .subheading {
@@ -52,12 +57,12 @@ $translucent: #00000080;
     }
 
     .website-logo {
-        height: 75px; 
+        height: 40px; 
         width: auto;
     }
 
     .page-content {
-        width: 80%;
+        width: 90%;
         margin: auto;
         padding: 20px 0;
     }
@@ -108,36 +113,66 @@ $translucent: #00000080;
         background-color: $website-navy;
         
         #header-content {
-            @include flex-direction(row, space-between, center, 0);
+            @include flex-direction(column, unset, center, 20px);
             margin: auto;
             padding: 10px 0;
             width: 80%;
     
             .header-section {
-                @include flex-direction(row, unset, center, 5px);
+                @include flex-direction(row, center, center, 5px);
                 color: $website-white;
                 width: 400px;
             }
 
-            .header-section:nth-child(2) {
-                justify-content: center;
-            }
-
-            .header-section:nth-child(3) {
-                justify-content: end;
-            }
-        
             #nav-tabs {
-                gap: 20px;
-                
-                .page-link {
-                    text-decoration: none;
-                    color: $website-white;
-                    transition: 0.3s color ease;
+                display: none;
+            }
         
+            #mobile-nav-tabs-container {
+                @include flex-direction(column, unset, center, 0);
+                position: relative;
+
+                #nav-tabs-button {
+                    background: $website-white;
+                    width: 40px;
+                    height: 40px;
+                    @include flex-direction(row, center, center, 0);
+                    transition: 0.3s background-color ease;
+
                     &:hover {
                         cursor: pointer;
-                        color: $website-red;
+                        background-color: $website-light-gray;
+                    }
+
+                    img {
+                        width: 30px;
+                        height: auto;
+                    }
+                }
+
+                #mobile-nav-tabs {
+                    display: none;
+                    flex-direction: column;
+                    position: absolute;
+                    width: 60%;
+                    top: 40px;
+                    z-index: 10;
+                    gap: 20px;
+                    padding: 10px 15px;
+                    text-align: center;
+                    background-color: $website-white;
+                    border: thin solid $website-gray;
+
+                    .page-link {
+                        text-decoration: none;
+                        color: $website-black;
+                        letter-spacing: -1px;
+                        transition: 0.3s color ease;
+            
+                        &:hover {
+                            cursor: pointer;
+                            color: $website-red;
+                        }
                     }
                 }
             }
@@ -145,21 +180,29 @@ $translucent: #00000080;
     }
 
     #toolbar {
+        width: 100%;
+        margin: auto;
         
         #toolbar-content {
-            @include flex-direction(row, space-between, center, 0);
+            @include flex-direction(column, unset, center, 15px);
             padding: 10px 0;
 
-            #left-content {
-                @include flex-direction(row, unset, center, 20px);
+            #website-title {
+                @include flex-direction(row, unset, center, 10px);
 
-                #website-title {
+                #superments {
                     @include flex-direction(row, unset, center, 0);
 
                     #super {
                         color: $website-red;
                     }
                 }
+
+            }
+
+            #tools-container {
+                width: 100%;
+                @include flex-direction(row, space-between, center, 0);
 
                 #searchbar-container {
                     @include flex-direction(row, unset, center, 10px);
@@ -175,7 +218,7 @@ $translucent: #00000080;
                     #searchbar {
                         background-color: $invisible;
                         border: none;
-                        width: 155px;
+                        width: 100px;
 
                         &:focus {
                             outline: none;
@@ -187,20 +230,20 @@ $translucent: #00000080;
                         height: auto;
                     }
                 }
-            }
 
-            #right-content {
-                @include flex-direction(row, unset, center, 0);
-
-                div {
-                    @include flex-direction(row, unset, center, 30px);
+                #user-tools {
+                    @include flex-direction(row, unset, center, 15px);
                 }
             }
         }
     }
 
     #product-filters {
-        @include flex-direction(row, unset, center, 45px);
+        @include flex-direction(row, unset, center, 20px);
+        width: 100%;
+        margin: auto;
+        overflow-x: scroll;
+        scrollbar-width: none;
         position: sticky;
         top: 0;
         z-index: 5; 
@@ -209,10 +252,14 @@ $translucent: #00000080;
         border-bottom: 2px solid $website-light-gray;
         padding: 10px 0;
         
-        p {
+        .link {
+            text-decoration: none;
+            color: $website-black;
             font-size: 14px;
+            letter-spacing: -1px;
             font-weight: 700;
             transition: 0.3s color ease;
+            text-wrap: nowrap;
 
             &:hover {
                 color: $website-red;
@@ -230,62 +277,51 @@ $translucent: #00000080;
             padding: 30px 0;
             @include flex-direction(column, unset, unset, 30px);
 
-            #top-section {
-                display: grid;
-                grid-template-columns: 3fr 1fr;
-                gap: 30px;
+            #ads-section {
+                @include flex-direction(column, unset, center, 30px);
 
                 #image-slideshow {
-                    width: 100%;
-                    height: 425px;
+                    aspect-ratio: 1 / 0.75;
                     @include flex-direction(row, unset, center, 0);
+                    width: 100%;
                     overflow-x: scroll;
                     scrollbar-width: none;
                     overflow-y: hidden;
                     scroll-snap-type: x mandatory;
                     scroll-snap-stop: always;
-                    position: relative;
 
                     .image-container {
+                        flex: 0 0 100%;
                         width: 100%;
+                        height: 100%;
                         scroll-snap-align: start;
-                        position: relative;
+                        background-size: cover;
+                        background-repeat: no-repeat;
 
-                        .image-content-container {
-                            position: absolute;
-                            background-color: $translucent;
-                            z-index: 1;
+                        .image-content {
+                            @include flex-direction(column, center, flex-start, 15px);
                             width: 100%;
-                            height: 425px;
+                            height: 100%;
+                            background-color: $translucent;
+                            color: $website-white;
+                            padding: 20px;
 
-                            .image-content-left {
-                                width: 80%;
-                                margin: 15% auto;
-                                color: $website-white;
-                                @include flex-direction(column, unset, flex-start, 20px);
-
-                                h1 {
-                                    font-weight: 800;
-                                    font-size: 50px;
-                                }
-
-                                p {
-                                    font-weight: 800;
-                                    font-size: 25px;
-                                }
+                            .shop-now-button-red {
+                                width: 120px;
+                                font-size: 12px;
+                                padding-top: 12px;
+                                padding-bottom: 12px
                             }
-
-                            .image-content-right {
-                                @extend .image-content-left;
-                                @include flex-direction(column, unset, flex-end, 20px);
+    
+                            .image-title {
+                                font-weight: 800;
+                                font-size: 30px;
                             }
-                        }
-
-                        img {
-                            flex: 0 0 100%;
-                            width: 857px;
-                            height: 425px;
-                            object-fit: cover;
+    
+                            p {
+                                font-weight: 800;
+                                font-size: 16px;
+                            }
                         }
                     }
                 }
@@ -305,10 +341,8 @@ $translucent: #00000080;
                 }
             }
 
-            #bottom-section {
-                display: grid;
-                grid-template-columns: 1fr 1fr 1fr 1fr;
-                gap: 30px;
+            #product-types-section {
+                @include flex-direction(column, unset, center, 30px);
                 
                 .product-navigation-tab  {
                     // aspect-ratio referenced from: https://stackoverflow.com/questions/5445491/height-equal-to-dynamic-width-css-fluid-layout
@@ -354,22 +388,20 @@ $translucent: #00000080;
             }
 
             #featured-products-gallery {
-                display: grid;
-                grid-template-columns: repeat(4, 1fr);
-                gap: 30px;
-                padding-top: 30px;
+                @include flex-direction(column, unset, center, 15px);
+                padding-top: 10px;
 
                 .featured-product {
-                    width: inherit;
-                    height: 430px;
+                    width: 100%;
+                    height: 400px;
                     overflow: hidden;
                     text-overflow: ellipsis;
 
                     .product-image {
                         height: 65%;
                         background-size: contain;
-                        background-repeat: no-repeat;
                         background-position: center;
+                        background-repeat: no-repeat;
 
                         div {
                             @include flex-direction(unset, center, center, 0);
@@ -416,18 +448,21 @@ $translucent: #00000080;
     }
 
     #footer {
+        width: 90%;
+        margin: auto;
 
         #newsletter-section {
-            @include flex-direction(row, space-between, center, 0);
+            @include flex-direction(column, unset, center, 20px);
             background-color: $website-navy;
             color: $website-white;
             padding: 25px 20px;
 
-            #right-section {
-                @include flex-direction(row, unset, center, 10px);
+            #subscribe-section {
+                width: 100%;
+                @include flex-direction(column, unset, flex-start, 10px);
 
                 input {
-                    width: 400px;
+                    width: 200px;
                     padding: 12px 25px;
                     border: none;
                     border-radius: 5px;
@@ -459,14 +494,14 @@ $translucent: #00000080;
         }
 
         #main-content {
-            @include flex-direction(row, unset, flex-start, 75px);
+            @include flex-direction(column, unset, flex-start, 30px);
             padding: 30px 0;
 
             #about {
-                width: 30%;
 
                 #about-text {
-                    color: grey;
+                    color: $website-gray;
+                    font-size: 12px;
                 }
             }
 
@@ -481,6 +516,7 @@ $translucent: #00000080;
                 .link {
                     color: $website-red;
                     font-size: 12px;
+                    letter-spacing: -1px;
                     transition: 0.3s color ease;
                     text-decoration: none;
 
@@ -491,5 +527,389 @@ $translucent: #00000080;
                 }
             }
         }
+
+        #copyright-notice {
+            @include flex-direction(row, center, center, 0);
+            border-top: thin solid $website-gray;
+            padding: 15px;
+            text-wrap: nowrap;
+
+            p {
+                color: $website-black;
+                font-weight: 700;
+                font-size: 14px;
+            }
+        }
     }
+}
+
+@media screen AND (min-width: 1440px) {
+    // #toolbar {
+            
+    //     #toolbar-content {
+    //         @include flex-direction(row, space-between, center, 0);
+    //         padding: 10px 0;
+
+    //         #left-content {
+    //             @include flex-direction(row, unset, center, 20px);
+
+    //             #website-title {
+    //                 @include flex-direction(row, unset, center, 0);
+
+    //                 #super {
+    //                     color: $website-red;
+    //                 }
+    //             }
+
+    //             #searchbar-container {
+    //                 @include flex-direction(row, unset, center, 10px);
+    //                 background-color: $website-light-gray;
+    //                 padding: 10px 15px;
+    //                 height: min-content;
+    //                 border: thin solid $invisible;
+
+    //                 &:focus-within {
+    //                     border: thin solid $high-translucence;
+    //                 }
+
+    //                 #searchbar {
+    //                     background-color: $invisible;
+    //                     border: none;
+    //                     width: 155px;
+
+    //                     &:focus {
+    //                         outline: none;
+    //                     }
+    //                 }
+
+    //                 #search-icon {
+    //                     width: 18px;
+    //                     height: auto;
+    //                 }
+    //             }
+    //         }
+
+    //         #right-content {
+    //             @include flex-direction(row, unset, center, 0);
+
+    //             div {
+    //                 @include flex-direction(row, unset, center, 30px);
+    //             }
+    //         }
+    //     }
+    // }
+
+    // #product-filters {
+    //     @include flex-direction(row, unset, center, 45px);
+    //     position: sticky;
+    //     top: 0;
+    //     z-index: 5; 
+    //     background-color: $website-white; 
+    //     border-top: 2px solid $website-light-gray;
+    //     border-bottom: 2px solid $website-light-gray;
+    //     padding: 10px 0;
+        
+    //     .link {
+    //         text-decoration: none;
+    //         color: $website-black;
+    //         font-size: 14px;
+    //         letter-spacing: -1px;
+    //         font-weight: 700;
+    //         transition: 0.3s color ease;
+
+    //         &:hover {
+    //             color: $website-red;
+    //             cursor: pointer;
+    //         }
+    //     }
+    // }
+
+    // #content {
+
+    //     // SECTION ONE
+    //     #products-gallery {
+    //         width: 100%;
+    //         background-color: $website-white;
+    //         padding: 30px 0;
+    //         @include flex-direction(column, unset, unset, 30px);
+
+    //         #top-section {
+    //             display: grid;
+    //             grid-template-columns: 3fr 1fr;
+    //             gap: 30px;
+
+    //             #image-slideshow {
+    //                 width: 100%;
+    //                 height: 425px;
+    //                 @include flex-direction(row, unset, center, 0);
+    //                 overflow-x: scroll;
+    //                 scrollbar-width: none;
+    //                 overflow-y: hidden;
+    //                 scroll-snap-type: x mandatory;
+    //                 scroll-snap-stop: always;
+    //                 position: relative;
+
+    //                 .image-container {
+    //                     width: 100%;
+    //                     scroll-snap-align: start;
+    //                     position: relative;
+
+    //                     .image-content-container {
+    //                         position: absolute;
+    //                         background-color: $translucent;
+    //                         z-index: 1;
+    //                         width: 100%;
+    //                         height: 425px;
+    //                         @include flex-direction(row, flex-start, center, 0);
+
+    //                         .image-content-left {
+    //                             width: 80%;
+    //                             margin: auto;
+    //                             color: $website-white;
+    //                             @include flex-direction(column, unset, flex-start, 20px);
+
+    //                             h1 {
+    //                                 font-weight: 800;
+    //                                 font-size: 50px;
+    //                             }
+
+    //                             p {
+    //                                 font-weight: 800;
+    //                                 font-size: 25px;
+    //                             }
+    //                         }
+
+    //                         .image-content-right {
+    //                             @extend .image-content-left;
+    //                             @include flex-direction(column, unset, flex-end, 20px);
+    //                         }
+    //                     }
+
+    //                     img {
+    //                         flex: 0 0 100%;
+    //                         width: 857px;
+    //                         height: 425px;
+    //                         object-fit: cover;
+    //                     }
+    //                 }
+    //             }
+
+    //             #sale-banner {
+    //                 background-color: $website-red;
+    //                 color: $website-white;
+    //                 text-align: center;
+    //                 @include flex-direction(column, center, center, 20px);
+    //                 padding: 0 25px;
+    //                 height: 425px;
+
+    //                 #sale-offer {
+    //                     font-weight: 800;
+    //                     font-size: 40px;
+    //                 }
+    //             }
+    //         }
+
+    //         #bottom-section {
+    //             display: grid;
+    //             grid-template-columns: 1fr 1fr 1fr 1fr;
+    //             gap: 30px;
+                
+    //             .product-navigation-tab  {
+    //                 // aspect-ratio referenced from: https://stackoverflow.com/questions/5445491/height-equal-to-dynamic-width-css-fluid-layout
+    //                 aspect-ratio: 1/1;
+    //                 width: 100%;
+    //                 background-repeat: no-repeat;
+    //                 background-size: cover;
+    //                 color: $website-white;
+
+    //                 div {
+    //                     width: 100%;
+    //                     height: 100%;
+    //                     @include flex-direction(row, center, center, 0);
+    //                     background-color: $translucent;
+    //                     transition: 0.3s background-color ease;
+
+    //                     &:hover {
+    //                         cursor: pointer;
+    //                         background-color: $high-translucence;
+
+    //                         h1 {
+    //                             transform: translateY(-3px);
+    //                         }
+    //                     }
+
+    //                     h1 {
+    //                         transition: 0.3s transform ease;
+    //                         font-size: 35px;
+    //                         font-weight: 800;
+    //                     }
+    //                 }
+    //             }
+    //         }
+    //     }
+
+    //     // SECTION TWO
+    //     #featured-products-container {
+    //         padding: 15px 0;
+            
+    //         #title {
+    //             font-weight: 800;
+    //             font-size: 24px;
+    //         }
+
+    //         #featured-products-gallery {
+    //             display: grid;
+    //             grid-template-columns: repeat(4, 1fr);
+    //             gap: 30px;
+    //             padding-top: 30px;
+
+    //             .featured-product {
+    //                 width: inherit;
+    //                 height: 430px;
+    //                 overflow: hidden;
+    //                 text-overflow: ellipsis;
+
+    //                 .product-image {
+    //                     height: 65%;
+    //                     background-size: contain;
+    //                     background-repeat: no-repeat;
+    //                     background-position: center;
+
+    //                     div {
+    //                         @include flex-direction(unset, center, center, 0);
+    //                         height: 100%;
+    //                         color: $invisible;
+    //                         transition: 0.3s all ease;
+
+    //                         p {
+    //                             font-size: 40px;
+    //                             font-weight: 800;
+    //                         }
+
+    //                         &:hover {
+    //                             background-color: $high-translucence;
+    //                             color: white;
+    //                             cursor: pointer;
+    //                         }
+    //                     }
+    //                 }
+
+    //                 .product-details {
+    //                     @include flex-direction(column, unset, flex-start, 10px);
+    //                     white-space: nowrap;
+    //                     padding: 10px 0;
+    //                     height: 35%;
+
+    //                     .product-name {
+    //                         font-size: 14px;
+    //                     }
+
+    //                     .product-price {
+    //                         font-size: 28px;
+    //                         font-weight: 600;
+    //                     }
+
+    //                     .shop-now-button-gray {
+    //                         width: auto;
+    //                         padding: 10px 15px;
+    //                     }
+    //                 }
+    //             }
+    //         }
+    //     }
+    // }
+
+    // #footer {
+    //     width: 80%;
+    //     margin: auto;
+
+    //     #newsletter-section {
+    //         @include flex-direction(row, space-between, center, 0);
+    //         background-color: $website-navy;
+    //         color: $website-white;
+    //         padding: 25px 20px;
+
+    //         #right-section {
+    //             @include flex-direction(row, unset, center, 10px);
+
+    //             input {
+    //                 width: 400px;
+    //                 padding: 12px 25px;
+    //                 border: none;
+    //                 border-radius: 5px;
+    //                 outline: none;
+
+    //                 &::placeholder {
+    //                     font-size: 12px;
+    //                     color: $website-black;
+    //                 }
+    //             }
+
+    //             button {
+    //                 background-color: $website-red;
+    //                 padding: 13px 25px;
+    //                 border: none;
+    //                 border-radius: 5px;
+    //                 font-size: 12px;
+    //                 font-weight: 700;
+    //                 color: $website-white;
+    //                 transition: all 0.3s ease;
+
+    //                 &:hover {
+    //                     color: $website-black;
+    //                     background-color: $website-white;
+    //                     cursor: pointer;
+    //                 }
+    //             }
+    //         }
+    //     }
+
+    //     #main-content {
+    //         @include flex-direction(row, unset, flex-start, 75px);
+    //         padding: 30px 0;
+
+    //         #about {
+    //             width: 30%;
+
+    //             #about-text {
+    //                 color: $website-gray;
+    //                 font-size: 12px;
+    //             }
+    //         }
+
+    //         div {
+    //             @include flex-direction(column, unset, unset, 20px);
+
+    //             .content-title {
+    //                 font-weight: 700;
+    //                 font-size: 14px;
+    //             }
+
+    //             .link {
+    //                 color: $website-red;
+    //                 font-size: 12px;
+    //                 letter-spacing: -1px;
+    //                 transition: 0.3s color ease;
+    //                 text-decoration: none;
+
+    //                 &:hover {
+    //                     color: $website-navy;
+    //                     cursor: pointer;
+    //                 }
+    //             }
+    //         }
+    //     }
+
+    //     #copyright-notice {
+    //         @include flex-direction(row, center, center, 0);
+    //         border-top: thin solid $website-gray;
+    //         padding: 15px;
+
+    //         p {
+    //             color: $website-black;
+    //             font-weight: 700;
+    //             font-size: 14px;
+    //         }
+    //     }
+    // }
 }

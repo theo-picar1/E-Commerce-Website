@@ -3,7 +3,6 @@ import React, {Component} from "react"
 import Toolbar from "../components/home/Toolbar.js"
 import Filters from "../components/home/Filters.js"
 import Content from "../components/home/Content.js"
-import Footer from "../components/Footer.js"
 
 export default class Home extends Component {
     render() {
@@ -12,7 +11,6 @@ export default class Home extends Component {
                 <Toolbar />
                 <Filters />
                 <Content />
-                <Footer />
             </div>
         )
     }

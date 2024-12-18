@@ -6,11 +6,11 @@ export default class Footer extends Component {
         return (
             <footer id="footer">  
                 <div id="newsletter-section">
-                    <div id="left-section">
+                    <div id="text-section">
                         <p className="subheading">Newsletter</p>
                         <p className="small-body">Get the latest news on new arrivals, gifts, special offers and other discount information.</p>
                     </div>
-                    <div id="right-section">
+                    <div id="subscribe-section">
                         <input type="text" placeholder="Enter your email address *"/>
                         <button>SUBSCRIBE</button>
                     </div>
@@ -22,20 +22,23 @@ export default class Footer extends Component {
                     </div>
                     <div>
                         <p className="content-title">INFORMATION</p>
-                        <Link className="link"  to="/nosuchpage">About Us</Link>
-                        <Link className="link"  to="/nosuchpage">Customer Service</Link>
-                        <Link className="link"  to="/nosuchpage">Privacy Policy</Link>
-                        <Link className="link"  to="/nosuchpage">Contact Us</Link>
-                        <Link className="link"  to="/nosuchpage">FAQ</Link>
-                        <Link className="link"  to="/nosuchpage">Blog</Link>
+                        <Link className="link" to="/nosuchpage">About Us</Link>
+                        <Link className="link" to="/nosuchpage">Customer Service</Link>
+                        <Link className="link" to="/nosuchpage">Privacy Policy</Link>
+                        <Link className="link" to="/nosuchpage">Contact Us</Link>
+                        <Link className="link" to="/nosuchpage">FAQ</Link>
+                        <Link className="link" to="/nosuchpage">Blog</Link>
                     </div>
                     <div>
                         <p className="content-title">WHY BUY FROM US</p>
-                        <Link className="link"  to="/nosuchpage">Shipping & Delivery</Link>
-                        <Link className="link"  to="/nosuchpage">Secure Payment</Link>
-                        <Link className="link"  to="/nosuchpage">Guarantee</Link>
-                        <Link className="link"  to="/nosuchpage">Terms & Conditions</Link>
+                        <Link className="link" to="/nosuchpage">Shipping & Delivery</Link>
+                        <Link className="link" to="/nosuchpage">Secure Payment</Link>
+                        <Link className="link" to="/nosuchpage">Guarantee</Link>
+                        <Link className="link" to="/nosuchpage">Terms & Conditions</Link>
                     </div>
+                </div>
+                <div id="copyright-notice">
+                    <p>&#169; THEO DAMI OISIN | ALL RIGHTS RESERVED</p>
                 </div>
             </footer>         
         )
