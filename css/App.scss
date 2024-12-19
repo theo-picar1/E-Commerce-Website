@@ -33,10 +33,6 @@ $translucent: #00000080;
         transform-origin: center; 
     }
 
-    #root {
-        overflow-x: hidden;
-    }
-
     .title {
         font-weight: 800;
         font-size: 30px;
@@ -59,12 +55,6 @@ $translucent: #00000080;
     .website-logo {
         height: 40px; 
         width: auto;
-    }
-
-    .page-content {
-        width: 90%;
-        margin: auto;
-        padding: 20px 0;
     }
 
     .shop-now-button-red {
@@ -108,9 +98,15 @@ $translucent: #00000080;
             background-color: $website-red;
         }
     }
+
+    .page-content {
+        width: 90%;
+        margin: auto;
+    }
     
     #header {
         background-color: $website-navy;
+        width: 100%;
         
         #header-content {
             @include flex-direction(column, unset, center, 20px);
@@ -121,7 +117,6 @@ $translucent: #00000080;
             .header-section {
                 @include flex-direction(row, center, center, 5px);
                 color: $website-white;
-                width: 400px;
             }
 
             #nav-tabs {
@@ -240,17 +235,18 @@ $translucent: #00000080;
 
     #product-filters {
         @include flex-direction(row, unset, center, 20px);
+        position: sticky;
+        top: 0;
+        z-index: 5; 
         width: 100%;
         margin: auto;
         overflow-x: scroll;
         scrollbar-width: none;
-        position: sticky;
-        top: 0;
-        z-index: 5; 
         background-color: $website-white; 
         border-top: 2px solid $website-light-gray;
         border-bottom: 2px solid $website-light-gray;
         padding: 10px 0;
+        margin-top: 20px;
         
         .link {
             text-decoration: none;
@@ -448,7 +444,7 @@ $translucent: #00000080;
     }
 
     #footer {
-        width: 90%;
+        width: 100%;
         margin: auto;
 
         #newsletter-section {
@@ -495,6 +491,8 @@ $translucent: #00000080;
 
         #main-content {
             @include flex-direction(column, unset, flex-start, 30px);
+            width: 90%;
+            margin: auto;
             padding: 30px 0;
 
             #about {
@@ -541,375 +539,4 @@ $translucent: #00000080;
             }
         }
     }
-}
-
-@media screen AND (min-width: 1440px) {
-    // #toolbar {
-            
-    //     #toolbar-content {
-    //         @include flex-direction(row, space-between, center, 0);
-    //         padding: 10px 0;
-
-    //         #left-content {
-    //             @include flex-direction(row, unset, center, 20px);
-
-    //             #website-title {
-    //                 @include flex-direction(row, unset, center, 0);
-
-    //                 #super {
-    //                     color: $website-red;
-    //                 }
-    //             }
-
-    //             #searchbar-container {
-    //                 @include flex-direction(row, unset, center, 10px);
-    //                 background-color: $website-light-gray;
-    //                 padding: 10px 15px;
-    //                 height: min-content;
-    //                 border: thin solid $invisible;
-
-    //                 &:focus-within {
-    //                     border: thin solid $high-translucence;
-    //                 }
-
-    //                 #searchbar {
-    //                     background-color: $invisible;
-    //                     border: none;
-    //                     width: 155px;
-
-    //                     &:focus {
-    //                         outline: none;
-    //                     }
-    //                 }
-
-    //                 #search-icon {
-    //                     width: 18px;
-    //                     height: auto;
-    //                 }
-    //             }
-    //         }
-
-    //         #right-content {
-    //             @include flex-direction(row, unset, center, 0);
-
-    //             div {
-    //                 @include flex-direction(row, unset, center, 30px);
-    //             }
-    //         }
-    //     }
-    // }
-
-    // #product-filters {
-    //     @include flex-direction(row, unset, center, 45px);
-    //     position: sticky;
-    //     top: 0;
-    //     z-index: 5; 
-    //     background-color: $website-white; 
-    //     border-top: 2px solid $website-light-gray;
-    //     border-bottom: 2px solid $website-light-gray;
-    //     padding: 10px 0;
-        
-    //     .link {
-    //         text-decoration: none;
-    //         color: $website-black;
-    //         font-size: 14px;
-    //         letter-spacing: -1px;
-    //         font-weight: 700;
-    //         transition: 0.3s color ease;
-
-    //         &:hover {
-    //             color: $website-red;
-    //             cursor: pointer;
-    //         }
-    //     }
-    // }
-
-    // #content {
-
-    //     // SECTION ONE
-    //     #products-gallery {
-    //         width: 100%;
-    //         background-color: $website-white;
-    //         padding: 30px 0;
-    //         @include flex-direction(column, unset, unset, 30px);
-
-    //         #top-section {
-    //             display: grid;
-    //             grid-template-columns: 3fr 1fr;
-    //             gap: 30px;
-
-    //             #image-slideshow {
-    //                 width: 100%;
-    //                 height: 425px;
-    //                 @include flex-direction(row, unset, center, 0);
-    //                 overflow-x: scroll;
-    //                 scrollbar-width: none;
-    //                 overflow-y: hidden;
-    //                 scroll-snap-type: x mandatory;
-    //                 scroll-snap-stop: always;
-    //                 position: relative;
-
-    //                 .image-container {
-    //                     width: 100%;
-    //                     scroll-snap-align: start;
-    //                     position: relative;
-
-    //                     .image-content-container {
-    //                         position: absolute;
-    //                         background-color: $translucent;
-    //                         z-index: 1;
-    //                         width: 100%;
-    //                         height: 425px;
-    //                         @include flex-direction(row, flex-start, center, 0);
-
-    //                         .image-content-left {
-    //                             width: 80%;
-    //                             margin: auto;
-    //                             color: $website-white;
-    //                             @include flex-direction(column, unset, flex-start, 20px);
-
-    //                             h1 {
-    //                                 font-weight: 800;
-    //                                 font-size: 50px;
-    //                             }
-
-    //                             p {
-    //                                 font-weight: 800;
-    //                                 font-size: 25px;
-    //                             }
-    //                         }
-
-    //                         .image-content-right {
-    //                             @extend .image-content-left;
-    //                             @include flex-direction(column, unset, flex-end, 20px);
-    //                         }
-    //                     }
-
-    //                     img {
-    //                         flex: 0 0 100%;
-    //                         width: 857px;
-    //                         height: 425px;
-    //                         object-fit: cover;
-    //                     }
-    //                 }
-    //             }
-
-    //             #sale-banner {
-    //                 background-color: $website-red;
-    //                 color: $website-white;
-    //                 text-align: center;
-    //                 @include flex-direction(column, center, center, 20px);
-    //                 padding: 0 25px;
-    //                 height: 425px;
-
-    //                 #sale-offer {
-    //                     font-weight: 800;
-    //                     font-size: 40px;
-    //                 }
-    //             }
-    //         }
-
-    //         #bottom-section {
-    //             display: grid;
-    //             grid-template-columns: 1fr 1fr 1fr 1fr;
-    //             gap: 30px;
-                
-    //             .product-navigation-tab  {
-    //                 // aspect-ratio referenced from: https://stackoverflow.com/questions/5445491/height-equal-to-dynamic-width-css-fluid-layout
-    //                 aspect-ratio: 1/1;
-    //                 width: 100%;
-    //                 background-repeat: no-repeat;
-    //                 background-size: cover;
-    //                 color: $website-white;
-
-    //                 div {
-    //                     width: 100%;
-    //                     height: 100%;
-    //                     @include flex-direction(row, center, center, 0);
-    //                     background-color: $translucent;
-    //                     transition: 0.3s background-color ease;
-
-    //                     &:hover {
-    //                         cursor: pointer;
-    //                         background-color: $high-translucence;
-
-    //                         h1 {
-    //                             transform: translateY(-3px);
-    //                         }
-    //                     }
-
-    //                     h1 {
-    //                         transition: 0.3s transform ease;
-    //                         font-size: 35px;
-    //                         font-weight: 800;
-    //                     }
-    //                 }
-    //             }
-    //         }
-    //     }
-
-    //     // SECTION TWO
-    //     #featured-products-container {
-    //         padding: 15px 0;
-            
-    //         #title {
-    //             font-weight: 800;
-    //             font-size: 24px;
-    //         }
-
-    //         #featured-products-gallery {
-    //             display: grid;
-    //             grid-template-columns: repeat(4, 1fr);
-    //             gap: 30px;
-    //             padding-top: 30px;
-
-    //             .featured-product {
-    //                 width: inherit;
-    //                 height: 430px;
-    //                 overflow: hidden;
-    //                 text-overflow: ellipsis;
-
-    //                 .product-image {
-    //                     height: 65%;
-    //                     background-size: contain;
-    //                     background-repeat: no-repeat;
-    //                     background-position: center;
-
-    //                     div {
-    //                         @include flex-direction(unset, center, center, 0);
-    //                         height: 100%;
-    //                         color: $invisible;
-    //                         transition: 0.3s all ease;
-
-    //                         p {
-    //                             font-size: 40px;
-    //                             font-weight: 800;
-    //                         }
-
-    //                         &:hover {
-    //                             background-color: $high-translucence;
-    //                             color: white;
-    //                             cursor: pointer;
-    //                         }
-    //                     }
-    //                 }
-
-    //                 .product-details {
-    //                     @include flex-direction(column, unset, flex-start, 10px);
-    //                     white-space: nowrap;
-    //                     padding: 10px 0;
-    //                     height: 35%;
-
-    //                     .product-name {
-    //                         font-size: 14px;
-    //                     }
-
-    //                     .product-price {
-    //                         font-size: 28px;
-    //                         font-weight: 600;
-    //                     }
-
-    //                     .shop-now-button-gray {
-    //                         width: auto;
-    //                         padding: 10px 15px;
-    //                     }
-    //                 }
-    //             }
-    //         }
-    //     }
-    // }
-
-    // #footer {
-    //     width: 80%;
-    //     margin: auto;
-
-    //     #newsletter-section {
-    //         @include flex-direction(row, space-between, center, 0);
-    //         background-color: $website-navy;
-    //         color: $website-white;
-    //         padding: 25px 20px;
-
-    //         #right-section {
-    //             @include flex-direction(row, unset, center, 10px);
-
-    //             input {
-    //                 width: 400px;
-    //                 padding: 12px 25px;
-    //                 border: none;
-    //                 border-radius: 5px;
-    //                 outline: none;
-
-    //                 &::placeholder {
-    //                     font-size: 12px;
-    //                     color: $website-black;
-    //                 }
-    //             }
-
-    //             button {
-    //                 background-color: $website-red;
-    //                 padding: 13px 25px;
-    //                 border: none;
-    //                 border-radius: 5px;
-    //                 font-size: 12px;
-    //                 font-weight: 700;
-    //                 color: $website-white;
-    //                 transition: all 0.3s ease;
-
-    //                 &:hover {
-    //                     color: $website-black;
-    //                     background-color: $website-white;
-    //                     cursor: pointer;
-    //                 }
-    //             }
-    //         }
-    //     }
-
-    //     #main-content {
-    //         @include flex-direction(row, unset, flex-start, 75px);
-    //         padding: 30px 0;
-
-    //         #about {
-    //             width: 30%;
-
-    //             #about-text {
-    //                 color: $website-gray;
-    //                 font-size: 12px;
-    //             }
-    //         }
-
-    //         div {
-    //             @include flex-direction(column, unset, unset, 20px);
-
-    //             .content-title {
-    //                 font-weight: 700;
-    //                 font-size: 14px;
-    //             }
-
-    //             .link {
-    //                 color: $website-red;
-    //                 font-size: 12px;
-    //                 letter-spacing: -1px;
-    //                 transition: 0.3s color ease;
-    //                 text-decoration: none;
-
-    //                 &:hover {
-    //                     color: $website-navy;
-    //                     cursor: pointer;
-    //                 }
-    //             }
-    //         }
-    //     }
-
-    //     #copyright-notice {
-    //         @include flex-direction(row, center, center, 0);
-    //         border-top: thin solid $website-gray;
-    //         padding: 15px;
-
-    //         p {
-    //             color: $website-black;
-    //             font-weight: 700;
-    //             font-size: 14px;
-    //         }
-    //     }
-    // }
 }

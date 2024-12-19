@@ -10,9 +10,6 @@
     transform: scale(1, 1.05);
     transform-origin: center;
   }
-  #root {
-    overflow-x: hidden;
-  }
   .title {
     font-weight: 800;
     font-size: 30px;
@@ -31,11 +28,6 @@
   .website-logo {
     height: 40px;
     width: auto;
-  }
-  .page-content {
-    width: 90%;
-    margin: auto;
-    padding: 20px 0;
   }
   .shop-now-button-red, .shop-now-button-gray, .shop-now-button-white {
     -webkit-appearance: none;
@@ -73,8 +65,13 @@
     color: #ffffff;
     background-color: #df4134;
   }
+  .page-content {
+    width: 90%;
+    margin: auto;
+  }
   #header {
     background-color: #2c3a57;
+    width: 100%;
   }
   #header #header-content {
     display: flex;
@@ -93,7 +90,6 @@
     align-items: center;
     gap: 5px;
     color: #ffffff;
-    width: 400px;
   }
   #header #header-content #nav-tabs {
     display: none;
@@ -225,17 +221,18 @@
     justify-content: unset;
     align-items: center;
     gap: 20px;
+    position: sticky;
+    top: 0;
+    z-index: 5;
     width: 100%;
     margin: auto;
     overflow-x: scroll;
     scrollbar-width: none;
-    position: sticky;
-    top: 0;
-    z-index: 5;
     background-color: #ffffff;
     border-top: 2px solid #d9ddd9;
     border-bottom: 2px solid #d9ddd9;
     padding: 10px 0;
+    margin-top: 20px;
   }
   #product-filters .link {
     text-decoration: none;
@@ -436,7 +433,7 @@
     padding: 10px 15px;
   }
   #footer {
-    width: 90%;
+    width: 100%;
     margin: auto;
   }
   #footer #newsletter-section {
@@ -493,6 +490,8 @@
     justify-content: unset;
     align-items: flex-start;
     gap: 30px;
+    width: 90%;
+    margin: auto;
     padding: 30px 0;
   }
   #footer #main-content #about #about-text {
