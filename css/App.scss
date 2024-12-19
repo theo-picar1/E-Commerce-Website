@@ -381,7 +381,6 @@ $translucent: #00000080;
                     width: 100%;
                     height: 400px;
                     overflow: hidden;
-                    text-overflow: ellipsis;
 
                     .product-image {
                         height: 65%;
@@ -427,6 +426,14 @@ $translucent: #00000080;
                             width: auto;
                             padding: 10px 15px;
                             background-color: $website-light-gray;
+                            color: $website-light-black;
+                            transition: 0.3s all ease;
+
+                            &:hover {
+                                cursor: pointer;
+                                background-color: $website-navy;
+                                color: $website-white;
+                            }
                         }
                     }
                 }
@@ -442,10 +449,15 @@ $translucent: #00000080;
             @include flex-direction(column, unset, center, 20px);
             background-color: $website-navy;
             color: $website-white;
-            padding: 25px 20px;
+            padding: 20px 0;
+
+            #text-section {
+                width: 90%;
+                @include flex-direction(column, flex-start, flex-start, 10px);
+            }
 
             #subscribe-section {
-                width: 100%;
+                width: 90%;
                 @include flex-direction(column, unset, flex-start, 10px);
 
                 input {
@@ -607,6 +619,13 @@ $translucent: #00000080;
                 @include grid-template-columns(repeat(2, 1fr), 30px);
             }
         }
+
+        #featured-products-container {
+            
+            #featured-products-gallery {
+                @include grid-template-columns(repeat(2, 1fr), 30px);
+            }
+        }
     }
 }
 
@@ -657,6 +676,13 @@ $translucent: #00000080;
             }
         }
     }
+
+    #footer {
+
+        #main-content {
+            @include grid-template-columns(repeat(2, 1fr), 30px);
+        }
+    }
 }
 
 // LAPTOP LAYOUT: .page-content should be 80%
@@ -684,6 +710,25 @@ $translucent: #00000080;
                 @include flex-direction(row, flex-end, center, 30px);
 
             }
+        }
+    }
+
+    #footer {
+
+        #newsletter-section {
+            @include flex-direction(row, space-between, center, 0);
+            width: 80%;
+            margin: auto;
+            padding: 20px 25px;
+
+            #subscribe-section {
+                @include flex-direction(row, flex-end, center, 10px);
+            }
+        }
+
+        #main-content {
+            width: 80%;
+            @include grid-template-columns(repeat(4, 1fr), 30px);
         }
     }
 }
@@ -716,6 +761,13 @@ $translucent: #00000080;
             }
 
             #product-types-section {
+                @include grid-template-columns(repeat(4, 1fr), 30px);
+            }
+        }
+
+        #featured-products-container {
+            
+            #featured-products-gallery {
                 @include grid-template-columns(repeat(4, 1fr), 30px);
             }
         }

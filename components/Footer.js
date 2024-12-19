@@ -20,7 +20,7 @@ export default class Footer extends Component {
                         <p className="content-title">ABOUT</p>
                         <p className="text" id="about-text">Our store is more than just another average online retailer. We sell not only top quality products, but give our customers a positive online shopping experience. We work to make your life more enjoyable.</p>
                     </div>
-                    <div>
+                    <div id="information">
                         <p className="content-title">INFORMATION</p>
                         <Link className="link" to="/nosuchpage">About Us</Link>
                         <Link className="link" to="/nosuchpage">Customer Service</Link>
