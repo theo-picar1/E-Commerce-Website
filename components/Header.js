@@ -40,12 +40,12 @@ export default class Header extends Component {
         return (
             <header id="header">
                 <div id="header-content">
-                    <div className="header-section">
-                        <img src="/images/telephone.png" className="website-icon" alt="telephone" />
-                        <p className="small-body">Round-the-clock free hotline (24/7)</p>
+                    <div className="header-section" id="start-section">
+                        <img src="/images/telephone.png" className="website-icon"/>
+                        <p className="small-body">Round-the-clock free hotline</p>
                     </div>
                     <div className="header-section">
-                        <img src="/images/clock.png" className="website-icon" alt="clock" />
+                        <img src="/images/clock.png" className="website-icon"  />
                         <p className="small-body">7 days a week from 9AM to 5PM</p>
                     </div>
                     <div className="header-section" id="nav-tabs">

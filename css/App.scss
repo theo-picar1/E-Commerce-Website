@@ -18,7 +18,13 @@ $translucent: #00000080;
     gap: $gap;
 }
 
-// MOBILE LAYOUT
+@mixin grid-template-columns($columns, $gap) {
+    display: grid;
+    grid-template-columns: $columns;
+    gap: $gap;
+}
+
+// MOBILE LAYOUT: .page-content width must be 90%
 @media screen AND (min-width: 0px) {
     * {
         margin: 0;
@@ -57,7 +63,7 @@ $translucent: #00000080;
         width: auto;
     }
 
-    .shop-now-button-red {
+    .shop-now-button {
         appearance: none;
         width: 200px;
         padding: 15px 0;
@@ -76,29 +82,6 @@ $translucent: #00000080;
         }
     }
 
-    .shop-now-button-white {
-        @extend .shop-now-button-red;
-        background-color: $website-white;
-        color: $website-black;
-        width: 125px;
-
-        &:hover {
-            color: $website-white;
-        }
-    }
-
-    .shop-now-button-gray {
-        @extend .shop-now-button-red;
-        background-color: $website-light-gray;
-        color: $website-light-black;
-        width: 125px;
-
-        &:hover {
-            color: $website-white;
-            background-color: $website-red;
-        }
-    }
-
     .page-content {
         width: 90%;
         margin: auto;
@@ -112,7 +95,7 @@ $translucent: #00000080;
             @include flex-direction(column, unset, center, 20px);
             margin: auto;
             padding: 10px 0;
-            width: 80%;
+            width: 90%;
     
             .header-section {
                 @include flex-direction(row, center, center, 5px);
@@ -149,7 +132,7 @@ $translucent: #00000080;
                     display: none;
                     flex-direction: column;
                     position: absolute;
-                    width: 60%;
+                    width: 250px;
                     top: 40px;
                     z-index: 10;
                     gap: 20px;
@@ -302,7 +285,7 @@ $translucent: #00000080;
                             color: $website-white;
                             padding: 20px;
 
-                            .shop-now-button-red {
+                            .shop-now-button {
                                 width: 120px;
                                 font-size: 12px;
                                 padding-top: 12px;
@@ -327,17 +310,24 @@ $translucent: #00000080;
                     color: $website-white;
                     text-align: center;
                     @include flex-direction(column, center, center, 20px);
-                    padding: 0 25px;
+                    padding: 10px 25px;
                     height: 425px;
+                    width: 100%;
 
                     #sale-offer {
                         font-weight: 800;
                         font-size: 40px;
                     }
+
+                    p {
+                        font-size: 24px;
+                        font-weight: 700;
+                    }
                 }
             }
 
             #product-types-section {
+                width: 100%;
                 @include flex-direction(column, unset, center, 30px);
                 
                 .product-navigation-tab  {
@@ -433,9 +423,10 @@ $translucent: #00000080;
                             font-weight: 600;
                         }
 
-                        .shop-now-button-gray {
+                        .shop-now-button {
                             width: auto;
                             padding: 10px 15px;
+                            background-color: $website-light-gray;
                         }
                     }
                 }
@@ -538,5 +529,215 @@ $translucent: #00000080;
                 font-size: 14px;
             }
         }
+    }
+}
+
+// MOBILE LARGE < MIDDLE LAYOUT > TABLET
+@media screen AND (min-width: 595px) {
+    #header {
+
+        #header-content {
+            @include grid-template-columns(repeat(3, 1fr), 0);
+            text-wrap: nowrap;
+
+            #start-section {
+                justify-content: flex-start;
+            }
+
+            #mobile-nav-tabs-container {
+                align-items: flex-end;
+            }
+        }
+    }
+
+    #toolbar {
+        padding: 20px 0;
+
+        #toolbar-content {
+            @include flex-direction(row, unset, center, 0);
+
+            #tools-container {
+                @include flex-direction(row, flex-end, center, 15px);
+            }
+        }
+    }
+
+    #product-filters {
+        @include flex-direction(row, unset, center, 30px);
+        margin-top: 0;
+    }
+
+    #content {
+
+        #products-gallery {
+
+            #ads-section {
+
+                #image-slideshow {
+                    height: 325px;
+
+                    .image-container {
+
+                        .image-content {
+                            @include flex-direction(column, end, flex-start, 20px);
+                            padding: 50px;
+
+                            .image-title {
+                                font-size: 40px;
+                            }
+
+                            p {
+                                font-size: 20px;
+                            }
+
+                            .shop-now-button {
+                                width: 150px;
+                            }
+                        }
+                    }
+                }
+
+                #sale-banner {
+                    height: min-content;
+                    padding: 20px;
+                }
+            }
+
+            #product-types-section {
+                @include grid-template-columns(repeat(2, 1fr), 30px);
+            }
+        }
+    }
+}
+
+@media screen AND (min-width: 768px) {
+    #header {
+
+        #header-content {
+
+            #nav-tabs {
+                @include flex-direction(row, flex-end, center, 15px);
+
+                .page-link {
+                    text-decoration: none;
+                    color: $website-white;
+                    letter-spacing: -1px;
+                    transition: 0.3s color ease;
+
+                    &:hover {
+                        color: $website-red;
+                        cursor: pointer;
+                    }
+                }
+            }
+
+            #mobile-nav-tabs-container {
+                display: none;
+            }
+        }
+    }
+
+    #toolbar {
+
+        #toolbar-content {
+
+            #tools-container {
+                @include flex-direction(row, flex-end, center, 30px);
+
+                #searchbar-container {
+
+                    #searchbar {
+                        width: 175px;
+                    }
+                }
+
+                #user-tools {
+                    @include flex-direction(row, unset, center, 25px);
+                }
+            }
+        }
+    }
+}
+
+// LAPTOP LAYOUT: .page-content should be 80%
+@media screen AND (min-width: 1024px) {
+    .title {
+        font-weight: 800;
+        font-size: 40px;
+    }
+
+    .website-logo {
+        height: 50px; 
+        width: auto;
+    }
+
+    .page-content {
+        width: 80%;
+    }
+
+    #header {
+
+        #header-content {
+            width: 80%;
+
+            #nav-tabs {
+                @include flex-direction(row, flex-end, center, 30px);
+
+            }
+        }
+    }
+}
+
+// LAPTOP < MIDDLE LAYOUT > LAPTOP LARGE
+@media screen AND (min-width: 1232px) {
+    #content {
+
+        #products-gallery {
+
+            #ads-section {
+                @include grid-template-columns(3fr 1fr, 30px);
+                height: 400px;
+
+                #image-slideshow {
+                    height: 100%;
+
+                    .image-container {
+
+                        .image-content {
+                            justify-content: center;
+                            gap: 30px;
+                        }
+                    }
+                }
+
+                #sale-banner {
+                    height: 100%;
+                }
+            }
+
+            #product-types-section {
+                @include grid-template-columns(repeat(4, 1fr), 30px);
+            }
+        }
+    }
+}
+
+// LAPTOP LARGE LAYOUT
+@media screen AND (min-width: 1440px) {
+
+    #header {
+
+        #header-content {
+
+            #nav-tabs {
+                @include flex-direction(row, flex-end, center, 45px);
+
+            }
+        }
+    }
+
+    #product-filters {
+        @include flex-direction(row, unset, center, 50px);
+        margin-top: 0;
     }
 }
