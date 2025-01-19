@@ -1,7 +1,7 @@
 $website-white: #ffffff;
 $website-black: #000000;
 $website-red: #df4134;
-$website-light-gray: #d9ddd9;
+$website-light-gray: #F5F6F5;
 $website-gray: rgb(171, 171, 171);
 $website-navy: #2c3a57;
 $website-light-black: #272727;
@@ -56,6 +56,12 @@ $translucent: #00000080;
     .website-icon {
         height: 20px;
         width: auto;
+        transition: filter 0.5s ease;
+
+        &:hover {
+            cursor: pointer;
+            filter: invert(30%) sepia(85%) saturate(5500%) hue-rotate(-5deg) brightness(95%) contrast(90%);
+        }
     }
 
     .website-logo {
@@ -423,16 +429,29 @@ $translucent: #00000080;
                         }
 
                         .shop-now-button {
+                            @include flex-direction(row, center, center, 3px);
                             width: auto;
-                            padding: 10px 15px;
+                            padding: 15px 30px;
                             background-color: $website-light-gray;
                             color: $website-light-black;
                             transition: 0.3s all ease;
+                            font-size: 12px;
+                            border-radius: 3px;
+
+                            img {
+                                height: 16px;
+                                width: auto;
+                                transition: filter 0.3s ease;
+                            }
 
                             &:hover {
                                 cursor: pointer;
-                                background-color: $website-navy;
+                                background-color: $website-red;
                                 color: $website-white;
+
+                                img {
+                                    filter: invert(100%) brightness(100%);
+                                }
                             }
                         }
                     }

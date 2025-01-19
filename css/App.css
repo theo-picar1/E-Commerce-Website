@@ -24,6 +24,11 @@
   .website-icon {
     height: 20px;
     width: auto;
+    transition: filter 0.5s ease;
+  }
+  .website-icon:hover {
+    cursor: pointer;
+    filter: invert(30%) sepia(85%) saturate(5500%) hue-rotate(-5deg) brightness(95%) contrast(90%);
   }
   .website-logo {
     height: 40px;
@@ -98,7 +103,7 @@
   }
   #header #header-content #mobile-nav-tabs-container #nav-tabs-button:hover {
     cursor: pointer;
-    background-color: #d9ddd9;
+    background-color: #F5F6F5;
   }
   #header #header-content #mobile-nav-tabs-container #nav-tabs-button img {
     width: 30px;
@@ -170,7 +175,7 @@
     justify-content: unset;
     align-items: center;
     gap: 10px;
-    background-color: #d9ddd9;
+    background-color: #F5F6F5;
     padding: 10px 15px;
     height: -moz-min-content;
     height: min-content;
@@ -212,8 +217,8 @@
     overflow-x: scroll;
     scrollbar-width: none;
     background-color: #ffffff;
-    border-top: 2px solid #d9ddd9;
-    border-bottom: 2px solid #d9ddd9;
+    border-top: 2px solid #F5F6F5;
+    border-bottom: 2px solid #F5F6F5;
     padding: 10px 0;
     margin-top: 20px;
   }
@@ -417,16 +422,31 @@
     font-weight: 600;
   }
   #content #featured-products-container #featured-products-gallery .featured-product .product-details .shop-now-button {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 3px;
     width: auto;
-    padding: 10px 15px;
-    background-color: #d9ddd9;
+    padding: 15px 30px;
+    background-color: #F5F6F5;
     color: #272727;
     transition: 0.3s all ease;
+    font-size: 12px;
+    border-radius: 3px;
+  }
+  #content #featured-products-container #featured-products-gallery .featured-product .product-details .shop-now-button img {
+    height: 16px;
+    width: auto;
+    transition: filter 0.3s ease;
   }
   #content #featured-products-container #featured-products-gallery .featured-product .product-details .shop-now-button:hover {
     cursor: pointer;
-    background-color: #2c3a57;
+    background-color: #df4134;
     color: #ffffff;
+  }
+  #content #featured-products-container #featured-products-gallery .featured-product .product-details .shop-now-button:hover img {
+    filter: invert(100%) brightness(100%);
   }
   #footer {
     width: 100%;
