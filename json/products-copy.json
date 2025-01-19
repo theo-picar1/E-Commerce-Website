@@ -1,0 +1,226 @@
+[
+    {
+        "id": 1,
+        "name": "Gibson Les Paul Standard '50s Tribute",
+        "category": "guitar",
+        "price": 2499.17,
+        "description": [
+            "The Gibson Les Paul Standard 50s AAA guitarguitar Exclusive has been designed with the intention of grouping together the features that typify this period for Gibson. Without being a specific vintage reissue, this model will deliver a definitive Les Paul experience!", 
+            "The body of this model has zero weight relief, a bonus for Les Paul aficionados, some who believe the drill holes used by Gibson to remove the heft of a solid mahogany body, take with them some of the tone. Gibson have listened to those who are after a 'full fat' Les Paul and have delivered exactly that."
+        ],
+        "rating": 4.7,
+        "noOfReviews": 679,
+        "stockQuantity": 7,
+        "productImgs": [
+            "https://images.guitarguitar.co.uk/cdn/large/170/240916429791008-16876869f.jpg?h=62&w=62&scale=canvas&bg=ffffff&quality=60",
+            "https://images.guitarguitar.co.uk/cdn/large/170/240916429791008-16876869f1.jpg?h=62&w=62&scale=canvas&bg=ffffff&quality=60",
+            "https://images.guitarguitar.co.uk/cdn/large/170/240916429791008-16876869f2.jpg?h=62&w=62&scale=canvas&bg=ffffff&quality=60",
+            "https://images.guitarguitar.co.uk/cdn/large/170/240916429791008-16876869f3.jpg",
+            "https://images.guitarguitar.co.uk/cdn/large/170/240916429791008-16876869f6.jpg?h=500&maxwidth=770&scale=canvas&bg=ffffff&quality=70",
+            "https://images.guitarguitar.co.uk/cdn/large/170/240916429791008-16876869f7.jpg?h=500&maxwidth=770&scale=canvas&bg=ffffff&quality=70"
+        ]
+    },
+    {
+        "id": 2,
+        "name": "Single Cutaway Acoustic Guitar by Gear4music, Sunburst",
+        "category": "guitar",
+        "price": 72.70,
+        "description": [
+            "The Single Cutaway Acoustic Guitar by Gear4music, Sunburst is a full sized acoustic guitar which provides a comfortable playing experience ideal for budding guitarists. The acoustic guitar arrives ready to play straight from the box, having already been strung and set up as standard - all that's required is a quick tune up!",
+            "With a classic cutaway body shape and basswood construction offering a rich and resonant sound, this acoustic guitar is great for all genres. Whether you're strumming chords or picking out melodies, this cutaway acoustic guitar by Gear4music offers quality at an accessible price."
+        ],
+        "rating": 4.2,
+        "noOfReviews": 103,
+        "stockQuantity": 28,
+        "productImgs": [
+            "https://r2.gear4music.com/media/111/1118655/76/preview.jpg",
+            "https://r2.gear4music.com/media/111/1118658/76/preview.jpg",
+            "https://r2.gear4music.com/media/111/1118659/76/preview.jpg",
+            "https://r2.gear4music.com/media/111/1118661/76/preview.jpg"
+        ]
+    },
+    {
+        "id:": 3,
+        "name": "Squier by Fender Debut Collection Stratocaster Electric Guitar, Laurel Fingerboard, White Pickguard, Dakota Red",
+        "category": "guitar",
+        "price": 133.23,
+        "description": [
+            "One Squier Debut Series Stratocaster electric guitar – a perfect beginner guitar for both kids and adults.",
+            "The laurel fingerboard and iconic slim 'C' - shaped neck profile allows for a smooth and comfortable playing feel while the chrome hardware provides a durable structure with a premium look",
+            "The Squier Debut Series Strat features three single-coil pickups with 5-way switching that offers a wide range of classic Strat tones, and the tremlolo bridge and removeable arm allows for excting string-bending effects"
+        ],
+        "rating": 4.4,
+        "noOfReviews": 734,
+        "stockQuantity": 2,
+        "productImgs": [
+            "https://m.media-amazon.com/images/I/31WT5y0wu2L._AC_US40_.jpg",
+            "https://m.media-amazon.com/images/I/41MWqfU+M9L._AC_US40_.jpg",
+            "https://m.media-amazon.com/images/I/514nJzSoLhL._AC_US40_.jpg",
+            "https://m.media-amazon.com/images/I/51nDkpA-cfL._AC_US40_.jpg"
+        ]
+    },
+    {
+        "id:": 4,
+        "name": "Martin Guitars D-200 Deluxe",
+        "category": "guitar",
+        "price": 150300.00,
+        "description": [
+            "Together with the exclusive, matching RGM wristwatch included in the scope of delivery, the Martin Guitars D-200 Deluxe is the perfect acquisition for passionate guitar collectors who particularly love instruments from the world's oldest instrument manufacturer.",
+            "In keeping with the guitar's central theme of time, the fact that this guitar is limited to a run of just 50 pieces worldwide also means that it will appreciably increase in value as time goes on, making this instrument not only a desirable collector's item but also a guaranteed eyecatcher at events and exhibitions - all while giving its proud owner the profound pleasure that playing a genuine Martin guitar has always delivered.",
+            "The D-200 Deluxe delivers the same excellent playability and tone that one can expect from a Martin guitar."
+        ],
+        "rating": null,
+        "noOfReviews": null,
+        "stockQuantity": 1,
+        "productImgs": [
+            "https://thumbs.static-thomann.de/thumb/padthumb600x600/pics/bdb/_55/556676/18336349_800.jpg",
+            "https://thumbs.static-thomann.de/thumb/padthumb600x600/pics/bdb/_55/556676/18336367_800.jpg",
+            "https://thumbs.static-thomann.de/thumb/thumb80x80/pics/bdb/_55/556676/18336394_800.jpg",
+            "https://thumbs.static-thomann.de/thumb/thumb80x80/pics/bdb/_55/556676/18336409_800.jpg"
+        ]
+    },
+    {
+        "id:": 5,
+        "name": "",
+        "category": "",
+        "price": 0.00,
+        "description": [
+
+        ],
+        "rating": 0.0,
+        "noOfReviews": 0,
+        "stockQuantity": 0,
+        "bestSeller": false,
+        "productImgs": [
+            
+        ]
+    },
+    {
+        "id:": 6,
+        "name": "",
+        "category": "",
+        "price": 0.00,
+        "description": [
+
+        ],
+        "rating": 0.0,
+        "noOfReviews": 0,
+        "stockQuantity": 0,
+        "bestSeller": false,
+        "productImgs": [
+            
+        ]
+    },
+    {
+        "id:": 7,
+        "name": "",
+        "category": "",
+        "price": 0.00,
+        "description": [
+
+        ],
+        "rating": 0.0,
+        "noOfReviews": 0,
+        "stockQuantity": 0,
+        "bestSeller": false,
+        "productImgs": [
+            
+        ]
+    },
+    {
+        "id:": 8,
+        "name": "",
+        "category": "",
+        "price": 0.00,
+        "description": [
+
+        ],
+        "rating": 0.0,
+        "noOfReviews": 0,
+        "stockQuantity": 0,
+        "bestSeller": false,
+        "productImgs": [
+            
+        ]
+    },
+    {
+        "id:": 9,
+        "name": "",
+        "category": "",
+        "price": 0.00,
+        "description": [
+
+        ],
+        "rating": 0.0,
+        "noOfReviews": 0,
+        "stockQuantity": 0,
+        "bestSeller": false,
+        "productImgs": [
+            
+        ]
+    },
+    {
+        "id:": 10,
+        "name": "",
+        "category": "",
+        "price": 0.00,
+        "description": [
+
+        ],
+        "rating": 0.0,
+        "noOfReviews": 0,
+        "stockQuantity": 0,
+        "bestSeller": false,
+        "productImgs": [
+            
+        ]
+    },
+    {
+        "id:": 11,
+        "name": "",
+        "category": "",
+        "price": 0.00,
+        "description": [
+
+        ],
+        "rating": 0.0,
+        "noOfReviews": 0,
+        "stockQuantity": 0,
+        "bestSeller": false,
+        "productImgs": [
+            
+        ]
+    },
+    {
+        "id:": 12,
+        "name": "",
+        "category": "",
+        "price": 0.00,
+        "description": [
+
+        ],
+        "rating": 0.0,
+        "noOfReviews": 0,
+        "stockQuantity": 0,
+        "bestSeller": false,
+        "productImgs": [
+            
+        ]
+    },
+    {
+        "id:": 13,
+        "name": "",
+        "category": "",
+        "price": 0.00,
+        "description": [
+
+        ],
+        "rating": 0.0,
+        "noOfReviews": 0,
+        "stockQuantity": 0,
+        "bestSeller": false,
+        "productImgs": [
+            
+        ]
+    }
+]
