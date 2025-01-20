@@ -40,28 +40,6 @@ export default class ProductsGallery extends Component {
                         <p>60% OFF ORDERS</p>
                     </div>
                 </div>
-                <div id="product-types-section">
-                    <div className="product-navigation-tab" style={{backgroundImage: `url(/images/guitar-background-2.jpg)`}}>
-                        <div>
-                            <h1>GUITARS</h1>
-                        </div>
-                    </div>
-                    <div className="product-navigation-tab" style={{backgroundImage: `url(/images/keyboard-background-2.jpg)`}}>
-                        <div>
-                            <h1>KEYBOARDS</h1>
-                        </div>
-                    </div>
-                    <div className="product-navigation-tab" style={{backgroundImage: `url(/images/drum-background-2.avif)`}}>
-                            <div>
-                            <h1>DRUMS</h1>
-                        </div>
-                    </div>
-                    <div className="product-navigation-tab" style={{backgroundImage: `url(/images/amplifier-background-2.jpg)`}}>
-                        <div>
-                            <h1>AMPLIFIERS</h1>
-                        </div>
-                    </div>
-                </div>
             </div>
         )
     }

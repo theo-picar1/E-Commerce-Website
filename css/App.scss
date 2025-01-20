@@ -331,43 +331,6 @@ $translucent: #00000080;
                     }
                 }
             }
-
-            #product-types-section {
-                width: 100%;
-                @include flex-direction(column, unset, center, 30px);
-                
-                .product-navigation-tab  {
-                    // aspect-ratio referenced from: https://stackoverflow.com/questions/5445491/height-equal-to-dynamic-width-css-fluid-layout
-                    aspect-ratio: 1/1;
-                    width: 100%;
-                    background-repeat: no-repeat;
-                    background-size: cover;
-                    color: $website-white;
-
-                    div {
-                        width: 100%;
-                        height: 100%;
-                        @include flex-direction(row, center, center, 0);
-                        background-color: $translucent;
-                        transition: 0.3s background-color ease;
-
-                        &:hover {
-                            cursor: pointer;
-                            background-color: $high-translucence;
-
-                            h1 {
-                                transform: translateY(-3px);
-                            }
-                        }
-
-                        h1 {
-                            transition: 0.3s transform ease;
-                            font-size: 35px;
-                            font-weight: 800;
-                        }
-                    }
-                }
-            }
         }
 
         // SECTION TWO
@@ -633,10 +596,6 @@ $translucent: #00000080;
                     padding: 20px;
                 }
             }
-
-            #product-types-section {
-                @include grid-template-columns(repeat(2, 1fr), 30px);
-            }
         }
 
         #featured-products-container {
@@ -777,10 +736,6 @@ $translucent: #00000080;
                 #sale-banner {
                     height: 100%;
                 }
-            }
-
-            #product-types-section {
-                @include grid-template-columns(repeat(4, 1fr), 30px);
             }
         }
 
