@@ -82,15 +82,15 @@
     {
         "id:": 5,
         "name": "Thomann FL-200 Flute",
-        "category": "other",
-        "price": 0.00,
+        "category": "flute",
+        "price": 159.00,
         "description": [
-
+            "A good beginner's flute is distinguished by a wide range of sound dynamics and for being comfortable in the hands of any player. The Thomann FL-200 fulfils these criteria and is currently one of the most affordable flutes on the market.",
+            "This flute makes a convincing case with good intonation in all registers, an easy response, and a centred sound. The headjoint, the body, and the mechanism consist of silver-plated nickel and are solidly manufactured. With this model, which has been available since 1999, Thomann offers a flute with an E-mechanism and an offset G. The scope of delivery includes a stable wooden case, a cleaning rod, and cork grease."
         ],
         "rating": 0.0,
         "noOfReviews": 0,
         "stockQuantity": 0,
-        "bestSeller": false,
         "productImgs": [
             
         ]
@@ -106,7 +106,6 @@
         "rating": 0.0,
         "noOfReviews": 0,
         "stockQuantity": 0,
-        "bestSeller": false,
         "productImgs": [
             
         ]
@@ -122,7 +121,6 @@
         "rating": 0.0,
         "noOfReviews": 0,
         "stockQuantity": 0,
-        "bestSeller": false,
         "productImgs": [
             
         ]
@@ -138,7 +136,6 @@
         "rating": 0.0,
         "noOfReviews": 0,
         "stockQuantity": 0,
-        "bestSeller": false,
         "productImgs": [
             
         ]
@@ -154,7 +151,6 @@
         "rating": 0.0,
         "noOfReviews": 0,
         "stockQuantity": 0,
-        "bestSeller": false,
         "productImgs": [
             
         ]
@@ -170,7 +166,6 @@
         "rating": 0.0,
         "noOfReviews": 0,
         "stockQuantity": 0,
-        "bestSeller": false,
         "productImgs": [
             
         ]
@@ -186,7 +181,6 @@
         "rating": 0.0,
         "noOfReviews": 0,
         "stockQuantity": 0,
-        "bestSeller": false,
         "productImgs": [
             
         ]
@@ -202,7 +196,6 @@
         "rating": 0.0,
         "noOfReviews": 0,
         "stockQuantity": 0,
-        "bestSeller": false,
         "productImgs": [
             
         ]
@@ -218,7 +211,6 @@
         "rating": 0.0,
         "noOfReviews": 0,
         "stockQuantity": 0,
-        "bestSeller": false,
         "productImgs": [
             
         ]
