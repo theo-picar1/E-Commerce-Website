@@ -345,33 +345,47 @@ $translucent: #00000080;
             #featured-products-gallery {
                 @include flex-direction(column, unset, center, 15px);
                 padding-top: 10px;
+                padding-bottom: 30px;
 
                 .featured-product {
                     width: 100%;
                     height: 400px;
                     overflow: hidden;
 
-                    .product-image {
+                    .product-image-container {
+                        @include flex-direction(row, unset, unset, 0);
+                        overflow-x: scroll;
+                        overflow-y: hidden;
+                        scrollbar-width: none;
+                        scroll-snap-type: x mandatory;
                         height: 65%;
-                        background-size: contain;
-                        background-position: center;
-                        background-repeat: no-repeat;
 
-                        div {
-                            @include flex-direction(unset, center, center, 0);
+                        .product-image {
+                            flex: 0 0 100%;
+                            width: 100%;
                             height: 100%;
-                            color: $invisible;
-                            transition: 0.3s all ease;
+                            scroll-snap-align: start; 
+                            background-repeat: no-repeat;
+                            background-position: center;
+                            background-size: contain;
 
-                            p {
-                                font-size: 40px;
-                                font-weight: 800;
-                            }
-
-                            &:hover {
-                                background-color: $high-translucence;
-                                color: white;
-                                cursor: pointer;
+                            div {
+                                @include flex-direction(unset, center, center, 0);
+                                position: relative;
+                                height: 100%;
+                                color: $invisible;
+                                transition: 0.3s all ease;
+    
+                                p {
+                                    font-size: 40px;
+                                    font-weight: 800;
+                                }
+    
+                                &:hover {
+                                    background-color: $high-translucence;
+                                    color: white;
+                                    cursor: pointer;
+                                }
                             }
                         }
                     }
