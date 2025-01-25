@@ -235,7 +235,7 @@
     color: #df4134;
     cursor: pointer;
   }
-  #content #products-gallery {
+  #products-gallery {
     width: 100%;
     background-color: #ffffff;
     padding: 30px 0;
@@ -245,14 +245,14 @@
     align-items: unset;
     gap: 30px;
   }
-  #content #products-gallery #ads-section {
+  #products-gallery #ads-section {
     display: flex;
     flex-direction: column;
     justify-content: unset;
     align-items: center;
     gap: 30px;
   }
-  #content #products-gallery #ads-section #image-slideshow {
+  #products-gallery #ads-section #image-slideshow {
     aspect-ratio: 1/0.75;
     display: flex;
     flex-direction: row;
@@ -266,7 +266,7 @@
     scroll-snap-type: x mandatory;
     scroll-snap-stop: always;
   }
-  #content #products-gallery #ads-section #image-slideshow .image-container {
+  #products-gallery #ads-section #image-slideshow .image-container {
     flex: 0 0 100%;
     width: 100%;
     height: 100%;
@@ -274,7 +274,7 @@
     background-size: cover;
     background-repeat: no-repeat;
   }
-  #content #products-gallery #ads-section #image-slideshow .image-container .image-content {
+  #products-gallery #ads-section #image-slideshow .image-container .image-content {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -286,21 +286,21 @@
     color: #ffffff;
     padding: 20px;
   }
-  #content #products-gallery #ads-section #image-slideshow .image-container .image-content .shop-now-button {
+  #products-gallery #ads-section #image-slideshow .image-container .image-content .shop-now-button {
     width: 120px;
     font-size: 12px;
     padding-top: 12px;
     padding-bottom: 12px;
   }
-  #content #products-gallery #ads-section #image-slideshow .image-container .image-content .image-title {
+  #products-gallery #ads-section #image-slideshow .image-container .image-content .image-title {
     font-weight: 800;
     font-size: 30px;
   }
-  #content #products-gallery #ads-section #image-slideshow .image-container .image-content p {
+  #products-gallery #ads-section #image-slideshow .image-container .image-content p {
     font-weight: 800;
     font-size: 16px;
   }
-  #content #products-gallery #ads-section #sale-banner {
+  #products-gallery #ads-section #sale-banner {
     background-color: #df4134;
     color: #ffffff;
     text-align: center;
@@ -313,22 +313,22 @@
     height: 425px;
     width: 100%;
   }
-  #content #products-gallery #ads-section #sale-banner #sale-offer {
+  #products-gallery #ads-section #sale-banner #sale-offer {
     font-weight: 800;
     font-size: 40px;
   }
-  #content #products-gallery #ads-section #sale-banner p {
+  #products-gallery #ads-section #sale-banner p {
     font-size: 24px;
     font-weight: 700;
   }
-  #content #featured-products-container {
+  #featured-products-container {
     padding: 15px 0;
   }
-  #content #featured-products-container #title {
+  #featured-products-container #title {
     font-weight: 800;
     font-size: 24px;
   }
-  #content #featured-products-container #featured-products-gallery {
+  #featured-products-container #featured-products-gallery {
     display: flex;
     flex-direction: column;
     justify-content: unset;
@@ -337,12 +337,12 @@
     padding-top: 10px;
     padding-bottom: 30px;
   }
-  #content #featured-products-container #featured-products-gallery .featured-product {
+  #featured-products-container #featured-products-gallery .featured-product {
     width: 100%;
     height: 400px;
     overflow: hidden;
   }
-  #content #featured-products-container #featured-products-gallery .featured-product .product-image-container {
+  #featured-products-container #featured-products-gallery .featured-product .product-image-container {
     display: flex;
     flex-direction: row;
     justify-content: unset;
@@ -354,7 +354,7 @@
     scroll-snap-type: x mandatory;
     height: 65%;
   }
-  #content #featured-products-container #featured-products-gallery .featured-product .product-image-container .product-image {
+  #featured-products-container #featured-products-gallery .featured-product .product-image-container .product-image {
     flex: 0 0 100%;
     width: 100%;
     height: 100%;
@@ -363,7 +363,7 @@
     background-position: center;
     background-size: contain;
   }
-  #content #featured-products-container #featured-products-gallery .featured-product .product-image-container .product-image div {
+  #featured-products-container #featured-products-gallery .featured-product .product-image-container .product-image div {
     display: flex;
     flex-direction: unset;
     justify-content: center;
@@ -374,16 +374,16 @@
     color: rgba(0, 0, 0, 0);
     transition: 0.3s all ease;
   }
-  #content #featured-products-container #featured-products-gallery .featured-product .product-image-container .product-image div p {
+  #featured-products-container #featured-products-gallery .featured-product .product-image-container .product-image div p {
     font-size: 40px;
     font-weight: 800;
   }
-  #content #featured-products-container #featured-products-gallery .featured-product .product-image-container .product-image div:hover {
+  #featured-products-container #featured-products-gallery .featured-product .product-image-container .product-image div:hover {
     background-color: rgba(0, 0, 0, 0.2509803922);
     color: white;
     cursor: pointer;
   }
-  #content #featured-products-container #featured-products-gallery .featured-product .product-details {
+  #featured-products-container #featured-products-gallery .featured-product .product-details {
     display: flex;
     flex-direction: column;
     justify-content: unset;
@@ -393,14 +393,14 @@
     padding: 10px 0;
     height: 35%;
   }
-  #content #featured-products-container #featured-products-gallery .featured-product .product-details .product-name {
+  #featured-products-container #featured-products-gallery .featured-product .product-details .product-name {
     font-size: 14px;
   }
-  #content #featured-products-container #featured-products-gallery .featured-product .product-details .product-price {
+  #featured-products-container #featured-products-gallery .featured-product .product-details .product-price {
     font-size: 28px;
     font-weight: 600;
   }
-  #content #featured-products-container #featured-products-gallery .featured-product .product-details .shop-now-button {
+  #featured-products-container #featured-products-gallery .featured-product .product-details .shop-now-button {
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -414,17 +414,17 @@
     font-size: 12px;
     border-radius: 3px;
   }
-  #content #featured-products-container #featured-products-gallery .featured-product .product-details .shop-now-button img {
+  #featured-products-container #featured-products-gallery .featured-product .product-details .shop-now-button img {
     height: 16px;
     width: auto;
     transition: filter 0.3s ease;
   }
-  #content #featured-products-container #featured-products-gallery .featured-product .product-details .shop-now-button:hover {
+  #featured-products-container #featured-products-gallery .featured-product .product-details .shop-now-button:hover {
     cursor: pointer;
     background-color: #df4134;
     color: #ffffff;
   }
-  #content #featured-products-container #featured-products-gallery .featured-product .product-details .shop-now-button:hover img {
+  #featured-products-container #featured-products-gallery .featured-product .product-details .shop-now-button:hover img {
     filter: invert(100%) brightness(100%);
   }
   #footer {
@@ -577,10 +577,10 @@
     gap: 30px;
     margin-top: 0;
   }
-  #content #products-gallery #ads-section #image-slideshow {
+  #products-gallery #ads-section #image-slideshow {
     height: 325px;
   }
-  #content #products-gallery #ads-section #image-slideshow .image-container .image-content {
+  #products-gallery #ads-section #image-slideshow .image-container .image-content {
     display: flex;
     flex-direction: column;
     justify-content: end;
@@ -588,21 +588,21 @@
     gap: 20px;
     padding: 50px;
   }
-  #content #products-gallery #ads-section #image-slideshow .image-container .image-content .image-title {
+  #products-gallery #ads-section #image-slideshow .image-container .image-content .image-title {
     font-size: 40px;
   }
-  #content #products-gallery #ads-section #image-slideshow .image-container .image-content p {
+  #products-gallery #ads-section #image-slideshow .image-container .image-content p {
     font-size: 20px;
   }
-  #content #products-gallery #ads-section #image-slideshow .image-container .image-content .shop-now-button {
+  #products-gallery #ads-section #image-slideshow .image-container .image-content .shop-now-button {
     width: 150px;
   }
-  #content #products-gallery #ads-section #sale-banner {
+  #products-gallery #ads-section #sale-banner {
     height: -moz-min-content;
     height: min-content;
     padding: 20px;
   }
-  #content #featured-products-container #featured-products-gallery {
+  #featured-products-container #featured-products-gallery {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 30px;
@@ -699,23 +699,23 @@
   }
 }
 @media screen and (min-width: 1232px) {
-  #content #products-gallery #ads-section {
+  #products-gallery #ads-section {
     display: grid;
     grid-template-columns: 3fr 1fr;
     gap: 30px;
     height: 400px;
   }
-  #content #products-gallery #ads-section #image-slideshow {
+  #products-gallery #ads-section #image-slideshow {
     height: 100%;
   }
-  #content #products-gallery #ads-section #image-slideshow .image-container .image-content {
+  #products-gallery #ads-section #image-slideshow .image-container .image-content {
     justify-content: center;
     gap: 30px;
   }
-  #content #products-gallery #ads-section #sale-banner {
+  #products-gallery #ads-section #sale-banner {
     height: 100%;
   }
-  #content #featured-products-container #featured-products-gallery {
+  #featured-products-container #featured-products-gallery {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 30px;

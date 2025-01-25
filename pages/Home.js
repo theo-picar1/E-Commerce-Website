@@ -2,7 +2,8 @@ import React, {Component} from "react"
 
 import Toolbar from "../components/home/Toolbar.js"
 import Filters from "../components/home/Filters.js"
-import Content from "../components/home/Content.js"
+import ProductsGallery from "../components/home/ProductsGallery.js"
+import FeaturedProducts from "../components/home/FeaturedProducts.js"
 
 export default class Home extends Component {
     render() {
@@ -10,7 +11,8 @@ export default class Home extends Component {
             <div className="page-content">
                 <Toolbar />
                 <Filters />
-                <Content />
+                <ProductsGallery />
+                <FeaturedProducts />
             </div>
         )
     }
