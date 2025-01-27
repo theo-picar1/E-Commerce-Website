@@ -188,6 +188,7 @@
             "https://m.media-amazon.com/images/I/51PYmZ6TndS._AC_SL1500_.jpg"
         ]
     },
+<<<<<<< HEAD
     {
       "id:": 11,
       "name": "SubZero SZPA-410 175W 10 PA System With Digital Media Player",
@@ -255,3 +256,72 @@
       ]
     }
 ]
+=======
+  {
+    "id:": 11,
+    "name": "SubZero SZPA-410 175W 10 PA System With Digital Media Player",
+    "category": "amplifier",
+    "price": 182.75,
+    "description": [
+      "Be heard clearly. An all-in-one 175W PA system, including MP3 player. With two robust 10 inch speakers included and a range of microphone, instrument and CD player inputs, the SubZero SZPA-410 gives you the flexibility to host any event.",
+      "Each of the four input channels has both XLR and Jack connections, for increased compatibility. They also include individual volume controls, 2-band EQs and assignable delay effects, so you can get everything sounding the way you like.",
+      "With everything you need to set up, the SubZero SZPA-410 gives you great sound in all kinds of live environments, including spoken word and presentations."
+    ],
+    "rating": 4.5,
+    "noOfReviews": 42,
+    "stockQuantity": 25,
+    "productImgs": [
+      "https://r2.gear4music.com/media/23/236372/600/preview.jpg",
+      "https://r2.gear4music.com/media/58/585036/600/preview.jpg",
+      "https://r2.gear4music.com/media/58/585031/600/preview.jpg"
+    ]
+  },
+  {
+    "id:": 12,
+    "name": "Donner Bluetooth 5.0 Stereo Audio Amplifier Receiver, Peak power 440 W Hi-Fi Wireless 4 channel Desktop Amp with USB, SD,FM, 2 Mic IN Echo, RCA, LED, Speaker Selector for Studio, Home Speakers-MAMP5",
+    "category": "amplifier",
+    "price": 153.74,
+    "description": [
+      "【High-power Independent Control】The peak power of Donner Bluetooth Stereo Audio Amplifier Receiver can set up to 440W(110W x 4), and has 4 CHANNELS which is independently controlled. 440W is enough to support 4 groups of 8 speakers with 4-8 ohms. Perfect for home theater, karaoke party.",
+      "【Multiple Input Modes】In addition to the Bluetooth function, the amplifier can also be connected to SD card (Maximum 16G), USB disk (Maximum 32G), 3.5mm AUX IN, FM radio, 2 pairs RCA audio inputs for CD/DVD and 2 1/4 inch(6.35mm) microphone inputs.",
+      "【EQ Controls】The improved professional compact & powerful amp system features crisp, responsive buttons for mode controls & power ON/OFF switch. Equipped with rotary knob controls for microphone volume, bass, treble and music volume. (Note: Remote control can ONLY remotely control the volume of BT/MP3/FM.)"
+    ],
+    "rating": 2.1,
+    "noOfReviews": 13,
+    "stockQuantity": 7,
+    "productImgs": [
+      "https://m.media-amazon.com/images/I/61CpgL3vvsL._AC_SL1500_.jpg",
+      "https://m.media-amazon.com/images/I/815drwkBVML._AC_SX679_.jpg",
+      "https://m.media-amazon.com/images/I/81EGRJY79vL._AC_SX679_.jpg",
+      "https://m.media-amazon.com/images/I/814y4MxIsPL._AC_SX679_.jpg",
+      "https://m.media-amazon.com/images/I/81VXGRqV2BL._AC_SX679_.jpg",
+      "https://m.media-amazon.com/images/I/717EYhWUePL._AC_SX679_.jpg"
+    ]
+  },
+  {
+    "id:": 13,
+    "name": "AMP 3800 BT 5.0 HiFi Amplifier",
+    "category": "amplifier",
+    "price": 96.99,
+    "description": [
+      "Compact, powerful and versatile: with the auna AMP 3800 BT 5.0 surround amplifier, your home cinema receives its intelligent sound upgrade.",
+      "Equipped with a Bluetooth interface, all audio files can be streamed wirelessly and conveniently from smartphone or tablet via stereo amplifier. With an output power of 2 x 120 watts and 3 x 50 watts RMS and the corresponding connections on the back of the unit, your 5.0 home cinema is supported with the best sound. You can adjust the treble, bass, balance and echo effect according to your preferences. The auna AMP 3800 BT HiFi amplifier also has a USB port and an SD slot on the front for easy playback of MP3 files, as well as two microphone connections with adjustable treble and bass for the next karaoke party. In addition to the 5 speaker outputs, you will find a stereo DVD input and a stereo line output for signal routing on the rear panel. The included remote control allows convenient control from a distance of up to 6 m.",
+      "As universally usable home device, the auna AMP 3800 BT 5.0 amplifier is the ideal enrichment for all friends of smart music enjoyment."
+    ],
+    "rating": 4.8,
+    "noOfReviews": 689,
+    "stockQuantity": 78,
+    "productImgs": [
+      "https://res.cloudinary.com/chal-tec/image/upload/w_750,q_auto,f_auto,dpr_2.0/bbg/10034624/Gallery/10034624_yy_0001_titel___.jpg",
+      "https://res.cloudinary.com/chal-tec/image/upload/w_750,q_auto,f_auto,dpr_2.0/bbg/10034624/Gallery/10034624_uk_0002_logo___.jpg",
+      "https://res.cloudinary.com/chal-tec/image/upload/w_750,q_auto,f_auto,dpr_2.0/bbg/10034624/Gallery/10034624_uk_0003_logo___.jpg",
+      "https://res.cloudinary.com/chal-tec/image/upload/w_750,q_auto,f_auto,dpr_2.0/bbg/10034624/Gallery/10034624_uk_0004_logo___.jpg",
+      "https://res.cloudinary.com/chal-tec/image/upload/w_750,q_auto,f_auto,dpr_2.0/bbg/10034624/Gallery/10034624_uk_0005_logo___.jpg",
+      "https://res.cloudinary.com/chal-tec/image/upload/w_750,q_auto,f_auto,dpr_2.0/bbg/10034624/Gallery/10034624_uk_0006_logo___.jpg",
+      "https://res.cloudinary.com/chal-tec/image/upload/w_750,q_auto,f_auto,dpr_2.0/bbg/10034624/Gallery/10034624_uk_0007_logo___.jpg",
+      "https://res.cloudinary.com/chal-tec/image/upload/w_750,q_auto,f_auto,dpr_2.0/bbg/10034624/Gallery/10034624_uk_0008_logo___.jpg",
+      "https://res.cloudinary.com/chal-tec/image/upload/w_750,q_auto,f_auto,dpr_2.0/bbg/10034624/Gallery/10034624_yy_0009_logo___.jpg"
+    ]
+  }
+]
+>>>>>>> 7cecd8514ee3da2e0609eae0bb714053658d882d
