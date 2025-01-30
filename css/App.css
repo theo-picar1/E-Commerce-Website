@@ -323,6 +323,7 @@
   }
   #featured-products-container {
     padding: 15px 0;
+    padding-top: 30px;
   }
   #featured-products-container #title {
     font-weight: 800;
@@ -431,68 +432,13 @@
     width: 100%;
     margin: auto;
   }
-  #footer #newsletter-section {
-    display: flex;
-    flex-direction: column;
-    justify-content: unset;
-    align-items: center;
-    gap: 20px;
-    background-color: #2c3a57;
-    color: #ffffff;
-    padding: 20px 0;
-  }
-  #footer #newsletter-section #text-section {
-    width: 90%;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: flex-start;
-    gap: 10px;
-  }
-  #footer #newsletter-section #subscribe-section {
-    width: 90%;
-    display: flex;
-    flex-direction: column;
-    justify-content: unset;
-    align-items: flex-start;
-    gap: 10px;
-  }
-  #footer #newsletter-section #subscribe-section input {
-    width: 200px;
-    padding: 12px 25px;
-    border: none;
-    border-radius: 5px;
-    outline: none;
-  }
-  #footer #newsletter-section #subscribe-section input::-moz-placeholder {
-    font-size: 12px;
-    color: #000000;
-  }
-  #footer #newsletter-section #subscribe-section input::placeholder {
-    font-size: 12px;
-    color: #000000;
-  }
-  #footer #newsletter-section #subscribe-section button {
-    background-color: #df4134;
-    padding: 13px 25px;
-    border: none;
-    border-radius: 5px;
-    font-size: 12px;
-    font-weight: 700;
-    color: #ffffff;
-    transition: all 0.3s ease;
-  }
-  #footer #newsletter-section #subscribe-section button:hover {
-    color: #000000;
-    background-color: #ffffff;
-    cursor: pointer;
-  }
   #footer #main-content {
     display: flex;
     flex-direction: column;
     justify-content: unset;
     align-items: flex-start;
     gap: 30px;
+    border-top: thin solid rgb(171, 171, 171);
     width: 90%;
     margin: auto;
     padding: 30px 0;
@@ -529,8 +475,10 @@
     justify-content: center;
     align-items: center;
     gap: 0;
+    width: 90%;
+    margin: auto;
     border-top: thin solid rgb(171, 171, 171);
-    padding: 15px;
+    padding: 30px 0;
     text-wrap: nowrap;
   }
   #footer #copyright-notice p {
@@ -674,28 +622,14 @@
     align-items: center;
     gap: 30px;
   }
-  #footer #newsletter-section {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    gap: 0;
-    width: 80%;
-    margin: auto;
-    padding: 20px 25px;
-  }
-  #footer #newsletter-section #subscribe-section {
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-end;
-    align-items: center;
-    gap: 10px;
-  }
   #footer #main-content {
     width: 80%;
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 30px;
+  }
+  #footer #copyright-notice {
+    width: 80%;
   }
 }
 @media screen and (min-width: 1232px) {

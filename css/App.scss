@@ -333,6 +333,7 @@ $translucent: #00000080;
     // SECTION TWO
     #featured-products-container {
         padding: 15px 0;
+        padding-top: 30px;
         
         #title {
             font-weight: 800;
@@ -437,55 +438,9 @@ $translucent: #00000080;
         width: 100%;
         margin: auto;
 
-        #newsletter-section {
-            @include flex-direction(column, unset, center, 20px);
-            background-color: $website-navy;
-            color: $website-white;
-            padding: 20px 0;
-
-            #text-section {
-                width: 90%;
-                @include flex-direction(column, flex-start, flex-start, 10px);
-            }
-
-            #subscribe-section {
-                width: 90%;
-                @include flex-direction(column, unset, flex-start, 10px);
-
-                input {
-                    width: 200px;
-                    padding: 12px 25px;
-                    border: none;
-                    border-radius: 5px;
-                    outline: none;
-
-                    &::placeholder {
-                        font-size: 12px;
-                        color: $website-black;
-                    }
-                }
-
-                button {
-                    background-color: $website-red;
-                    padding: 13px 25px;
-                    border: none;
-                    border-radius: 5px;
-                    font-size: 12px;
-                    font-weight: 700;
-                    color: $website-white;
-                    transition: all 0.3s ease;
-
-                    &:hover {
-                        color: $website-black;
-                        background-color: $website-white;
-                        cursor: pointer;
-                    }
-                }
-            }
-        }
-
         #main-content {
             @include flex-direction(column, unset, flex-start, 30px);
+            border-top: thin solid $website-gray;
             width: 90%;
             margin: auto;
             padding: 30px 0;
@@ -523,8 +478,10 @@ $translucent: #00000080;
 
         #copyright-notice {
             @include flex-direction(row, center, center, 0);
+            width: 90%;
+            margin: auto;
             border-top: thin solid $website-gray;
-            padding: 15px;
+            padding: 30px 0;
             text-wrap: nowrap;
 
             p {
@@ -700,20 +657,13 @@ $translucent: #00000080;
 
     #footer {
 
-        #newsletter-section {
-            @include flex-direction(row, space-between, center, 0);
-            width: 80%;
-            margin: auto;
-            padding: 20px 25px;
-
-            #subscribe-section {
-                @include flex-direction(row, flex-end, center, 10px);
-            }
-        }
-
         #main-content {
             width: 80%;
             @include grid-template-columns(repeat(4, 1fr), 30px);
+        }
+
+        #copyright-notice {
+            width: 80%;
         }
     }
 }

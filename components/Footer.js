@@ -4,17 +4,7 @@ import { Link } from "react-router-dom/cjs/react-router-dom"
 export default class Footer extends Component {
     render() {
         return (
-            <footer id="footer">  
-                <div id="newsletter-section">
-                    <div id="text-section">
-                        <p className="subheading">Newsletter</p>
-                        <p className="small-body">Get the latest news on new arrivals, gifts, special offers and other discount information.</p>
-                    </div>
-                    <div id="subscribe-section">
-                        <input type="text" placeholder="Enter your email address *"/>
-                        <button>SUBSCRIBE</button>
-                    </div>
-                </div>
+            <footer id="footer"> 
                 <div id="main-content">
                     <div id="about">
                         <p className="content-title">ABOUT</p>
