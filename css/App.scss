@@ -5,6 +5,8 @@ $website-light-gray: #F5F6F5;
 $website-gray: rgb(171, 171, 171);
 $website-navy: #2c3a57;
 $website-light-black: #272727;
+$product-link-color: #2163A2;
+$product-link-hover-color: #0C3354;
 
 $invisible: #00000000;
 $high-translucence: #00000040;
@@ -223,7 +225,7 @@ $translucent: #00000080;
     }
 
     #product-filters {
-        @include flex-direction(row, unset, center, 20px);
+        @include flex-direction(row, unset, center, 50px);
         position: sticky;
         top: 0;
         z-index: 5; 
@@ -396,6 +398,17 @@ $translucent: #00000080;
 
                     .product-name {
                         font-size: 14px;
+                        color: $product-link-color;
+
+                        &:hover {
+                            cursor: pointer;
+                            color: $product-link-hover-color;
+                            text-decoration: underline;
+                        }
+
+                        &:active {
+                            color: $product-link-color;
+                        }
                     }
 
                     .product-price {
@@ -412,6 +425,7 @@ $translucent: #00000080;
                         transition: 0.3s all ease;
                         font-size: 12px;
                         border-radius: 3px;
+                        text-align: right;
 
                         img {
                             height: 16px;
@@ -524,7 +538,7 @@ $translucent: #00000080;
     }
 
     #product-filters {
-        @include flex-direction(row, unset, center, 30px);
+        @include flex-direction(row, unset, center, 50px);
         margin-top: 0;
     }
 
@@ -697,7 +711,7 @@ $translucent: #00000080;
     #featured-products-container {
         
         #featured-products-gallery {
-            @include grid-template-columns(repeat(4, 1fr), 30px);
+            @include grid-template-columns(repeat(4, 1fr), 50px);
         }
     }
 }
@@ -714,10 +728,5 @@ $translucent: #00000080;
 
             }
         }
-    }
-
-    #product-filters {
-        @include flex-direction(row, unset, center, 50px);
-        margin-top: 0;
     }
 }

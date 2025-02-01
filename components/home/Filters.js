@@ -5,10 +5,11 @@ export default class Toolbar extends Component {
     render() {
         return (
             <div id="product-filters">
-                <Link to="/nosuchpage" className="link" >GUITARS</Link>
-                <Link to="/nosuchpage" className="link" >KEYBOARDS & PIANOS</Link>
-                <Link to="/nosuchpage" className="link" >DRUMS & PERCUSSIONS</Link>
-                <Link to="/nosuchpage" className="link" >AMPLIFIERS</Link>
+                <select id="select-product-filter">
+                    { this.props.categories.map(category => 
+                        <option value={ category }>{ category }</option>
+                    )}
+                </select>
             </div> 
         )
     }
