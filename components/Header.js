@@ -18,6 +18,14 @@ export default class Header extends Component {
 
     // Code by ChatGPT
     // *********************************************************************************
+    componentDidMount() {
+        document.addEventListener("click", this.handleClickOutside)
+    }
+
+    componentWillUnmount() {
+        document.removeEventListener("click", this.handleClickOutside)
+    }
+    
     handleClickOutside = (event) => {
         const modal = document.getElementById("mobile-nav-tabs")
         const button = document.getElementById("nav-tabs-button")
@@ -25,14 +33,6 @@ export default class Header extends Component {
         if (modal && !modal.contains(event.target) && !button.contains(event.target)) {
             this.setState({ openModal: false })
         }
-    }
-
-    componentDidMount() {
-        document.addEventListener("click", this.handleClickOutside)
-    }
-
-    componentWillUnmount() {
-        document.removeEventListener("click", this.handleClickOutside)
     }
     // *********************************************************************************
 
