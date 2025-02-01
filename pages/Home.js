@@ -2,67 +2,59 @@ import React, {Component} from "react"
 
 import Toolbar from "../components/home/Toolbar.js"
 import Filters from "../components/home/Filters.js"
-import FeaturedProducts from "../components/home/FeaturedProducts.js"
+import ProductsGallery from "../components/home/ProductsGallery.js"
+
+import axios from "axios"
+
+import { SERVER_HOST } from "../config/global_constants.js"
 
 export default class Home extends Component {
-    constructor(props)
-    {
+    constructor(props) {
         super(props)
 
         this.state = {
             products: [],
             originalProducts: [],
-            productKeys: [],
-            categories: [],
-            cartCounter: []
+            categories: []
         }
     }
-               
+
     componentDidMount() {
-        let url = "json/products.json"
+        axios.get(`${SERVER_HOST}/products`).then(res => {
+            if(res.data) {
 
-        fetch(url)
-            .then(response => response.json())
-            .then(jsonData => {
-                let keys = []
-                let categories = []
+                if(res.data.errorMessage) {
+                    console.log(res.data.errorMessage)
+                }
+                else {
+                    console.log("Products have been successfully retrieved/read")
 
-                jsonData.forEach(product => {
-                    keys.push(...Object.keys(product))
+                    let categories = []
 
-                    if(product["category"]) {
-                        categories.push(product["category"])
-                    }
-                })
+                    res.data.forEach(product => {
+                        if(product["category"]) {
+                            categories.push(product["category"])
+                        }
+                    })
 
-                let uniqueKeys = [...new Set(keys)]
-                let uniqueCategories = [...new Set(categories)]
-                
-                this.setState({
-                    products: jsonData,
-                    originalProducts: jsonData,
-                    productKeys: uniqueKeys,
-                    categories: uniqueCategories
-                })
-            })
-    }
-
-    incrementCartCounter() {
-        let newCounter = this.state.cartCounter + 1
-
-        this.setState({
-            cartCounter: newCounter
-        },
-            console.log(this.state.cartCounter)
-        )
-    }
+                    let uniqueCategories = [...new Set(categories)]
+                    
+                    this.setState({
+                        products: res.data,
+                        originalProducts: res.data,
+                        categories: uniqueCategories
+                    })
+                }
+            }
+        })
+    }           
     
     render() {
         return (
             <div className="page-content">
                 <Toolbar />
                 <Filters categories={ this.state.categories }/>
-                <FeaturedProducts products={ this.state.products } onClick={ this.incrementCartCounter }/>
+                <ProductsGallery products={ this.state.products } onClick={ this.incrementCartCounter }/>
             </div>
         )
     }

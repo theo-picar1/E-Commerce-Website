@@ -20,7 +20,7 @@ export default class FeaturedProducts extends Component {
                                 <p className="product-price">€{product["price"]}.99</p>
                                 <button className="shop-now-button">
                                     <img src="/images/shopping-cart.png"/>
-                                    <p onClick={ this.props.onClick() }>ADD TO CART</p>
+                                    <p>ADD TO CART</p>
                                 </button>
                             </div>
                         </div>
