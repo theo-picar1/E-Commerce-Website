@@ -54,22 +54,6 @@ export default class Header extends Component {
                         <Link to="/nosuchpage" className="small-body page-link">Contacts</Link>
                         <Link to="/nosuchpage" className="small-body page-link">Blog</Link>
                     </div>
-                    <div className="header-section" id="mobile-nav-tabs-container">
-                        <div id="nav-tabs-button" onClick={this.toggleModal}>
-                            <img src={this.state.openModal ? "/images/menu-red.png" : "/images/menu-black.png"}/>
-                        </div>
-                        <div
-                            id="mobile-nav-tabs"
-                            style={{
-                                display: this.state.openModal ? "flex" : "none"
-                            }}
-                        >
-                            <Link to="/" className="small-body page-link">Home</Link>
-                            <Link to="/nosuchpage" className="small-body page-link">About Us</Link>
-                            <Link to="/nosuchpage" className="small-body page-link">Contacts</Link>
-                            <Link to="/nosuchpage" className="small-body page-link">Blog</Link>
-                        </div>
-                    </div>
                 </div>
             </header>
         )

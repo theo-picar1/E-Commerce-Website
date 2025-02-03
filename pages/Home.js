@@ -53,8 +53,10 @@ export default class Home extends Component {
         return (
             <div className="page-content">
                 <Toolbar />
-                <Filters categories={ this.state.categories }/>
-                <ProductsGallery products={ this.state.products } onClick={ this.incrementCartCounter }/>
+                <div id="main-content">
+                    <Filters categories={ this.state.categories }/>
+                    <ProductsGallery products={ this.state.products } onClick={ this.incrementCartCounter }/>
+                </div>
             </div>
         )
     }
