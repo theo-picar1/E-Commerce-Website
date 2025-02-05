@@ -142,6 +142,10 @@ $translucent: #00000080;
                         &:focus {
                             outline: none;
                         }
+
+                        &::placeholder {
+                            font-size: 16px;
+                        }
                     }
 
                     #search-icon {
@@ -154,12 +158,13 @@ $translucent: #00000080;
                     @include flex-direction(row, flex-end, center, 40px);
 
                     #shopping-cart-button {
-                        @include flex-direction(row, unset, center, 20px);
+                        @include flex-direction(row, center, center, 20px);
                         font-size: 20px;
                         color:$website-white;
                         font-weight: bold;
                         background-color: $website-light-gray;
-                        padding: 10px 25px;
+                        padding: 10px 0px;
+                        width: 110px;
                         border-radius: 20px;
                         background-color: $website-red;
                         transition: background-color 0.3s ease;
@@ -183,7 +188,7 @@ $translucent: #00000080;
                         border: thin solid $website-black;
                         border-radius: 50%;
                         transition: background-color 0.3s ease;
-                        width: 42px;
+                        width: 30px;
                         height: auto;
 
                         &:hover {
@@ -192,7 +197,7 @@ $translucent: #00000080;
                         }
 
                         img {
-                            width: 30px;
+                            width: 20px;
                             height: auto;
                         }
                     }
