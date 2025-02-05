@@ -15,7 +15,8 @@ export default class Home extends Component {
         this.state = {
             products: [],
             originalProducts: [],
-            categories: []
+            categories: [],
+            cartCounter: 0
         }
     }
 
@@ -47,12 +48,16 @@ export default class Home extends Component {
                 }
             }
         })
-    }           
+    } 
+    
+    incrementCartCounter = () => {
+        this.setState(prevState => ({ cartCounter: prevState.cartCounter + 1 }))
+    }
     
     render() {
         return (
             <div className="page-content">
-                <Toolbar />
+                <Toolbar cartCounter={ this.state.cartCounter }/>
                 <div id="main-content">
                     <Filters categories={ this.state.categories }/>
                     <ProductsGallery products={ this.state.products } onClick={ this.incrementCartCounter }/>

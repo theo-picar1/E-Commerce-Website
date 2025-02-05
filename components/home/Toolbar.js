@@ -14,14 +14,17 @@ export default class Toolbar extends Component {
                             <img src="/images/website-logo.jpg" className="website-logo"/>
                         </div>
                     </div>
-                    <div id="tools-container">
-                        <div id="searchbar-container">
-                            <input type="text" id="searchbar" placeholder="Search for instruments..."/>
-                            <img src="/images/search.png" className="website-icon"/>
+                    <div id="searchbar-container">
+                        <input type="text" id="searchbar" placeholder="What are you searching for?" autoComplete="off"/>
+                        <img src="/images/search.png" className="website-icon"/>
+                    </div>
+                    <div id="user-tools">
+                        <div id="shopping-cart-button">
+                            <img src="/images/shopping-cart.png"/>
+                            <p>{ this.props.cartCounter }</p>
                         </div>
-                        <div id="user-tools">
-                            <img src="/images/shopping-cart.png" className="website-icon"/>
-                            <img src="/images/user.png" className="website-icon"/>
+                        <div id="user-profile">
+                            <img src="/images/user.png"/>
                         </div>
                     </div>
                 </div>
