@@ -16,7 +16,9 @@ export default class Home extends Component {
             products: [],
             originalProducts: [],
             categories: [],
-            cartCounter: 0
+            cartCounter: 0,
+            sortBy: ``,
+            sortType: ``
         }
     }
 
@@ -53,6 +55,31 @@ export default class Home extends Component {
     incrementCartCounter = () => {
         this.setState(prevState => ({ cartCounter: prevState.cartCounter + 1 }))
     }
+
+    sortProducts = (sortBy, sortType) => {
+        let updatedProducts = [...this.state.products]
+
+        if(sortType === "asc") {
+            updatedProducts.sort((a, b) => a[sortBy] > b[sortBy] ? 1 : -1)
+        }
+        else if(sortType === "desc") {
+            updatedProducts.sort((a, b) => a[sortBy] < b[sortBy] ? 1 : -1)
+        }
+
+        this.setState({
+            products: updatedProducts
+        })
+    }
+
+    setSortAttribute = (e) => {
+        let array = e.target.value.split('-')
+
+        let sortBy = array[0]
+        let sortType = array[1]
+
+        this.sortProducts(sortBy, sortType)
+    }
+
     
     render() {
         return (
@@ -60,7 +87,7 @@ export default class Home extends Component {
                 <Toolbar cartCounter={ this.state.cartCounter }/>
                 <div id="main-content">
                     <Filters categories={ this.state.categories }/>
-                    <ProductsGallery products={ this.state.products } onClick={ this.incrementCartCounter }/>
+                    <ProductsGallery products={ this.state.products } onClick={ this.incrementCartCounter } onSort={ this.setSortAttribute }/>
                 </div>
             </div>
         )

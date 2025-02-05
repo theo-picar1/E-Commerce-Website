@@ -2,16 +2,17 @@ import React, {Component} from 'react'
 
 export default class FeaturedProducts extends Component {
     render() {
-        {console.log(this.props.products)}
         return (
             <div id="products-gallery-container">
                 <div id="products-gallery-header">
                     <p className="subheading">FEATURED PRODUCTS</p>
-                    <select>
-                        <option>Highest Price</option>
-                        <option>Lowest Price</option>
-                        <option>Highest Rating</option>
-                        <option>Lowest Rating</option>
+                    <select onChange={ this.props.onSort }>
+                        <option value="name-asc">Name (A-Z)</option>
+                        <option value="price-desc">Name (Z-A)</option>
+                        <option value="price-desc">Highest Price</option>
+                        <option value="price-asc">Lowest Price</option>
+                        <option value="rating-desc">Highest Rating</option>
+                        <option value="rating-asc">Lowest Rating</option>
                     </select>
                 </div>
                 <div id="products-gallery">
