@@ -2,8 +2,8 @@ import React, { Component } from "react"
 import { BrowserRouter, Switch, Route } from "react-router-dom/cjs/react-router-dom.js"
 
 import "./css/App.css"
-import Home from "./pages/Home"
-import NoSuchPage from "./pages/NoSuchPage"
+import Home from "./components/Home"
+import NoSuchPage from "./components/NoSuchPage"
 import Header from "./components/Header"
 import Footer from "./components/Footer"
 

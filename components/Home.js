@@ -1,8 +1,8 @@
 import React, {Component} from "react"
 
-import Toolbar from "../components/home/Toolbar.js"
-import Filters from "../components/home/Filters.js"
-import ProductsGallery from "../components/home/ProductsGallery.js"
+import Toolbar from "./Toolbar.js"
+import Filters from "./Filters.js"
+import ProductsGallery from "./ProductsGallery.js"
 
 import axios from "axios"
 

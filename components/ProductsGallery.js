@@ -8,7 +8,7 @@ export default class FeaturedProducts extends Component {
                     <p className="subheading">FEATURED PRODUCTS</p>
                     <select onChange={ this.props.onSort }>
                         <option value="name-asc">Name (A-Z)</option>
-                        <option value="price-desc">Name (Z-A)</option>
+                        <option value="name-desc">Name (Z-A)</option>
                         <option value="price-desc">Highest Price</option>
                         <option value="price-asc">Lowest Price</option>
                         <option value="rating-desc">Highest Rating</option>
