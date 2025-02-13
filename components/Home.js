@@ -3,6 +3,7 @@ import React, {Component} from "react"
 import Toolbar from "./Toolbar.js"
 import Filters from "./Filters.js"
 import ProductsGallery from "./ProductsGallery.js"
+import Footer from "./Footer.js"
 
 import axios from "axios"
 
@@ -18,7 +19,9 @@ export default class Home extends Component {
             categories: [],
             cartCounter: 0,
             sortBy: ``,
-            sortType: ``
+            sortType: ``,
+            isLoggedIn: false,
+            isRegistered: false
         }
     }
 
@@ -89,6 +92,7 @@ export default class Home extends Component {
                     <Filters categories={ this.state.categories }/>
                     <ProductsGallery products={ this.state.products } onClick={ this.incrementCartCounter } onSort={ this.setSortAttribute }/>
                 </div>
+                <Footer />
             </div>
         )
     }

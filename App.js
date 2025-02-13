@@ -4,18 +4,27 @@ import { BrowserRouter, Switch, Route } from "react-router-dom/cjs/react-router-
 import "./css/App.css"
 import Home from "./components/Home"
 import NoSuchPage from "./components/NoSuchPage"
-import Footer from "./components/Footer"
+import Register from "./components/Register"
+import Login from "./components/Login"
+
+import {ACCESS_LEVEL_GUEST} from "./config/global_constants"
+
+
+if (typeof sessionStorage.accessLevel === "undefined") {
+    sessionStorage.name = "GUEST"
+    sessionStorage.accessLevel = ACCESS_LEVEL_GUEST
+}
 
 export default class App extends Component {
     render() {
         return (
             <BrowserRouter>
                 <Switch>
+                    <Route exact path="/register" component={Register} />
                     <Route exact path="/" component={Home} />
-                    <Route path="/nosuchpage" component={NoSuchPage} />
+                    <Route exact path="/nosuchpage" component={NoSuchPage} />
+                    <Route exact path="/login" component={Login} />
                 </Switch>
-
-                <Footer />
             </BrowserRouter>
         )
     }

@@ -1,5 +1,7 @@
 import React, {Component} from "react"
 
+import {ACCESS_LEVEL_GUEST, ACCESS_LEVEL_ADMIN} from "../config/global_constants"
+
 export default class Filters extends Component {
     constructor(props) {
         super(props)
@@ -34,6 +36,7 @@ export default class Filters extends Component {
         return (
             <div id="product-filters">
                 <p className="subheading">FILTERS</p>
+                {sessionStorage.accessLevel >= ACCESS_LEVEL_ADMIN ? <h1>Testing adminstration code</h1> : null}
                 <div className="filter-section">
                     <p className="filter-type-subheading">PRICE RANGE</p>
                     <div className="section-content"id="price-range-section">

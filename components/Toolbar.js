@@ -1,5 +1,7 @@
 import React, {Component} from "react"
 
+import { Link } from "react-router-dom"
+
 export default class Toolbar extends Component {
     render() {
         return (
@@ -23,9 +25,9 @@ export default class Toolbar extends Component {
                             <img src="/images/shopping-cart.png"/>
                             <p>{ this.props.cartCounter }</p>
                         </div>
-                        <div id="user-profile">
+                        <Link id="user-profile" to={"/login"}>
                             <img src="/images/user.png"/>
-                        </div>
+                        </Link>
                     </div>
                 </div>
             </div> 
