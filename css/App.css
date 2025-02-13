@@ -13,13 +13,16 @@
   .title {
     font-weight: 800;
     font-size: 30px;
+    letter-spacing: -1px;
   }
   .subheading {
     font-weight: 800;
     font-size: 24px;
+    letter-spacing: -1px;
   }
   .small-body {
     font-size: 14px;
+    letter-spacing: -1px;
   }
   .website-icon {
     height: 20px;
@@ -500,5 +503,63 @@
     color: #000000;
     font-weight: 700;
     font-size: 14px;
+  }
+  .form-container {
+    width: 100%;
+    height: 100vh;
+    background-color: #2c3a57;
+    display: flex;
+    flex-direction: unset;
+    justify-content: center;
+    align-items: center;
+    gap: 0;
+  }
+  .form-container form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+    background-color: #ffffff;
+    width: -moz-min-content;
+    width: min-content;
+    height: auto;
+    padding: 30px 40px;
+  }
+  .form-container form .input-form-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+  }
+  .form-container form .input-form-container input {
+    -webkit-appearance: none;
+       -moz-appearance: none;
+            appearance: none;
+    border: thin solid rgb(171, 171, 171);
+    padding: 8px 10px;
+    border-radius: 8px;
+    width: 275px;
+  }
+  .form-container form button {
+    -webkit-appearance: none;
+       -moz-appearance: none;
+            appearance: none;
+    width: 275px;
+    padding: 10px 0;
+    border: none;
+    background-color: #df4134;
+    color: white;
+    letter-spacing: -1px;
+    font-size: 14px;
+    font-weight: 800;
+  }
+  .form-container form .form-message {
+    font-size: 13px;
+    text-decoration: none;
+  }
+  .form-container form .link {
+    text-decoration: none;
   }
 }/*# sourceMappingURL=App.css.map */
