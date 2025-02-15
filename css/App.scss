@@ -524,46 +524,129 @@ $translucent: #00000080;
         height: 100vh;
         background-color: $website-navy;
         @include flex-direction(unset, center, center, 0);
-        
-
+    
         form {
-            @include flex-direction(column, center, center, 30px);
+            @include flex-direction(column, center, center, 20px);
             background-color: $website-white;
             width: min-content;
             height: auto;
-            padding: 30px 40px;
+            padding: 25px;
+            border: thin solid $website-black;
 
-            .input-form-container {
-                @include flex-direction(column, center, center, 20px);
+            #website-title {
+                @include flex-direction(row, unset, center, 10px);
 
-                input {
-                    appearance: none;
-                    border: thin solid $website-gray;
-                    padding: 8px 10px;
-                    border-radius: 8px;
-                    width: 275px;
+                #superments {
+                    @include flex-direction(row, unset, center, 0);
+                    color: $website-red;
+
+                    #super {
+                        color: black;
+                    }
+                }
+
+                img {
+                    width: 50px;
+                    height: auto;
                 }
             }
 
-            button {
-                appearance: none;
-                width: 275px;
-                padding: 10px 0;
-                border: none;
-                background-color: $website-red;
-                color: white;
+            .input-section {
+                @include flex-direction(column, center, unset, 20px);
+                border: thin solid $website-light-black;
+                padding: 15px 25px;
+                border-radius: 15px;
+
+                .input-form-container {
+                    @include flex-direction(column, center, center, 10px);
+
+                    div {
+                        .input-header {
+                            letter-spacing: -1px;
+                            font-size: 14px;
+                        }
+
+                        input {
+                            appearance: none;
+                            border: thin solid $website-gray;
+                            padding: 8px 10px;
+                            border-radius: 8px;
+                            width: 275px;
+
+                            &::placeholder {
+                                letter-spacing: -1px;
+                            }
+                        }
+
+                        .empty-input {
+                            color: $website-red;
+                            font-size: 12px;
+                            letter-spacing: -1px;
+                        }
+
+                        .error-message {
+                            @extend .empty-input;
+                        }
+                    }
+                }
+
+                button {
+                    appearance: none;
+                    width: 275px;
+                    padding: 10px 0;
+                    border: none;
+                    background-color: $website-red;
+                    color: white;
+                    letter-spacing: -1px;
+                    font-size: 14px;
+                    font-weight: 800;
+
+                    &:hover {
+                        cursor: pointer;
+                        filter: opacity(0.95);
+                    }
+                }
+
+                .form-message {
+                    font-size: 13px;
+                    text-decoration: none;
+                    text-align: center;
+                }
+
+                .link {
+                    text-decoration: none;
+                }
+            }
+
+            .successful-page {
+                @include flex-direction(column, unset, unset, 20px);
+                border: thin solid $website-light-black;
+                padding: 15px 25px;
                 letter-spacing: -1px;
                 font-size: 14px;
-                font-weight: 800;
-            }
+                border-radius: 10px;
+                text-align: center;
 
-            .form-message {
-                font-size: 13px;
-                text-decoration: none;
-            }
+                b {
+                    font-size: 18px;
+                }
 
-            .link {
-                text-decoration: none;
+                button {
+                    appearance: none;
+                    width: 275px;
+                    padding: 10px 0;
+                    border: none;
+                    background-color: $website-red;
+                    color: white;
+                    letter-spacing: -1px;
+                    font-size: 14px;
+                    font-weight: 800;
+
+                    &:hover {
+                        cursor: pointer;
+                        filter: opacity(0.95);
+                    }
+                }
             }
         }
     }
