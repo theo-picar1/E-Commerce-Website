@@ -12,7 +12,9 @@ export default class Login extends Component {
         this.state = {
             email: "",
             password: "",
-            isLoggedIn: false
+            isLoggedIn: false,
+            submittedOnce: false,
+            name: ""
         }
     }
 
@@ -25,58 +27,96 @@ export default class Login extends Component {
     handleSubmit = (e) => {
         e.preventDefault()
 
-        axios.post(`${SERVER_HOST}/users/login/${this.state.email}/${this.state.password}`).then(res => {
-            sessionStorage.name = "GUEST"
-            sessionStorage.accessLevel = ACCESS_LEVEL_GUEST
+        this.setState({
+            submittedOnce: true
+        })
+            
+        if(this.state.email !== "" && this.state.password !== "") {
+            axios.post(`${SERVER_HOST}/users/login/${this.state.email}/${this.state.password}`).then(res => {
+                sessionStorage.name = "GUEST"
+                sessionStorage.accessLevel = ACCESS_LEVEL_GUEST
 
-            if (res.data) {
-                if (res.data.errorMessage) {
-                    console.log(res.data.errorMessage)
+                if (res.data) {
+                    if (res.data.errorMessage) {
+                        console.log(res.data.errorMessage)
+                    }
+                    else {
+                        console.log("User logged in")
+                        sessionStorage.name = res.data.name
+                        sessionStorage.accessLevel = res.data.accessLevel
+
+                        this.setState({
+                            isLoggedIn: true,
+                            name: res.data.name
+                        })
+                    }
                 }
                 else {
-                    console.log("User logged in")
-
-                    sessionStorage.name = res.data.name
-                    sessionStorage.accessLevel = res.data.accessLevel
-
-                    this.setState({
-                        isLoggedIn: true
-                    })
+                    console.log("Login failed")
+                    return
                 }
-            }
-            else {
-                console.log("Login failed")
-            }
-        })
+            })
+        }
     }
 
     render() {
-        return (
+        return ( 
             <div className="form-container">
                 <form noValidate={true}>
-                    {this.state.isLoggedIn ? <Redirect to="/" /> : null}
-                    <p className="title">LOGIN</p>
-                    <div className="input-form-container">
-                        <input
-                            name="email"
-                            type="email"
-                            placeholder="Enter your email"
-                            autoComplete="email"
-                            value={this.state.email}
-                            onChange={this.handleChange}
-                        />
-                        <input
-                            name="password"
-                            type="password"
-                            placeholder="Enter your password"
-                            autoComplete="password"
-                            title="Password must be at least ten-digits long and contains at least one lowercase letter, one uppercase letter, one digit and one of the following characters (£!#€$%^&*)"
-                            value={this.state.password}
-                            onChange={this.handleChange}
-                        />
+                    <div id="website-title">
+                        <div id="superments">
+                            <p className="title" id="super">SUPER</p>
+                            <p className="title">MENTS</p>
+                        </div>
+                        <div>
+                            <img src="/images/website-logo.jpg" className="website-logo" />
+                        </div>
                     </div>
-                    <button onClick={this.handleSubmit}>LOGIN</button>
-                    <p className="form-message">Don't have an account? <Link className="link" to={"/register"}> Register</Link></p>
+                    {!this.state.isLoggedIn ?
+                        <div className="input-section">
+                            <p className="title">LOGIN</p>
+                            <div className="input-form-container">
+                                <div>
+                                    <p className="input-header">Enter your email</p>
+                                    <input 
+                                        name="email"
+                                        type="email"
+                                        autoComplete="email"
+                                        value={this.state.email}
+                                        onChange={this.handleChange}
+                                        style={this.state.submittedOnce && this.state.email === "" ? { border: "thin solid red" } : {}}
+                                    />
+                                    {this.state.submittedOnce && this.state.email === "" && (
+                                        <p className="empty-input">Please fill out this form</p>
+                                    )}
+                                </div>
+                                <div>
+                                    <p className="input-header">Enter your password</p>
+                                    <input
+                                        name="password"
+                                        type="password"
+                                        autoComplete="password"
+                                        value={this.state.password}
+                                        onChange={this.handleChange}
+                                        style={this.state.submittedOnce && this.state.password === "" ? { border: "thin solid red" } : {}}
+                                    />
+                                    {this.state.submittedOnce && this.state.password === "" && (
+                                        <p className="empty-input">Please fill out this form</p>
+                                    )}
+                                    {this.state.submittedOnce && this.state.email !== "" && this.state.password !== "" && (
+                                        <p className="error-message">Incorrect email or password</p>
+                                    )}
+                                </div>
+                            </div>
+                            <button onClick={this.handleSubmit}>LOGIN</button>
+                            <p className="form-message">Don't have an account? <Link className="link" to={"/register"}> Register</Link></p>
+                        </div>
+                    :
+                        <div className="successful-page">
+                            <p>Welcome back, {this.state.name}!</p>
+                            <Link className="link" to={"/"}>Back to SuperMents</Link>
+                        </div>
+                    }
                 </form>
             </div>
         )
