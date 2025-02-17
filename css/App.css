@@ -97,7 +97,7 @@
     justify-content: space-between;
     align-items: center;
     gap: 0px;
-    background-color: #F5F6F5;
+    background-color: #f5f6f5;
     padding: 10px 15px;
     height: -moz-min-content;
     height: min-content;
@@ -142,7 +142,7 @@
     font-size: 20px;
     color: #ffffff;
     font-weight: bold;
-    background-color: #F5F6F5;
+    background-color: #f5f6f5;
     padding: 10px 0px;
     width: 110px;
     border-radius: 20px;
@@ -174,7 +174,7 @@
   }
   .page-content #toolbar #toolbar-content #user-tools #user-profile:hover {
     cursor: pointer;
-    background-color: #F5F6F5;
+    background-color: #f5f6f5;
   }
   .page-content #toolbar #toolbar-content #user-tools #user-profile img {
     width: 20px;
@@ -189,7 +189,7 @@
   }
   .page-content #main-content #product-filters {
     width: 20%;
-    background-color: #F5F6F5;
+    background-color: #f5f6f5;
     height: -moz-min-content;
     height: min-content;
     display: flex;
@@ -362,15 +362,15 @@
   }
   .page-content #main-content #products-gallery-container #products-gallery .product .product-details .product-name {
     font-size: 14px;
-    color: #2163A2;
+    color: #2163a2;
   }
   .page-content #main-content #products-gallery-container #products-gallery .product .product-details .product-name:hover {
     cursor: pointer;
-    color: #0C3354;
+    color: #0c3354;
     text-decoration: underline;
   }
   .page-content #main-content #products-gallery-container #products-gallery .product .product-details .product-name:active {
-    color: #2163A2;
+    color: #2163a2;
   }
   .page-content #main-content #products-gallery-container #products-gallery .product .product-details .product-price {
     font-size: 28px;
@@ -384,7 +384,7 @@
     gap: 3px;
     width: auto;
     padding: 15px 30px;
-    background-color: #F5F6F5;
+    background-color: #f5f6f5;
     color: #272727;
     transition: 0.3s all ease;
     font-size: 12px;
@@ -647,5 +647,81 @@
   .form-container form .successful-page button:hover {
     cursor: pointer;
     filter: opacity(0.95);
+  }
+  #product-details-container {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    max-width: 1200px;
+    margin: 50px auto;
+  }
+  #product-details-container #product-imagesDiv {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    overflow: hidden;
+    flex: 1;
+    max-width: 400px;
+  }
+  #product-details-container #product-imagesDiv #product-images {
+    width: 100%;
+    height: 400px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+  }
+  #product-details-container #product-imagesDiv #product-images img {
+    width: 400px;
+    max-width: 100%;
+    height: 100%;
+    -o-object-fit: contain;
+       object-fit: contain;
+    border-radius: 5px;
+    scroll-snap-align: center;
+    display: block;
+  }
+  #product-details-container #product-details {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    max-width: 700px;
+    padding-left: 20px;
+    position: relative;
+    font-family: Arial, sans-serif;
+  }
+  #product-details-container #product-details h1 {
+    font-size: 24px;
+    margin-bottom: 10px;
+  }
+  #product-details-container #product-details p {
+    margin: 5px 0;
+  }
+  #product-details-container #product-details #close-button {
+    font-size: 24px;
+    border: none;
+    background: none;
+    cursor: pointer;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+  }
+  #product-details-container button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 20px;
+  }
+  #product-details-container button:hover {
+    background-color: #0056b3;
   }
 }/*# sourceMappingURL=App.css.map */
