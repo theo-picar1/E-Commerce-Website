@@ -33,6 +33,7 @@ export default class Login extends Component {
             
         if(this.state.email !== "" && this.state.password !== "") {
             axios.post(`${SERVER_HOST}/users/login/${this.state.email}/${this.state.password}`).then(res => {
+                console.log(res.data)
                 sessionStorage.name = "GUEST"
                 sessionStorage.accessLevel = ACCESS_LEVEL_GUEST
 
@@ -42,7 +43,8 @@ export default class Login extends Component {
                     }
                     else {
                         console.log("User logged in")
-                        sessionStorage.name = res.data.name
+
+                        sessionStorage.name = res.data.accessName
                         sessionStorage.accessLevel = res.data.accessLevel
 
                         this.setState({

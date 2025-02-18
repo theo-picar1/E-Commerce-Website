@@ -6,6 +6,7 @@ import Home from "./components/Home"
 import NoSuchPage from "./components/NoSuchPage"
 import Register from "./components/Register"
 import Login from "./components/Login"
+import Logout from "./components/Logout"
 
 import {ACCESS_LEVEL_GUEST} from "./config/global_constants"
 
@@ -24,6 +25,7 @@ export default class App extends Component {
                     <Route exact path="/" component={Home} />
                     <Route exact path="/nosuchpage" component={NoSuchPage} />
                     <Route exact path="/login" component={Login} />
+                    <Route exact path="/logout" component={Logout} />
                     <Route path="*" component={NoSuchPage} />
                 </Switch>
             </BrowserRouter>

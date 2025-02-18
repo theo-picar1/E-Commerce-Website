@@ -2,6 +2,8 @@ import React, {Component} from "react"
 
 import { Link } from "react-router-dom"
 
+import { ACCESS_LEVEL_GUEST } from "../config/global_constants"
+
 export default class Toolbar extends Component {
     render() {
         return (
@@ -25,9 +27,11 @@ export default class Toolbar extends Component {
                             <img src="/images/shopping-cart.png"/>
                             <p>{ this.props.cartCounter }</p>
                         </div>
-                        <Link id="user-profile" to={"/login"}>
-                            <img src="/images/user.png"/>
-                        </Link>
+                        {sessionStorage.accessLevel > ACCESS_LEVEL_GUEST ? 
+                            <Link to={"/logout"}>Log out</Link>
+                        :
+                            <Link to={"/login"}>Sign in</Link>
+                        }
                     </div>
                 </div>
             </div> 

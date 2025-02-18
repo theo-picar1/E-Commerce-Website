@@ -650,4 +650,53 @@ $translucent: #00000080;
             }
         }
     }
+
+    // Logout page
+    #logout-page {
+        @include flex-direction(column, center, center, 0px);
+        background-color: $website-navy;
+        height: 100vh;
+        width: 100%;
+
+        #content {
+            @include flex-direction(column, center, center, 20px);
+            background-color: $website-white;
+            padding: 30px;
+
+            #website-title {
+                @include flex-direction(row, unset, center, 10px);
+
+                #superments {
+                    @include flex-direction(row, unset, center, 0);
+                    color: $website-red;
+
+                    #super {
+                        color: black;
+                    }
+                }
+
+                img {
+                    width: 50px;
+                    height: auto;
+                }
+            }
+
+            button {
+                appearance: none;
+                    width: 150px;
+                    padding: 10px 0;
+                    border: none;
+                    background-color: $website-red;
+                    color: white;
+                    letter-spacing: -1px;
+                    font-size: 14px;
+                    font-weight: 800;
+
+                    &:hover {
+                        cursor: pointer;
+                        filter: opacity(0.95);
+                    }
+            }
+        }
+    }
 }
