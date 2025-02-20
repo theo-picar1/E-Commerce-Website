@@ -171,11 +171,6 @@ $translucent: #00000080;
                         transition: background-color 0.3s ease;
                         height: 42px;
 
-                        &:hover {
-                            cursor: pointer;
-                            background-color: $website-navy;
-                        }
-
                         img {
                             filter: invert(100%) brightness(100%);
                             width: 20px;
