@@ -26,6 +26,7 @@ export default class App extends Component {
                     <Route exact path="/nosuchpage" component={NoSuchPage} />
                     <Route exact path="/login" component={Login} />
                     <Route exact path="/logout" component={Logout} />
+                    <Route exact path="/users" component={UsersTable} />
                     <Route path="*" component={NoSuchPage} />
                 </Switch>
             </BrowserRouter>

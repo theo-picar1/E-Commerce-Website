@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-import Toolbar from "./Toolbar.js";
+import Toolbar from "./Header.js";
 import Filters from "./Filters.js";
 import ProductsGallery from "./ProductsGallery.js";
 import ProductDetails from "./ProductDetails.js";
@@ -23,7 +23,9 @@ export default class Home extends Component {
       sortType: ``,
       showProductDetails: false,
       product: null,
-    };
+      users: [],
+      originalUsers: []
+    }
   }
 
   componentDidMount() {
@@ -52,7 +54,7 @@ export default class Home extends Component {
         }
       }
     });
-  }
+}
 
   incrementCartCounter = () => {
     this.setState((prevState) => ({ cartCounter: prevState.cartCounter + 1 }));
@@ -104,7 +106,7 @@ export default class Home extends Component {
   };
 
   render() {
-    const { showProductDetails, cartCounter, categories, products, product } =
+    const { showProductDetails, cartCounter, categories, products, product, users } =
       this.state;
     const {
       incrementCartCounter,
