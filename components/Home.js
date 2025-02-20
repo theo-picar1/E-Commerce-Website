@@ -124,7 +124,6 @@ export default class Home extends Component {
             setSortAttribute,
             handleProductClick,
             closeProductDetails,
-            handleSearch,
         } = this;
         return (
             <div className="page-content">
