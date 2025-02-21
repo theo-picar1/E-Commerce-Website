@@ -5,6 +5,10 @@ import { Link } from "react-router-dom"
 import { ACCESS_LEVEL_GUEST } from "../config/global_constants"
 
 export default class Header extends Component {
+    handleSearchChange = (e) => {
+        this.props.onSearch(e.target.value)
+    }
+
     render() {
         return (
             <div id="header">
@@ -19,7 +23,14 @@ export default class Header extends Component {
                         </div>
                     </div>
                     <div id="searchbar-container">
-                        <input type="text" id="searchbar" placeholder="What are you searching for?" autoComplete="off"/>
+                        <input 
+                            type="text" 
+                            id="searchbar" 
+                            placeholder="What are you searching for?"
+                            autoComplete="off"
+                            value={this.props.searchValue}
+                            onChange={this.handleSearchChange}
+                        />
                         <img src="/images/search.png" className="website-icon"/>
                     </div>
                     <div id="user-tools">

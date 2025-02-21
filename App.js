@@ -7,6 +7,7 @@ import NoSuchPage from "./components/NoSuchPage"
 import Register from "./components/Register"
 import Login from "./components/Login"
 import Logout from "./components/Logout"
+import UsersTable from "./components/UsersTable"
 
 import {ACCESS_LEVEL_GUEST} from "./config/global_constants"
 
