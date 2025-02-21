@@ -41,6 +41,8 @@ export default class Header extends Component {
                         ) : (
                             <Link to={"/login"}>Sign in</Link>
                         )}
+                        <Link to={"/logout"}>Log out</Link>
+                        <Link to={"/login"}>Sign in</Link>
                     </div>
                 </div>
             </div>
