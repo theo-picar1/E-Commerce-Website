@@ -1,16 +1,16 @@
-import React, {Component} from "react";
-import {Link} from "react-router-dom";
-import {ACCESS_LEVEL_GUEST} from "../config/global_constants";
+import React, {Component} from "react"
+import {Link} from "react-router-dom"
+import {ACCESS_LEVEL_GUEST} from "../config/global_constants"
 
 export default class Header extends Component {
     handleSearchChange = (e) => {
-        this.props.onSearch(e.target.value);
-    };
+        this.props.onSearch(e.target.value)
+    }
 
     render() {
         return (
-            <div id="toolbar">
-                <div id="toolbar-content">
+            <div id="header">
+                <div id="header-content">
                     <div id="website-title">
                         <div id="superments">
                             <p className="title" id="super">SUPER</p>
@@ -41,11 +41,9 @@ export default class Header extends Component {
                         ) : (
                             <Link to={"/login"}>Sign in</Link>
                         )}
-                        <Link to={"/logout"}>Log out</Link>
-                        <Link to={"/login"}>Sign in</Link>
                     </div>
                 </div>
             </div>
-        );
+        )
     }
 }
