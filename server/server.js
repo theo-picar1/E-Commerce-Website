@@ -1,16 +1,18 @@
 // Server-side global variables
 require(`dotenv`).config({path:`./config/.env`})
 
+require(`./config/db`)
 
 // Express
 const express = require(`express`)
 const app = express()
 
-
 app.use(require(`body-parser`).json())
 app.use(require(`cors`)({credentials: true, origin: process.env.LOCAL_HOST}))
 
-
+// Routers
+app.use(require(`./routes/products`))
+app.use(require(`./routes/users`))
 
 // Port
 app.listen(process.env.SERVER_PORT, () => 

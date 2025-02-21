@@ -1,17 +1,4 @@
-# Ignore node_modules in client and server
+node_modules/
+
 client/node_modules/
 server/node_modules/
-
-# Ignore build directories (e.g., production builds)
-client/build/
-server/build/
-
-# Ignore environment configuration
-server/.env
-
-# Ignore system-related files
-.DS_Store
-
-# Ignore common log and temp files
-*.log
-*.tmp

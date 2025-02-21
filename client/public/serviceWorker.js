@@ -2,7 +2,7 @@ const cacheName = 'MyApp_01'
 
 const filesToCache =
     ['index.html', 
-	 'logo192.png'
+	 'website-logo.jpg'
     ]
 
 
