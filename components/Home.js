@@ -1,6 +1,6 @@
 import React, {Component} from "react";
 
-import Toolbar from "./Toolbar.js";
+import Header from "./Header.js";
 import Filters from "./Filters.js";
 import ProductsGallery from "./ProductsGallery.js";
 import ProductDetails from "./ProductDetails.js";
@@ -128,7 +128,7 @@ export default class Home extends Component {
         return (
             <div className="page-content">
                 <div id="top-of-page"></div>
-                <Toolbar cartCounter={cartCounter} onSearch={this.handleSearch} searchValue={searchValue}/>
+                <Header cartCounter={cartCounter} onSearch={this.handleSearch} searchValue={searchValue}/>
                 <div id="main-content">
                     {showProductDetails ? (
                         <ProductDetails

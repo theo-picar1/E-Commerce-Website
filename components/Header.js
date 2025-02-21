@@ -2,7 +2,7 @@ import React, {Component} from "react";
 import {Link} from "react-router-dom";
 import {ACCESS_LEVEL_GUEST} from "../config/global_constants";
 
-export default class Toolbar extends Component {
+export default class Header extends Component {
     handleSearchChange = (e) => {
         this.props.onSearch(e.target.value);
     };
