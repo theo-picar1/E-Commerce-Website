@@ -24,6 +24,7 @@ export default class Home extends Component {
             showProductDetails: false,
             product: null,
             searchValue: "",
+            selectedCategories: [],
         };
     }
 
@@ -35,20 +36,12 @@ export default class Home extends Component {
                 } else {
                     console.log("Products have been successfully retrieved/read");
 
-                    let categories = [];
-
-                    res.data.forEach((product) => {
-                        if (product["category"]) {
-                            categories.push(product["category"]);
-                        }
-                    });
-
-                    let uniqueCategories = [...new Set(categories)];
+                    let categories = [...new Set(res.data.map(product => product.category))];
 
                     this.setState({
                         products: res.data,
                         originalProducts: res.data,
-                        categories: uniqueCategories,
+                        categories: categories.filter(Boolean), // Remove empty categories
                     });
                 }
             }
@@ -62,42 +55,25 @@ export default class Home extends Component {
     sortProducts = (sortBy, sortType) => {
         let updatedProducts = [...this.state.products];
 
-        if (sortType === "asc") {
-            updatedProducts.sort((a, b) => (a[sortBy] > b[sortBy] ? 1 : -1));
-        } else if (sortType === "desc") {
-            updatedProducts.sort((a, b) => (a[sortBy] < b[sortBy] ? 1 : -1));
-        }
-
-        this.setState({
-            products: updatedProducts,
+        updatedProducts.sort((a, b) => {
+            if (sortType === "asc") return a[sortBy] > b[sortBy] ? 1 : -1;
+            return a[sortBy] < b[sortBy] ? 1 : -1;
         });
+
+        this.setState({products: updatedProducts});
     };
 
     setSortAttribute = (e) => {
-        let array = e.target.value.split("-");
-
-        let sortBy = array[0];
-        let sortType = array[1];
-
+        const [sortBy, sortType] = e.target.value.split("-");
         this.sortProducts(sortBy, sortType);
     };
 
-    // Function to scroll to the top
     scrollToTop = () => {
-        const topOfPage = document.getElementById("top-of-page");
-        topOfPage.scrollIntoView({behavior: "smooth"});
+        document.getElementById("top-of-page").scrollIntoView({behavior: "smooth"});
     };
 
     handleProductClick = (product) => {
-        this.setState(
-            {
-                product,
-                showProductDetails: true,
-            },
-            () => {
-                this.scrollToTop();
-            }
-        );
+        this.setState({product, showProductDetails: true}, this.scrollToTop);
     };
 
     closeProductDetails = () => {
@@ -106,25 +82,36 @@ export default class Home extends Component {
 
     handleSearch = (searchValue) => {
         searchValue = searchValue.toLowerCase();
-        const filteredProducts = this.state.originalProducts.filter((product) =>
-            product.name.toLowerCase().includes(searchValue)
-        );
+        this.setState({searchValue}, this.filterProducts);
+    };
 
-        this.setState({
-            searchValue,
-            products: filteredProducts,
-        });
+    handleFilterChange = (selectedCategories) => {
+        this.setState({selectedCategories}, this.filterProducts);
+    };
+
+    filterProducts = () => {
+        const {selectedCategories, originalProducts, searchValue} = this.state;
+
+        let filteredProducts = originalProducts;
+
+        if (selectedCategories.length > 0) {
+            filteredProducts = filteredProducts.filter(product =>
+                selectedCategories.includes(product.category)
+            );
+        }
+
+        if (searchValue) {
+            filteredProducts = filteredProducts.filter(product =>
+                product.name.toLowerCase().includes(searchValue)
+            );
+        }
+
+        this.setState({products: filteredProducts});
     };
 
     render() {
-        const {searchValue, showProductDetails, cartCounter, categories, products, product} =
-            this.state;
-        const {
-            incrementCartCounter,
-            setSortAttribute,
-            handleProductClick,
-            closeProductDetails,
-        } = this;
+        const {searchValue, showProductDetails, cartCounter, categories, products, product} = this.state;
+
         return (
             <div className="page-content">
                 <div id="top-of-page"></div>
@@ -133,17 +120,17 @@ export default class Home extends Component {
                     {showProductDetails ? (
                         <ProductDetails
                             product={product}
-                            closeProductDetails={closeProductDetails}
-                            incrementCartCounter={incrementCartCounter}
+                            closeProductDetails={this.closeProductDetails}
+                            incrementCartCounter={this.incrementCartCounter}
                         />
                     ) : (
                         <>
-                            <Filters categories={categories}/>
+                            <Filters categories={categories} onFilterChange={this.handleFilterChange}/>
                             <ProductsGallery
                                 products={products}
-                                incrementCartCounter={incrementCartCounter}
-                                onSort={setSortAttribute}
-                                handleProductClick={handleProductClick}
+                                incrementCartCounter={this.incrementCartCounter}
+                                onSort={this.setSortAttribute}
+                                handleProductClick={this.handleProductClick}
                             />
                         </>
                     )}
