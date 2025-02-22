@@ -41,6 +41,11 @@ export default class Header extends Component {
                         ) : (
                             <Link to={"/login"}>Sign in</Link>
                         )}
+                        {!this.props.showCustomers ?
+                            <button onClick={this.props.showCustomersOnClick}>Customers</button>
+                        :
+                            <button onClick={this.props.showProductsOnClick}>Products</button>
+                        }
                     </div>
                 </div>
             </div>
