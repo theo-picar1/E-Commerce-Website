@@ -42,9 +42,15 @@ export default class Header extends Component {
                             <Link to={"/login"}>Sign in</Link>
                         )}
                         {!this.props.showCustomers ?
-                            <button onClick={this.props.showCustomersOnClick}>Customers</button>
+                            <button className="change-view-button" onClick={this.props.showCustomersOnClick}>
+                                <img src="images/user.png" />
+                                <p>CUSTOMERS</p>
+                            </button>
                         :
-                            <button onClick={this.props.showProductsOnClick}>Products</button>
+                            <button className="change-view-button" onClick={this.props.showProductsOnClick}>
+                                <img src="images/shopping-cart.png" />
+                                <p>PRODUCTS</p>
+                            </button>
                         }
                     </div>
                 </div>

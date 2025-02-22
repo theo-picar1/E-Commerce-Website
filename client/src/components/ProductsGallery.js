@@ -36,7 +36,7 @@ export default class FeaturedProducts extends Component {
                                 <p className="product-name">{product["name"]}</p>
                                 <p className="product-price">€{product["price"]}.99</p>
                                 <button
-                                    className="shop-now-button"
+                                    className="add-to-cart-button"
                                     onClick={this.props.incrementCartCounter}
                                 >
                                     <img src="/images/shopping-cart.png" />

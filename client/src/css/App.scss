@@ -75,25 +75,6 @@ $translucent: #00000080;
         width: auto;
     }
 
-    .shop-now-button {
-        appearance: none;
-        width: 200px;
-        padding: 15px 0;
-        text-align: center;
-        color: $website-white;
-        font-weight: 800;
-        background-color: $website-red;
-        outline: none;
-        border: none;
-        transition: 0.3s all ease;
-        border-radius: 5px;
-
-        &:hover {
-            background-color: $website-navy;
-            cursor: pointer;
-        }
-    }
-
     .page-content {
         width: 95%;
         margin: auto;
@@ -203,6 +184,35 @@ $translucent: #00000080;
                             top: 85px;
                             right: 72px;
                             border-radius: 10px;
+                        }
+                    }
+
+                    .change-view-button {
+                        @include flex-direction(row, center, center, 5px);
+                        appearance: none;
+                        -webkit-appearance: none;
+                        background-color: $website-light-gray;
+                        font-weight: 800;
+                        border: none;
+                        padding: 15px 20px;
+                        font-size: 12px;
+                        color: $website-light-black;
+                        transition: all 0.3s ease;
+                        border-radius: 5px;
+
+                        img {
+                            width: 16px;
+                            height: auto;
+                        }
+
+                        &:hover {
+                            cursor: pointer;
+                            background-color: $website-red;
+                            color: $website-white;
+
+                            img {
+                                filter: invert(100%) brightness(100%);
+                            }
                         }
                     }
                 }
@@ -388,7 +398,12 @@ $translucent: #00000080;
                                 font-weight: 600;
                             }
 
-                            .shop-now-button {
+                            .add-to-cart-button {
+                                appearance: none;
+                                font-weight: 800;
+                                outline: none;
+                                border: none;
+                                transition: 0.3s all ease;
                                 @include flex-direction(row, center, center, 3px);
                                 width: auto;
                                 padding: 15px 30px;
