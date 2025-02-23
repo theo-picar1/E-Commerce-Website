@@ -5,6 +5,7 @@ $website-light-gray: #f5f6f5;
 $website-gray: rgb(171, 171, 171);
 $website-navy: #2c3a57;
 $website-light-black: #272727;
+$website-light-green: #008000;
 $product-link-color: #2163a2;
 $product-link-hover-color: #0c3354;
 $border-color: #dddddd;
@@ -105,6 +106,35 @@ $translucent: #00000080;
             width: 18px;
             height: auto;
         }
+    }
+
+    .add-button {
+        appearance: none;
+        -webkit-appearance: none;
+        width: 145px;
+        padding: 10px 15px;
+        border: none;
+        background-color: $website-light-green;
+        border-radius: 5px;
+        font-weight: 800;
+        letter-spacing: -1px;
+        color: $website-white;
+        transition: filter 0.3s ease;
+
+        &:hover {
+            cursor: pointer;
+            filter: opacity(0.75);
+        }
+    }
+
+    .delete-button {
+        @extend .add-button;
+        background-color: $website-red;
+    }
+
+    .edit-button {
+        @extend .add-button;
+        background-color: $website-navy;
     }
 
     .page-content {
@@ -316,8 +346,17 @@ $translucent: #00000080;
                 #products-gallery-header {
                     @include flex-direction(row, space-between, center, 0);
 
-                    select {
-                        width: 125px;
+                    #product-tools {
+                        @include flex-direction(row, unset, center, 20px);
+
+                        select {
+                            width: 125px;
+                            padding: 8px 15px;
+                        }
+
+                        #action-buttons {
+                            @include flex-direction(row, unset, center, 10px);
+                        }
                     }
                 }
 
@@ -436,17 +475,29 @@ $translucent: #00000080;
             }
         }
 
+
+
         #users-main-content {
             @include flex-direction(column, unset, unset, 20px);
 
-            #customers-table-container {
+            #user-filters {
+
+                #filter-toolbar {
+
+                    #action-buttons {
+                        @include flex-direction(row, unset, center, 10px);
+                    }
+                }
+            }
+
+            #users-table-container {
                 padding: 5px;
                 background-color: $website-light-gray;
                 height: min-content;
                 width: 100%;
                 margin-bottom: 30px;
 
-                #customers-table {
+                #users-table {
                     width: inherit;
 
                     thead {

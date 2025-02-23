@@ -6,14 +6,21 @@ export default class FeaturedProducts extends Component {
             <div id="products-gallery-container">
                 <div id="products-gallery-header">
                     <p className="subheading">FEATURED PRODUCTS</p>
-                    <select onChange={this.props.onSort}>
-                        <option value="name-asc">Name (A-Z)</option>
-                        <option value="name-desc">Name (Z-A)</option>
-                        <option value="price-desc">Highest Price</option>
-                        <option value="price-asc">Lowest Price</option>
-                        <option value="rating-desc">Highest Rating</option>
-                        <option value="rating-asc">Lowest Rating</option>
-                    </select>
+                    <div id="product-tools">
+                        <select onChange={this.props.onSort}>
+                            <option value="name-asc">Name (A-Z)</option>
+                            <option value="name-desc">Name (Z-A)</option>
+                            <option value="price-desc">Highest Price</option>
+                            <option value="price-asc">Lowest Price</option>
+                            <option value="rating-desc">Highest Rating</option>
+                            <option value="rating-asc">Lowest Rating</option>
+                        </select>
+                        <div id="action-buttons">
+                            <button className="add-button">ADD PRODUCT</button>
+                            <button className="edit-button">EDIT PRODUCT</button>
+                            <button className="delete-button">DELETE PRODUCTS</button>
+                        </div>
+                    </div>
                 </div>
                 <div id="products-gallery">
                     {this.props.products.map((product) => (
