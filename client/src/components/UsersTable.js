@@ -3,16 +3,25 @@ import React, {Component} from "react"
 export default class UsersTable extends Component {
     render() {
         return(
-            <div>
-                <table>
+            <div id="customers-table-container">
+                <table id="customers-table">
                     <thead>
                         <tr>
-                            <th>Name</th>
-                            <th>Email</th>
+                            <th>USERNAME</th>
+                            <th>NAME</th>
+                            <th>EMAIL</th>
+                            <th>HOME ADDRESS</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <p>Hello</p>
+                        {this.props.users.map(user =>
+                            <tr key={user._id}>
+                                <td>username here</td>
+                                <td>{user["name"]}</td>
+                                <td>{user["email"]}</td>
+                                <td>31 Park Heath, Grangerath, Drogheda, Co. Meath</td>
+                            </tr>
+                        )}
                     </tbody>
                 </table>
             </div>

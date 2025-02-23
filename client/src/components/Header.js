@@ -36,11 +36,6 @@ export default class Header extends Component {
                             <img src="/images/shopping-cart.png"/>
                             <p>{this.props.cartCounter}</p>
                         </div>
-                        {sessionStorage.accessLevel > ACCESS_LEVEL_GUEST ? (
-                            <Link to={"/logout"}>Log out</Link>
-                        ) : (
-                            <Link to={"/login"}>Sign in</Link>
-                        )}
                         {!this.props.showCustomers ?
                             <button className="change-view-button" onClick={this.props.showCustomersOnClick}>
                                 <img src="images/user.png" />
@@ -52,6 +47,11 @@ export default class Header extends Component {
                                 <p>PRODUCTS</p>
                             </button>
                         }
+                        {sessionStorage.accessLevel > ACCESS_LEVEL_GUEST ? (
+                            <Link to={"/logout"}>Log out</Link>
+                        ) : (
+                            <Link to={"/login"}>Sign in</Link>
+                        )}
                     </div>
                 </div>
             </div>

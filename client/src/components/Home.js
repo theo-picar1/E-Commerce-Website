@@ -177,14 +177,16 @@ export default class Home extends Component {
                         />
                     ) : (
                         <>
-                            <Filters categories={categories} />
                             {!this.state.showCustomers ?
-                                <ProductsGallery
-                                    products={products}
-                                    incrementCartCounter={incrementCartCounter}
-                                    onSort={setSortAttribute}
-                                    handleProductClick={handleProductClick}
-                                />
+                                <>
+                                    <Filters categories={categories} />
+                                    <ProductsGallery
+                                        products={products}
+                                        incrementCartCounter={incrementCartCounter}
+                                        onSort={setSortAttribute}
+                                        handleProductClick={handleProductClick}
+                                    />
+                                </>
                             : 
                                 <UsersTable 
                                     users={this.state.users}

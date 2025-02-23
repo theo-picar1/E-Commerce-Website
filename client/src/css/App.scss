@@ -434,6 +434,38 @@ $translucent: #00000080;
                     }
                 }
             }
+
+            #customers-table-container {
+                padding: 5px;
+                background-color: $website-light-gray;
+                height: min-content;
+                width: 100%;
+                margin-bottom: 30px;
+
+                #customers-table {
+                    width: inherit;
+
+                    thead {
+                        background-color: $website-navy;
+                        color: $website-white;
+                        letter-spacing: -1px;
+                        font-size: 16px;
+                        text-align: left;
+
+                        th {
+                            padding: 5px 12px;
+                        }
+                    }
+
+                    tbody {
+                        background-color: $website-white;
+
+                        td {
+                            padding: 5px 12px;
+                        }
+                    }
+                }
+            }
         }
     }
 }
