@@ -1,14 +1,16 @@
-import React, {Component} from "react";
+import React, { Component } from "react";
 
 import Header from "./Header.js";
 import Filters from "./Filters.js";
 import ProductsGallery from "./ProductsGallery.js";
 import ProductDetails from "./ProductDetails.js";
 import Footer from "./Footer.js";
+import UsersTable from "./UsersTable.js"
+import UserFilters from "./UserFilters.js";
 
 import axios from "axios";
 
-import {SERVER_HOST} from "../config/global_constants.js";
+import { SERVER_HOST } from "../config/global_constants.js";
 
 export default class Home extends Component {
     constructor(props) {
@@ -24,6 +26,10 @@ export default class Home extends Component {
             showProductDetails: false,
             product: null,
             searchValue: "",
+            users: [],
+            originalUsers: [],
+            showCustomers: false,
+            showProducts: true
         };
     }
 
@@ -53,10 +59,26 @@ export default class Home extends Component {
                 }
             }
         });
+
+        axios.get(`${SERVER_HOST}/users`).then((res) => {
+            if(res.data) {
+                if(res.data.errorMessage) {
+                    console.log(res.data.errorMessage)
+                }
+                else {
+                    console.log("Users have been successfully retrieved")
+
+                    this.setState({
+                        users: res.data,
+                        originalUsers: res.data
+                    })
+                }
+            }
+        })
     }
 
     incrementCartCounter = () => {
-        this.setState((prevState) => ({cartCounter: prevState.cartCounter + 1}));
+        this.setState((prevState) => ({ cartCounter: prevState.cartCounter + 1 }));
     };
 
     sortProducts = (sortBy, sortType) => {
@@ -85,7 +107,7 @@ export default class Home extends Component {
     // Function to scroll to the top
     scrollToTop = () => {
         const topOfPage = document.getElementById("top-of-page");
-        topOfPage.scrollIntoView({behavior: "smooth"});
+        topOfPage.scrollIntoView({ behavior: "smooth" });
     };
 
     handleProductClick = (product) => {
@@ -101,7 +123,7 @@ export default class Home extends Component {
     };
 
     closeProductDetails = () => {
-        this.setState({showProductDetails: false, product: null});
+        this.setState({ showProductDetails: false, product: null });
     };
 
     handleSearch = (searchValue) => {
@@ -116,9 +138,20 @@ export default class Home extends Component {
         });
     };
 
+    showCustomerTable = () => {
+        this.setState({
+            showCustomers: true
+        })
+    }
+
+    showProducts = () => {
+        this.setState({
+            showCustomers: false
+        })
+    }
+
     render() {
-        const {searchValue, showProductDetails, cartCounter, categories, products, product} =
-            this.state;
+        const { searchValue, showProductDetails, cartCounter, categories, products, product } = this.state;
         const {
             incrementCartCounter,
             setSortAttribute,
@@ -128,27 +161,45 @@ export default class Home extends Component {
         return (
             <div className="page-content">
                 <div id="top-of-page"></div>
-                <Header cartCounter={cartCounter} onSearch={this.handleSearch} searchValue={searchValue}/>
-                <div id="main-content">
-                    {showProductDetails ? (
-                        <ProductDetails
-                            product={product}
-                            closeProductDetails={closeProductDetails}
-                            incrementCartCounter={incrementCartCounter}
-                        />
-                    ) : (
-                        <>
-                            <Filters categories={categories}/>
-                            <ProductsGallery
-                                products={products}
-                                incrementCartCounter={incrementCartCounter}
-                                onSort={setSortAttribute}
-                                handleProductClick={handleProductClick}
-                            />
-                        </>
-                    )}
-                </div>
-                <Footer/>
+                <Header 
+                    cartCounter={cartCounter} 
+                    onSearch={this.handleSearch} 
+                    searchValue={searchValue} 
+                    showCustomersOnClick={this.showCustomerTable}
+                    showProductsOnClick={this.showProducts}
+                    showCustomers={this.state.showCustomers}
+                />
+                {showProductDetails ? (
+                    <ProductDetails
+                        product={product}
+                        closeProductDetails={closeProductDetails}
+                        incrementCartCounter={incrementCartCounter}
+                    />
+                ) : (
+                    <>
+                        {!this.state.showCustomers ?
+                            <div id="products-main-content">
+                                <Filters categories={categories} />
+                                <ProductsGallery
+                                    products={products}
+                                    incrementCartCounter={incrementCartCounter}
+                                    onSort={setSortAttribute}
+                                    handleProductClick={handleProductClick}
+                                />
+                            </div>
+                        : 
+                            <div id="users-main-content">
+                                <UserFilters 
+                                    users={this.state.users}
+                                />
+                                <UsersTable 
+                                    users={this.state.users}
+                                />
+                            </div>
+                        }
+                    </>
+                )}
+                <Footer />
             </div>
         );
     }
