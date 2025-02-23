@@ -20,17 +20,19 @@ export default class Header extends Component {
                             <img src="/images/website-logo.jpg" className="website-logo"/>
                         </div>
                     </div>
-                    <div className="searchbar-container">
-                        <input
-                            type="text"
-                            id="searchbar"
-                            placeholder="What are you searching for?"
-                            autoComplete="off"
-                            value={this.props.searchValue}
-                            onChange={this.handleSearchChange}
-                        />
-                        <img src="/images/search.png" className="website-icon"/>
-                    </div>
+                    {!this.props.showCustomers &&
+                        <div className="searchbar-container">
+                            <input
+                                type="text"
+                                id="searchbar"
+                                placeholder="What are you searching for?"
+                                autoComplete="off"
+                                value={this.props.searchValue}
+                                onChange={this.handleSearchChange}
+                            />
+                            <img src="/images/search.png" className="website-icon"/>
+                        </div>
+                    }
                     <div id="user-tools">
                         <div id="shopping-cart-button">
                             <img src="/images/shopping-cart.png"/>

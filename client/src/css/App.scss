@@ -116,7 +116,7 @@ $translucent: #00000080;
             margin: auto;
 
             #header-content {
-                @include grid-template-columns(repeat(3, 1fr), 0);
+                @include flex-direction(row, space-between, center, 0);
                 align-items: center;
                 padding: 25px 0;
 
