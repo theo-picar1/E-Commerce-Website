@@ -75,6 +75,38 @@ $translucent: #00000080;
         width: auto;
     }
 
+    .searchbar-container {
+        @include flex-direction(row, space-between, center, 0px);
+        background-color: $website-light-gray;
+        padding: 10px 15px;
+        height: min-content;
+        width: min-content;
+        border: thin solid $invisible;
+
+        &:focus-within {
+            border: thin solid $high-translucence;
+        }
+
+        input {
+            background-color: $invisible;
+            border: none;
+            width: 450px;
+
+            &:focus {
+                outline: none;
+            }
+
+            &::placeholder {
+                font-size: 16px;
+            }
+        }
+
+        img {
+            width: 18px;
+            height: auto;
+        }
+    }
+
     .page-content {
         width: 95%;
         margin: auto;
@@ -101,38 +133,6 @@ $translucent: #00000080;
                         #super {
                             color: $website-red;
                         }
-                    }
-                }
-
-                #searchbar-container {
-                    @include flex-direction(row, space-between, center, 0px);
-                    background-color: $website-light-gray;
-                    padding: 10px 15px;
-                    height: min-content;
-                    width: min-content;
-                    border: thin solid $invisible;
-
-                    &:focus-within {
-                        border: thin solid $high-translucence;
-                    }
-
-                    #searchbar {
-                        background-color: $invisible;
-                        border: none;
-                        width: 450px;
-
-                        &:focus {
-                            outline: none;
-                        }
-
-                        &::placeholder {
-                            font-size: 16px;
-                        }
-                    }
-
-                    #search-icon {
-                        width: 18px;
-                        height: auto;
                     }
                 }
 
@@ -219,7 +219,7 @@ $translucent: #00000080;
             }
         }
 
-        #main-content {
+        #products-main-content {
             @include flex-direction(row, unset, unset, 20px);
 
             #product-filters {
@@ -434,6 +434,10 @@ $translucent: #00000080;
                     }
                 }
             }
+        }
+
+        #users-main-content {
+            @include flex-direction(column, unset, unset, 20px);
 
             #customers-table-container {
                 padding: 5px;

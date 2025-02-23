@@ -20,7 +20,7 @@ export default class Header extends Component {
                             <img src="/images/website-logo.jpg" className="website-logo"/>
                         </div>
                     </div>
-                    <div id="searchbar-container">
+                    <div className="searchbar-container">
                         <input
                             type="text"
                             id="searchbar"

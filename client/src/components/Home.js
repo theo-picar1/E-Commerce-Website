@@ -6,6 +6,7 @@ import ProductsGallery from "./ProductsGallery.js";
 import ProductDetails from "./ProductDetails.js";
 import Footer from "./Footer.js";
 import UsersTable from "./UsersTable.js"
+import UserFilters from "./UserFilters.js";
 
 import axios from "axios";
 
@@ -168,33 +169,36 @@ export default class Home extends Component {
                     showProductsOnClick={this.showProducts}
                     showCustomers={this.state.showCustomers}
                 />
-                <div id="main-content">
-                    {showProductDetails ? (
-                        <ProductDetails
-                            product={product}
-                            closeProductDetails={closeProductDetails}
-                            incrementCartCounter={incrementCartCounter}
-                        />
-                    ) : (
-                        <>
-                            {!this.state.showCustomers ?
-                                <>
-                                    <Filters categories={categories} />
-                                    <ProductsGallery
-                                        products={products}
-                                        incrementCartCounter={incrementCartCounter}
-                                        onSort={setSortAttribute}
-                                        handleProductClick={handleProductClick}
-                                    />
-                                </>
-                            : 
+                {showProductDetails ? (
+                    <ProductDetails
+                        product={product}
+                        closeProductDetails={closeProductDetails}
+                        incrementCartCounter={incrementCartCounter}
+                    />
+                ) : (
+                    <>
+                        {!this.state.showCustomers ?
+                            <div id="products-main-content">
+                                <Filters categories={categories} />
+                                <ProductsGallery
+                                    products={products}
+                                    incrementCartCounter={incrementCartCounter}
+                                    onSort={setSortAttribute}
+                                    handleProductClick={handleProductClick}
+                                />
+                            </div>
+                        : 
+                            <div id="users-main-content">
+                                <UserFilters 
+                                    users={this.state.users}
+                                />
                                 <UsersTable 
                                     users={this.state.users}
                                 />
-                            }
-                        </>
-                    )}
-                </div>
+                            </div>
+                        }
+                    </>
+                )}
                 <Footer />
             </div>
         );
