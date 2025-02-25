@@ -20,22 +20,35 @@ export default class Header extends Component {
                             <img src="/images/website-logo.jpg" className="website-logo"/>
                         </div>
                     </div>
-                    <div id="searchbar-container">
-                        <input
-                            type="text"
-                            id="searchbar"
-                            placeholder="What are you searching for?"
-                            autoComplete="off"
-                            value={this.props.searchValue}
-                            onChange={this.handleSearchChange}
-                        />
-                        <img src="/images/search.png" className="website-icon"/>
-                    </div>
+                    {!this.props.showCustomers &&
+                        <div className="searchbar-container">
+                            <input
+                                type="text"
+                                id="searchbar"
+                                placeholder="What are you searching for?"
+                                autoComplete="off"
+                                value={this.props.searchValue}
+                                onChange={this.handleSearchChange}
+                            />
+                            <img src="/images/search.png" className="website-icon"/>
+                        </div>
+                    }
                     <div id="user-tools">
                         <div id="shopping-cart-button">
                             <img src="/images/shopping-cart.png"/>
                             <p>{this.props.cartCounter}</p>
                         </div>
+                        {!this.props.showCustomers ?
+                            <button className="change-view-button" onClick={this.props.showCustomersOnClick}>
+                                <img src="images/user.png" />
+                                <p>CUSTOMERS</p>
+                            </button>
+                        :
+                            <button className="change-view-button" onClick={this.props.showProductsOnClick}>
+                                <img src="images/shopping-cart.png" />
+                                <p>PRODUCTS</p>
+                            </button>
+                        }
                         {sessionStorage.accessLevel > ACCESS_LEVEL_GUEST ? (
                             <Link to={"/logout"}>Log out</Link>
                         ) : (
