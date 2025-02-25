@@ -75,22 +75,35 @@ $translucent: #00000080;
         width: auto;
     }
 
-    .shop-now-button {
-        appearance: none;
-        width: 200px;
-        padding: 15px 0;
-        text-align: center;
-        color: $website-white;
-        font-weight: 800;
-        background-color: $website-red;
-        outline: none;
-        border: none;
-        transition: 0.3s all ease;
-        border-radius: 5px;
+    .searchbar-container {
+        @include flex-direction(row, space-between, center, 0px);
+        background-color: $website-light-gray;
+        padding: 10px 15px;
+        height: min-content;
+        width: min-content;
+        border: thin solid $invisible;
 
-        &:hover {
-            background-color: $website-navy;
-            cursor: pointer;
+        &:focus-within {
+            border: thin solid $high-translucence;
+        }
+
+        input {
+            background-color: $invisible;
+            border: none;
+            width: 450px;
+
+            &:focus {
+                outline: none;
+            }
+
+            &::placeholder {
+                font-size: 16px;
+            }
+        }
+
+        img {
+            width: 18px;
+            height: auto;
         }
     }
 
@@ -103,7 +116,7 @@ $translucent: #00000080;
             margin: auto;
 
             #header-content {
-                @include grid-template-columns(repeat(3, 1fr), 0);
+                @include flex-direction(row, space-between, center, 0);
                 align-items: center;
                 padding: 25px 0;
 
@@ -120,38 +133,6 @@ $translucent: #00000080;
                         #super {
                             color: $website-red;
                         }
-                    }
-                }
-
-                #searchbar-container {
-                    @include flex-direction(row, space-between, center, 0px);
-                    background-color: $website-light-gray;
-                    padding: 10px 15px;
-                    height: min-content;
-                    width: min-content;
-                    border: thin solid $invisible;
-
-                    &:focus-within {
-                        border: thin solid $high-translucence;
-                    }
-
-                    #searchbar {
-                        background-color: $invisible;
-                        border: none;
-                        width: 450px;
-
-                        &:focus {
-                            outline: none;
-                        }
-
-                        &::placeholder {
-                            font-size: 16px;
-                        }
-                    }
-
-                    #search-icon {
-                        width: 18px;
-                        height: auto;
                     }
                 }
 
@@ -205,11 +186,40 @@ $translucent: #00000080;
                             border-radius: 10px;
                         }
                     }
+
+                    .change-view-button {
+                        @include flex-direction(row, center, center, 5px);
+                        appearance: none;
+                        -webkit-appearance: none;
+                        background-color: $website-light-gray;
+                        font-weight: 800;
+                        border: none;
+                        padding: 15px 20px;
+                        font-size: 12px;
+                        color: $website-light-black;
+                        transition: all 0.3s ease;
+                        border-radius: 5px;
+
+                        img {
+                            width: 16px;
+                            height: auto;
+                        }
+
+                        &:hover {
+                            cursor: pointer;
+                            background-color: $website-red;
+                            color: $website-white;
+
+                            img {
+                                filter: invert(100%) brightness(100%);
+                            }
+                        }
+                    }
                 }
             }
         }
 
-        #main-content {
+        #products-main-content {
             @include flex-direction(row, unset, unset, 20px);
 
             #product-filters {
@@ -388,7 +398,12 @@ $translucent: #00000080;
                                 font-weight: 600;
                             }
 
-                            .shop-now-button {
+                            .add-to-cart-button {
+                                appearance: none;
+                                font-weight: 800;
+                                outline: none;
+                                border: none;
+                                transition: 0.3s all ease;
                                 @include flex-direction(row, center, center, 3px);
                                 width: auto;
                                 padding: 15px 30px;
@@ -415,6 +430,42 @@ $translucent: #00000080;
                                     }
                                 }
                             }
+                        }
+                    }
+                }
+            }
+        }
+
+        #users-main-content {
+            @include flex-direction(column, unset, unset, 20px);
+
+            #customers-table-container {
+                padding: 5px;
+                background-color: $website-light-gray;
+                height: min-content;
+                width: 100%;
+                margin-bottom: 30px;
+
+                #customers-table {
+                    width: inherit;
+
+                    thead {
+                        background-color: $website-navy;
+                        color: $website-white;
+                        letter-spacing: -1px;
+                        font-size: 16px;
+                        text-align: left;
+
+                        th {
+                            padding: 5px 12px;
+                        }
+                    }
+
+                    tbody {
+                        background-color: $website-white;
+
+                        td {
+                            padding: 5px 12px;
                         }
                     }
                 }
