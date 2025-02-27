@@ -10,6 +10,7 @@ import Logout from "./components/Logout"
 // import UsersTable from "./components/UsersTable"
 import AddProduct from "./components/AddProduct"
 import DeleteProduct from "./components/DeleteProduct"
+import EditProduct from "./components/EditProduct"
 
 import {ACCESS_LEVEL_GUEST} from "./config/global_constants"
 
@@ -31,6 +32,7 @@ export default class App extends Component {
                     <Route exact path="/logout" component={Logout} />
                     <Route exact path="/add-product" component={AddProduct} />
                     <Route exact path="/delete-product/:id" component={DeleteProduct} />
+                    <Route exact path="/edit-product/:id" component={EditProduct} />
                     <Route path="*" component={NoSuchPage} />
                 </Switch>
             </BrowserRouter>
