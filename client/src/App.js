@@ -7,7 +7,8 @@ import NoSuchPage from "./components/NoSuchPage"
 import Register from "./components/Register"
 import Login from "./components/Login"
 import Logout from "./components/Logout"
-import UsersTable from "./components/UsersTable"
+// import UsersTable from "./components/UsersTable"
+import AddProduct from "./components/AddProduct"
 import DeleteProduct from "./components/DeleteProduct"
 
 import {ACCESS_LEVEL_GUEST} from "./config/global_constants"
@@ -28,6 +29,7 @@ export default class App extends Component {
                     <Route exact path="/nosuchpage" component={NoSuchPage} />
                     <Route exact path="/login" component={Login} />
                     <Route exact path="/logout" component={Logout} />
+                    <Route exact path="/add-product" component={AddProduct} />
                     <Route exact path="/delete-product/:id" component={DeleteProduct} />
                     <Route path="*" component={NoSuchPage} />
                 </Switch>

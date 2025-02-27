@@ -17,7 +17,7 @@ export default class FeaturedProducts extends Component {
                             <option value="rating-desc">Highest Rating</option>
                             <option value="rating-asc">Lowest Rating</option>
                         </select>
-                        <button className="add-button">ADD PRODUCT</button>
+                        <Link to={"/add-product"}><button className="add-button">ADD PRODUCT</button></Link>
                     </div>
                 </div>
                 <div id="products-gallery">

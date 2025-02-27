@@ -846,7 +846,7 @@ $translucent: #00000080;
 
         button {
             appearance: none;
-            width: 150px;
+            width: inherit;
             padding: 10px 0;
             border: none;
             background-color: $website-red;
@@ -858,6 +858,49 @@ $translucent: #00000080;
             &:hover {
                 cursor: pointer;
                 filter: opacity(0.95);
+            }
+        }
+    }
+}
+
+// Add / Edit Product / User Pages
+.product-form-container {
+    @extend .form-container;
+
+    form {
+
+        .input-section {
+
+            .input-form-container {
+                
+                .input {
+
+                    .input-field {
+                        width: 300px;
+                    }
+
+                    .input-field-small {
+                        width: 140px;
+                    }
+                }
+
+                .input-row-container {
+                    width: 100%;
+                    @include flex-direction(row, space-between, center, 0);
+                }
+            }
+
+            #action-buttons {
+                @include flex-direction(column, unset, unset, 5px);
+
+                .submit-button {
+                    width: 100%;
+                }
+
+                .cancel-button {
+                    background-color: $website-navy;
+                    width: 100%;
+                }
             }
         }
     }
