@@ -3,6 +3,12 @@ node_modules/
 client/node_modules/
 server/node_modules/
 
+client/package-lock.json
+server/package-lock.json
+
+client/package.json
+server/package.json
+
 server/config/.env
 server/config/jwt_private_key.pem
 
