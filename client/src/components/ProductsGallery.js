@@ -1,4 +1,6 @@
-import React, { Component } from "react";
+import React, { Component } from "react"
+
+import { Link } from "react-router-dom"
 
 export default class FeaturedProducts extends Component {
     render() {
@@ -20,10 +22,10 @@ export default class FeaturedProducts extends Component {
                 </div>
                 <div id="products-gallery">
                     {this.props.products.map((product) => (
-                        <div className="product" key={product["id"]}>
+                        <div className="product" key={product._id}>
                             <div className="action-buttons">
                                 <button className="edit-button"><img src="images/edit-icon.png" className="website-icon" /></button>
-                                <button className="delete-button"><img src="images/delete-icon.png" className="website-icon" /></button>
+                                <Link to={"/delete-product/" + product._id}><button className="delete-button"><img src="images/delete-icon.png" className="website-icon" /></button></Link>
                             </div>
                             <div className="product-image-container">
                                 {product["productImgs"].map((img) => (

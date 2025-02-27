@@ -11,5 +11,14 @@ router.get(`/products`, (req, res) =>
     })
 })
 
+// Delete one record
+router.delete(`/products/:id`, (req, res) => 
+  {
+      productsModel.findByIdAndRemove(req.params.id, (error, data) => 
+      {
+          res.json(data)
+      })       
+  })
+
 module.exports = router
   
