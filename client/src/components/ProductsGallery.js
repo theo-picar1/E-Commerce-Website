@@ -15,16 +15,16 @@ export default class FeaturedProducts extends Component {
                             <option value="rating-desc">Highest Rating</option>
                             <option value="rating-asc">Lowest Rating</option>
                         </select>
-                        <div id="action-buttons">
-                            <button className="add-button">ADD PRODUCT</button>
-                            <button className="edit-button">EDIT PRODUCT</button>
-                            <button className="delete-button">DELETE PRODUCTS</button>
-                        </div>
+                        <button className="add-button">ADD PRODUCT</button>
                     </div>
                 </div>
                 <div id="products-gallery">
                     {this.props.products.map((product) => (
                         <div className="product" key={product["id"]}>
+                            <div className="action-buttons">
+                                <button className="edit-button"><img src="images/edit-icon.png" className="website-icon" /></button>
+                                <button className="delete-button"><img src="images/delete-icon.png" className="website-icon" /></button>
+                            </div>
                             <div className="product-image-container">
                                 {product["productImgs"].map((img) => (
                                     <div

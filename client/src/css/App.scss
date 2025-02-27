@@ -128,12 +128,23 @@ $translucent: #00000080;
     }
 
     .delete-button {
-        @extend .add-button;
+        appearance: none;
+        @include flex-direction(unset, center, center, 0);
+        border: none;
+        width: min-content;
+        height: auto;
+        padding: 5px;
+        border-radius: 5px;
         background-color: $website-red;
+
+        &:hover {
+            cursor: pointer;
+            filter: opacity(0.75);
+        }
     }
 
     .edit-button {
-        @extend .add-button;
+        @extend .delete-button;
         background-color: $website-navy;
     }
 
@@ -368,8 +379,12 @@ $translucent: #00000080;
 
                     .product {
                         width: 100%;
-                        height: 400px;
+                        height: 450px;
                         overflow: hidden;
+
+                        .action-buttons {
+                            @include flex-direction(row, flex-end, center, 10px);
+                        }
 
                         .product-image-container {
                             @include flex-direction(row, unset, unset, 0);
