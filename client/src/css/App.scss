@@ -5,6 +5,7 @@ $website-light-gray: #f5f6f5;
 $website-gray: rgb(171, 171, 171);
 $website-navy: #2c3a57;
 $website-light-black: #272727;
+$website-light-green: #008000;
 $product-link-color: #2163a2;
 $product-link-hover-color: #0c3354;
 $border-color: #dddddd;
@@ -105,6 +106,46 @@ $translucent: #00000080;
             width: 18px;
             height: auto;
         }
+    }
+
+    .add-button {
+        appearance: none;
+        -webkit-appearance: none;
+        width: 145px;
+        padding: 10px 15px;
+        border: none;
+        background-color: $website-light-green;
+        border-radius: 5px;
+        font-weight: 800;
+        letter-spacing: -1px;
+        color: $website-white;
+        transition: filter 0.3s ease;
+
+        &:hover {
+            cursor: pointer;
+            filter: opacity(0.75);
+        }
+    }
+
+    .delete-button {
+        appearance: none;
+        @include flex-direction(unset, center, center, 0);
+        border: none;
+        width: min-content;
+        height: auto;
+        padding: 5px;
+        border-radius: 5px;
+        background-color: $website-red;
+
+        &:hover {
+            cursor: pointer;
+            filter: opacity(0.75);
+        }
+    }
+
+    .edit-button {
+        @extend .delete-button;
+        background-color: $website-navy;
     }
 
     .page-content {
@@ -316,8 +357,17 @@ $translucent: #00000080;
                 #products-gallery-header {
                     @include flex-direction(row, space-between, center, 0);
 
-                    select {
-                        width: 125px;
+                    #product-tools {
+                        @include flex-direction(row, unset, center, 20px);
+
+                        select {
+                            width: 125px;
+                            padding: 8px 15px;
+                        }
+
+                        #action-buttons {
+                            @include flex-direction(row, unset, center, 10px);
+                        }
                     }
                 }
 
@@ -329,8 +379,12 @@ $translucent: #00000080;
 
                     .product {
                         width: 100%;
-                        height: 400px;
+                        height: 450px;
                         overflow: hidden;
+
+                        .action-buttons {
+                            @include flex-direction(row, flex-end, center, 10px);
+                        }
 
                         .product-image-container {
                             @include flex-direction(row, unset, unset, 0);
@@ -436,17 +490,29 @@ $translucent: #00000080;
             }
         }
 
+
+
         #users-main-content {
             @include flex-direction(column, unset, unset, 20px);
 
-            #customers-table-container {
+            #user-filters {
+
+                #filter-toolbar {
+
+                    #action-buttons {
+                        @include flex-direction(row, unset, center, 10px);
+                    }
+                }
+            }
+
+            #users-table-container {
                 padding: 5px;
                 background-color: $website-light-gray;
                 height: min-content;
                 width: 100%;
                 margin-bottom: 30px;
 
-                #customers-table {
+                #users-table {
                     width: inherit;
 
                     thead {
@@ -780,7 +846,7 @@ $translucent: #00000080;
 
         button {
             appearance: none;
-            width: 150px;
+            width: inherit;
             padding: 10px 0;
             border: none;
             background-color: $website-red;
@@ -792,6 +858,49 @@ $translucent: #00000080;
             &:hover {
                 cursor: pointer;
                 filter: opacity(0.95);
+            }
+        }
+    }
+}
+
+// Add / Edit Product / User Pages
+.product-form-container {
+    @extend .form-container;
+
+    form {
+
+        .input-section {
+
+            .input-form-container {
+                
+                .input {
+
+                    .input-field {
+                        width: 300px;
+                    }
+
+                    .input-field-small {
+                        width: 140px;
+                    }
+                }
+
+                .input-row-container {
+                    width: 100%;
+                    @include flex-direction(row, space-between, center, 0);
+                }
+            }
+
+            #action-buttons {
+                @include flex-direction(column, unset, unset, 5px);
+
+                .submit-button {
+                    width: 100%;
+                }
+
+                .cancel-button {
+                    background-color: $website-navy;
+                    width: 100%;
+                }
             }
         }
     }
