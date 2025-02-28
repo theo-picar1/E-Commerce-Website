@@ -12,7 +12,6 @@ export default class ProductDetails extends Component {
             ))}
           </div>
         </div>
-
         <div id="product-details">
           <div id="close-button" onClick={() => closeProductDetails()}>
             <p>&#10005;</p>
@@ -33,10 +32,12 @@ export default class ProductDetails extends Component {
           <p>
             <strong>{product.noOfReviews} Reviews</strong>
           </p>
+          <div id="description">
+            {product.description.map((desc, index) => 
+              <div key={index}>{desc}</div>
+            )}
+          </div>
           <button onClick={incrementCartCounter}>ADD TO BASKET</button>
-          {product.description.map((desc, index) => (
-            <p key={index}>{desc}</p>
-          ))}
         </div>
       </div>
     );

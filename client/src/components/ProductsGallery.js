@@ -2,7 +2,7 @@ import React, { Component } from "react"
 import { Link } from "react-router-dom"
 import {ACCESS_LEVEL_GUEST} from "../config/global_constants"
 
-export default class FeaturedProducts extends Component {
+export default class ProductsGallery extends Component {
     render() {
         return (
             <div id="products-gallery-container">
