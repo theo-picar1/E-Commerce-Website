@@ -19,7 +19,8 @@ export default class AddCar extends Component {
             noOfReviews: 0,
             stockQuantity: 0,
             productImg: "",
-            redirectToProducts: false
+            redirectToProducts: false,
+            submittedOnce: false
         }
     }
 
@@ -42,23 +43,50 @@ export default class AddCar extends Component {
             productImgs: this.state.productImg
         }
 
-        axios.post(`${SERVER_HOST}/products`, productObject)
-            .then(res => {
-                if (res.data) {
-                    if (res.data.errorMessage) {
-                        console.log(res.data.errorMessage)
+        this.setState({
+            submittedOnce: true
+        })
+
+        const inputs = this.validateInputs()
+
+        if (Object.values(inputs).every(value => value !== "")) {
+            axios.post(`${SERVER_HOST}/products`, productObject)
+                .then(res => {
+                    if (res.data) {
+                        if (res.data.errorMessage) {
+                            console.log(res.data.errorMessage)
+                        }
+                        else {
+                            console.log("Record added")
+                            this.setState({ redirectToProducts: true })
+                        }
                     }
                     else {
-                        console.log("Record added")
-                        this.setState({ redirectToProducts: true })
+                        console.log("Record not added")
                     }
-                }
-                else {
-                    console.log("Record not added")
-                }
-            })
+                })
+        }
+        else {
+            e.preventDefault()
+
+            console.log("Error adding product!!!")
+
+            return
+        }
     }
 
+    validateInputs() {
+        return {
+            name: this.state.name,
+            category: this.state.category,
+            price: this.state.price,
+            description: this.state.description,
+            rating: this.state.rating,
+            noOfReviews: this.state.noOfReviews,
+            stockQuantity: this.state.stockQuantity,
+            productImgs: this.state.productImg
+        }
+    }
 
     render() {
         return (
@@ -140,7 +168,7 @@ export default class AddCar extends Component {
                                     <p className="input-header">Rating</p>
                                     <input
                                         className="input-field-small"
-                                        name="price"
+                                        name="rating"
                                         type="number"
                                         value={this.state.rating}
                                         onChange={this.handleChange}
@@ -181,16 +209,16 @@ export default class AddCar extends Component {
                                     )}
                                 </div>
                                 <div className="input">
-                                    <p className="input-header">Main image</p>
+                                    <p className="input-header">Image</p>
                                     <input
                                         className="input-field-small"
                                         name="productImg"
-                                        type="number"
-                                        value={this.state.stockQuantity}
+                                        type="text"
+                                        value={this.state.productImg}
                                         onChange={this.handleChange}
-                                        style={this.state.submittedOnce && (this.state.stockQuantity === null) ? { border: "thin solid red" } : {}}
+                                        style={this.state.submittedOnce && (this.state.productImg === "") ? { border: "thin solid red" } : {}}
                                     />
-                                    {this.state.submittedOnce && this.state.stockQuantity === null && (
+                                    {this.state.submittedOnce && this.state.productImg === "" && (
                                         <p className="empty-input">Please fill out this form</p>
                                     )}
                                 </div>
