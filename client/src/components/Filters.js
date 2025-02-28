@@ -57,7 +57,7 @@ export default class Filters extends Component {
                     <p className="filter-type-subheading">INSTRUMENT</p>
                     <div className="section-content" id="instrument-checkboxes">
                         { this.props.categories.map(category =>
-                            <div>
+                            <div key={category}>
                                 <input type="checkbox" key={ category } className="instrument-checkbox" value={ category } onChange={ this.handleCheckboxes }/>
                                 <p>{category}</p>
                             </div>
