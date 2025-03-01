@@ -216,15 +216,39 @@ $translucent: #00000080;
                         }
 
                         #user-options {
-                            display: none;
-                            flex-direction: column;
+                            @include flex-direction(column, unset, unset, 8px);
                             position: absolute;
-                            background-color: white;
-                            box-shadow: 0 0 3px lightgray, 0 0 3px lightgray;
+                            background-color: $website-white;
                             width: 150px;
                             top: 85px;
-                            right: 72px;
-                            border-radius: 10px;
+                            right: 35px;
+                            padding: 12px 0px;
+                            box-shadow: 0 0 3px $website-gray, 0 0 3px $website-gray;
+
+                            div {
+                                .link {
+                                    text-decoration: none;
+                                }
+                                
+                                p {
+                                    padding: 5px 8px;
+                                    text-decoration: none;
+    
+                                    &:hover {
+                                        cursor: pointer;
+                                        background-color: rgba(169, 169, 169, 0.742)
+                                    }
+                                }
+
+                                #sign-out {
+                                    color: $website-red;
+                                }
+                            }
+
+                            hr {
+                                color: $website-black;
+                            }
+
                         }
                     }
 
