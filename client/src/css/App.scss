@@ -663,7 +663,20 @@ $translucent: #00000080;
             .input-form-container {
                 @include flex-direction(column, center, center, 10px);
 
+                .input-row-container {
+                    @include flex-direction(row, space-between, unset, 0);
+                    width: 100%;
+
+                    div {
+                        
+                        input {
+                            width: 135px;
+                        }
+                    }
+                }
+
                 div {
+
                     .input-header {
                         letter-spacing: -1px;
                         font-size: 14px;

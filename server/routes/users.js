@@ -31,21 +31,24 @@ router.post(`/users/reset_user_collection`, (req, res) => {
     })
 })
 
-router.post(`/users/register/:name/:email/:password`, (req, res) => {
-    usersModel.findOne({ email: req.params.email }, (uniqueError, uniqueData) => {
-
+router.post(`/users/register`, (req, res) => {
+    usersModel.findOne({ email: req.body.email }, (uniqueError, uniqueData) => {
         if (uniqueData) {
             res.json({ errorMessage: `User already exists` })
         }
         else {
-            bcrypt.hash(req.params.password, parseInt(process.env.SALT_ROUNDS), (err, hash) => {
-                usersModel.create({ name: req.params.name, email: req.params.email, password: hash }, (error, data) => {
-                    if (data) {
-                        res.json({ name: data.name })
+            bcrypt.hash(req.body.password, parseInt(process.env.SALT_ROUNDS), (err, hash) => {
+                console.log("Request body:", req.body);
+                usersModel.create({...req.body, password: hash }, (error, data) => {
+                    if (error) {
+                        console.error("MongoDB Error:", error);
+                        return res.json({ errorMessage: "MongoDB error. User not created." });
                     }
-                    else {
-                        res.json({ errorMessage: `User was not registered` })
+                    if (!data) {
+                        console.error("User creation returned null data.");
+                        return res.json({ errorMessage: "User creation failed." });
                     }
+                    res.json({ name: data.firstName });
                 })
             })
         }

@@ -7,7 +7,8 @@ let usersSchema = new mongoose.Schema(
         email: { type: String, required: true },
         password: { type: String, required: true },
         houseAddress: { type: String, default: "" },
-        accessLevel: { type: Number, default: parseInt(process.env.ACCESS_LEVEL_NORMAL_USER) },
+        telephoneNo: { type: String, required: true},
+        accessLevel: { type: Number, default: parseInt(process.env.ACCESS_LEVEL_USER) },
         profilePhotoFilename: { type: String, default: "" }
     },
     {
