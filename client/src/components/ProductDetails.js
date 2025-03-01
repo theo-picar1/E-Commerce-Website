@@ -1,8 +1,13 @@
-import React, { Component } from "react";
+import React, { Component } from "react"
 
 export default class ProductDetails extends Component {
   render() {
-    const { product, closeProductDetails, incrementCartCounter } = this.props;
+    const {
+      product,
+      closeProductDetails,
+      incrementCartCounter,
+      addProductToCart,
+    } = this.props
     return (
       <div id="product-details-container">
         <div id="product-imagesDiv">
@@ -33,12 +38,14 @@ export default class ProductDetails extends Component {
           <p>
             <strong>{product.noOfReviews} Reviews</strong>
           </p>
-          <button onClick={incrementCartCounter}>ADD TO BASKET</button>
+          <button onClick={() => addProductToCart(product)}>
+            ADD TO BASKET
+          </button>
           {product.description.map((desc, index) => (
             <p key={index}>{desc}</p>
           ))}
         </div>
       </div>
-    );
+    )
   }
 }
