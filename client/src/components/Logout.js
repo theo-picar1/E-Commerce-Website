@@ -54,7 +54,7 @@ export default class Logout extends Component {
                     </div>
                     <h1>Successfully logged out!</h1>
                     <p>You can head back to the main page</p>
-                    <button onClick={this.handleSubmit}>Return</button>
+                    <button id="return-button" onClick={this.handleSubmit}>Return</button>
                 </div>
             </div>
         )

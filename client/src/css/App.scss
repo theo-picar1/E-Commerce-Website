@@ -229,7 +229,7 @@ $translucent: #00000080;
                                 .link {
                                     text-decoration: none;
                                 }
-                                
+
                                 p {
                                     padding: 5px 8px;
                                     text-decoration: none;
@@ -870,9 +870,9 @@ $translucent: #00000080;
             }
         }
 
-        button {
+        #return-button {
             appearance: none;
-            width: inherit;
+            width: 100%;
             padding: 10px 0;
             border: none;
             background-color: $website-red;
