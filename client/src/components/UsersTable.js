@@ -3,8 +3,8 @@ import React, {Component} from "react"
 export default class UsersTable extends Component {
     render() {
         return(
-            <div id="customers-table-container">
-                <table id="customers-table">
+            <div id="users-table-container">
+                <table id="users-table">
                     <thead>
                         <tr>
                             <th>USERNAME</th>

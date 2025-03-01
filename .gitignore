@@ -12,8 +12,6 @@ server/package.json
 server/config/.env
 server/config/jwt_private_key.pem
 
-css/App.css
-css/App.css.map
+client/src/css/App.css
+client/src/css/App.css.map
 .DS_Store
-css/App.css
-css/App.css.map
