@@ -63,14 +63,20 @@ export default class Home extends Component {
       }
     })
 
-    axios
-      .get(`${SERVER_HOST}/users`)
+    axios.get(`${SERVER_HOST}/users`)
       .then((res) => {
         if (res.data) {
+          console.log(res.data)
           if (res.data.errorMessage) {
             console.log(res.data.errorMessage)
           } else {
             console.log("Users have been successfully retrieved")
+
+            this.setState(
+              {
+                users: res.data,
+                originalUsers: res.data
+              })
 
             const userId = sessionStorage.getItem("userId")
 
@@ -300,7 +306,7 @@ export default class Home extends Component {
   }
 
   toggleCartVisibility = () => {
-    if(!this.state.loggedInUser){
+    if (!this.state.loggedInUser) {
       alert("User not logged in")
       return
     }

@@ -208,28 +208,48 @@ $translucent: #00000080;
                     #user-status-container {
                         @include flex-direction(row, unset, center, 20px);
 
-                        #user-options-button {
-                            display: flex;
-                            flex-direction: row;
-                            align-items: center;
-                            gap: 10px;
-                            width: auto;
-                            padding: 8px 15px;
-                            border-radius: 2em;
-                            border: thin solid $website-light-black;
-                            transition: box-shadow 0.4s ease;
-                        }
+                        div {
 
-                        #user-options {
-                            display: none;
-                            flex-direction: column;
-                            position: absolute;
-                            background-color: white;
-                            box-shadow: 0 0 3px lightgray, 0 0 3px lightgray;
-                            width: 150px;
-                            top: 85px;
-                            right: 72px;
-                            border-radius: 10px;
+                            #user-options-button {
+                                display: flex;
+                                flex-direction: row;
+                                align-items: center;
+                                gap: 10px;
+                                width: auto;
+                                padding: 8px 15px;
+                                border-radius: 2em;
+                                border: thin solid $website-light-black;
+                                transition: box-shadow 0.4s ease;
+                            }
+
+                            #user-options {
+                                display: none;
+                                flex-direction: column;
+                                gap: 5px;
+                                position: absolute;
+                                background-color: white;
+                                box-shadow: 0 0 3px $website-gray, 0 0 3px $website-gray;
+                                width: 150px;
+                                top: 85px;
+                                right: 32px;
+
+                                div {
+                                    padding: 5px 10px;
+
+                                    #sign-out {
+                                        color: $website-red;
+                                        text-decoration: none;
+                                    }
+
+                                    .link {
+                                        text-decoration: none;
+                                    }
+
+                                    &:hover {
+                                        background-color:rgba(0, 0, 0, 0.2);
+                                    }
+                                }
+                            }
                         }
                     }
 
@@ -535,10 +555,10 @@ $translucent: #00000080;
                             td {
                                 padding: 5px 12px;
                             }
-    
+
                             #user-name {
                                 @include flex-direction(row, unset, center, 15px);
-    
+
                                 img {
                                     border: thin solid $website-black;
                                     width: 40px;
@@ -1051,7 +1071,7 @@ $translucent: #00000080;
 
         button {
             appearance: none;
-            width: inherit;
+            width: 100%;
             padding: 10px 0;
             border: none;
             background-color: $website-red;
@@ -1063,6 +1083,24 @@ $translucent: #00000080;
             &:hover {
                 cursor: pointer;
                 filter: opacity(0.95);
+            }
+        }
+    }
+}
+
+.product-form-container {
+    @extend .form-container;
+
+    form {
+
+        .input-section {
+
+            #action-buttons {
+                
+                .cancel-button {
+                    background-color: $website-navy;
+                    margin-top: 5px;
+                }
             }
         }
     }

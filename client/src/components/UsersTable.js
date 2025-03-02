@@ -1,6 +1,10 @@
 import React, {Component} from "react"
 
 export default class UsersTable extends Component {
+    componentDidMount() {
+        console.log(this.props.users)
+    }
+    
     render() {
         return(
             <div id="users-table-container">
