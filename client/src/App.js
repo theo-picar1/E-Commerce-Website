@@ -11,7 +11,7 @@ import NoSuchPage from "./components/NoSuchPage"
 import Register from "./components/Register"
 import Login from "./components/Login"
 import Logout from "./components/Logout"
-import PayPage from "./components/PayPage" // Added PayPage import
+import PayPage from "./components/PayPage"
 import AddProduct from "./components/AddProduct"
 import DeleteProduct from "./components/DeleteProduct"
 import EditProduct from "./components/EditProduct"
@@ -33,7 +33,7 @@ export default class App extends Component {
           <Route exact path="/nosuchpage" component={NoSuchPage} />
           <Route exact path="/login" component={Login} />
           <Route exact path="/logout" component={Logout} />
-          <Route path="/payPage" component={PayPage} />
+          <Route exact path="/payPage" component={PayPage} />
           <Route exact path="/add-product" component={AddProduct} />
           <Route exact path="/delete-product/:id" component={DeleteProduct} />
           <Route exact path="/edit-product/:id" component={EditProduct} />
