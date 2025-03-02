@@ -384,386 +384,47 @@ $translucent: #00000080;
 
                     .product {
                         width: 100%;
-                        height: 450px;
+                        height: 475px;
                         overflow: hidden;
 
-                        #header-content {
-                            @include flex-direction(row, space-between, center, 0);
-                            align-items: center;
-                            padding: 25px 0;
+                        .action-buttons {
+                            @include flex-direction(row, flex-end, center, 10px);
+                        }
 
-                            #website-title {
-                                @include flex-direction(row, unset, center, 10px);
+                        .product-image-container {
+                            @include flex-direction(row, unset, unset, 0);
+                            overflow-x: scroll;
+                            overflow-y: hidden;
+                            scrollbar-width: none;
+                            scroll-snap-type: x mandatory;
+                            height: 65%;
 
-                                #superments {
-                                    @include flex-direction(row, unset, center, 0);
+                            .product-image {
+                                flex: 0 0 100%;
+                                width: 100%;
+                                height: 100%;
+                                scroll-snap-align: start;
+                                background-repeat: no-repeat;
+                                background-position: center;
+                                background-size: contain;
+                                background-color: white;
 
-                                    .title {
-                                        font-size: 45px;
-                                    }
+                                div {
+                                    @include flex-direction(unset, center, center, 0);
+                                    position: relative;
+                                    height: 100%;
+                                    color: $invisible;
+                                    transition: 0.3s all ease;
 
-                                    #super {
-                                        color: $website-red;
-                                    }
-                                }
-                            }
-
-                            #user-tools {
-                                @include flex-direction(row, flex-end, center, 40px);
-
-                                #shopping-cart-button {
-                                    @include flex-direction(row, center, center, 20px);
-                                    font-size: 20px;
-                                    color: $website-white;
-                                    font-weight: bold;
-                                    background-color: $website-light-gray;
-                                    padding: 10px 0px;
-                                    width: 110px;
-                                    border-radius: 20px;
-                                    background-color: $website-red;
-                                    transition: background-color 0.3s ease;
-                                    height: 42px;
-
-                                    img {
-                                        filter: invert(100%) brightness(100%);
-                                        width: 20px;
-                                        height: auto;
-                                    }
-                                }
-
-                                #user-status-container {
-                                    @include flex-direction(row, unset, center, 20px);
-
-                                    #user-options-button {
-                                        display: flex;
-                                        flex-direction: row;
-                                        align-items: center;
-                                        gap: 10px;
-                                        width: auto;
-                                        padding: 8px 15px;
-                                        border-radius: 2em;
-                                        border: thin solid $website-light-black;
-                                        transition: box-shadow 0.4s ease;
-                                    }
-
-                                    #user-options {
-                                        @include flex-direction(column, unset, unset, 8px);
-                                        position: absolute;
-                                        background-color: $website-white;
-                                        width: 150px;
-                                        top: 85px;
-                                        right: 35px;
-                                        padding: 12px 0px;
-                                        box-shadow: 0 0 3px $website-gray, 0 0 3px $website-gray;
-
-                                        div {
-                                            .link {
-                                                text-decoration: none;
-                                            }
-
-                                            p {
-                                                padding: 5px 8px;
-                                                text-decoration: none;
-
-                                                &:hover {
-                                                    cursor: pointer;
-                                                    background-color: rgba(169, 169, 169, 0.742)
-                                                }
-                                            }
-
-                                            #sign-out {
-                                                color: $website-red;
-                                            }
-                                        }
-
-                                        hr {
-                                            color: $website-black;
-                                        }
-
-                                    }
-                                }
-
-                                .change-view-button {
-                                    @include flex-direction(row, center, center, 5px);
-                                    appearance: none;
-                                    -webkit-appearance: none;
-                                    background-color: $website-light-gray;
-                                    font-weight: 800;
-                                    border: none;
-                                    padding: 15px 20px;
-                                    font-size: 12px;
-                                    color: $website-light-black;
-                                    transition: all 0.3s ease;
-                                    border-radius: 5px;
-
-                                    img {
-                                        width: 16px;
-                                        height: auto;
+                                    p {
+                                        font-size: 40px;
+                                        font-weight: 800;
                                     }
 
                                     &:hover {
+                                        background-color: $high-translucence;
+                                        color: white;
                                         cursor: pointer;
-                                        background-color: $website-red;
-                                        color: $website-white;
-
-                                        img {
-                                            filter: invert(100%) brightness(100%);
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-
-                    #products-main-content {
-                        @include flex-direction(row, unset, unset, 20px);
-
-                        #product-filters {
-                            width: 20%;
-                            background-color: $website-light-gray;
-                            height: min-content;
-                            @include flex-direction(column, unset, unset, 15px);
-                            padding: 10px 15px;
-                            border-radius: 12px;
-
-                            .filter-section {
-                                .filter-type-subheading {
-                                    font-size: 16px;
-                                    font-weight: 600;
-                                    letter-spacing: -1px;
-                                }
-
-                                .section-content {
-                                    padding: 2px 0;
-                                    padding-left: 10px;
-                                }
-
-                                #price-range-section {
-                                    @include flex-direction(row, unset, center, 5px);
-
-                                    input[type="range"] {
-                                        appearance: none;
-                                        width: 100%;
-                                        background: transparent;
-                                    }
-
-                                    input[type="range"]::-webkit-slider-runnable-track {
-                                        background: #ccc;
-                                        height: 6px;
-                                        border-radius: 5px;
-                                    }
-
-                                    input[type="range"]::-webkit-slider-thumb {
-                                        -webkit-appearance: none;
-                                        background: #ff5733;
-                                        width: 20px;
-                                        height: 20px;
-                                        border-radius: 50%;
-                                        margin-top: -7px;
-                                    }
-                                }
-
-                                .min-max-section {
-                                    @include flex-direction(row, unset, center, 10px);
-                                    padding-top: 10px;
-
-                                    input[type="text"] {
-                                        appearance: none;
-                                        background-color: $website-white;
-                                        border: thin solid $website-gray;
-                                        border-radius: 10px;
-                                        width: 100px;
-                                        height: 30px;
-                                        text-align: center;
-                                    }
-                                }
-
-                                #instrument-checkboxes {
-                                    div {
-                                        @include flex-direction(row, unset, center, 8px);
-                                        padding: 2px 0;
-
-                                        input[type="checkbox"] {
-                                            appearance: none;
-                                            background-color: $website-white;
-                                            height: 15px;
-                                            width: 15px;
-                                            border: thin solid $website-gray;
-                                            border-radius: 3px;
-
-                                            &:checked {
-                                                background-color: $website-red;
-                                                border: thin solid $website-red;
-                                            }
-
-                                            &:hover {
-                                                cursor: pointer;
-                                                border: thin solid $website-light-black;
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-
-                            .action-buttons {
-                                @include flex-direction(row, flex-end, center, 10px);
-                            }
-
-                            .product-image-container {
-                                @include flex-direction(row, unset, unset, 0);
-                                overflow-x: scroll;
-                                overflow-y: hidden;
-                                scrollbar-width: none;
-                                scroll-snap-type: x mandatory;
-                                height: 65%;
-
-                                #products-gallery-header {
-                                    @include flex-direction(row, space-between, center, 0);
-
-                                    #product-tools {
-                                        @include flex-direction(row, unset, center, 20px);
-
-                                        select {
-                                            width: 125px;
-                                            padding: 8px 15px;
-                                        }
-
-                                        #action-buttons {
-                                            @include flex-direction(row, unset, center, 10px);
-                                        }
-                                    }
-                                }
-
-                                #products-gallery {
-                                    width: 100%;
-                                    @include grid-template-columns(repeat(4, 1fr), 40px);
-                                    padding-top: 10px;
-                                    padding-bottom: 30px;
-
-                                    .product {
-                                        width: 100%;
-                                        height: 475px;
-                                        overflow: hidden;
-
-                                        .action-buttons {
-                                            @include flex-direction(row, flex-end, center, 10px);
-                                        }
-
-                                        .product-image-container {
-                                            @include flex-direction(row, unset, unset, 0);
-                                            overflow-x: scroll;
-                                            overflow-y: hidden;
-                                            scrollbar-width: none;
-                                            scroll-snap-type: x mandatory;
-                                            height: 65%;
-
-                                            .product-image {
-                                                flex: 0 0 100%;
-                                                width: 100%;
-                                                height: 100%;
-                                                scroll-snap-align: start;
-                                                background-repeat: no-repeat;
-                                                background-position: center;
-                                                background-size: contain;
-                                                background-color: white;
-
-                                                div {
-                                                    @include flex-direction(unset, center, center, 0);
-                                                    position: relative;
-                                                    height: 100%;
-                                                    color: $invisible;
-                                                    transition: 0.3s all ease;
-
-                                                    p {
-                                                        font-size: 40px;
-                                                        font-weight: 800;
-                                                    }
-
-                                                    &:hover {
-                                                        background-color: $high-translucence;
-                                                        color: white;
-                                                        cursor: pointer;
-                                                    }
-                                                }
-                                            }
-                                        }
-
-                                        .product-details {
-                                            @include flex-direction(column, unset, flex-start, 10px);
-                                            white-space: nowrap;
-                                            padding: 10px 0;
-                                            height: 35%;
-                                            background-color: white;
-
-                                            .product-name {
-                                                font-size: 14px;
-                                                color: $product-link-color;
-
-                                                &:hover {
-                                                    cursor: pointer;
-                                                    color: $product-link-hover-color;
-                                                    text-decoration: underline;
-                                                }
-
-                                                &:active {
-                                                    color: $product-link-color;
-                                                }
-                                            }
-
-                                            .product-price {
-                                                font-size: 28px;
-                                                font-weight: 600;
-                                            }
-
-                                            .add-to-cart-button {
-                                                appearance: none;
-                                                font-weight: 800;
-                                                outline: none;
-                                                border: none;
-                                                transition: 0.3s all ease;
-                                                @include flex-direction(row, center, center, 3px);
-                                                width: auto;
-                                                padding: 15px 30px;
-                                                background-color: $website-light-gray;
-                                                color: $website-light-black;
-                                                transition: 0.3s all ease;
-                                                font-size: 12px;
-                                                border-radius: 3px;
-                                                text-align: right;
-
-                                                img {
-                                                    height: 16px;
-                                                    width: auto;
-                                                    transition: filter 0.3s ease;
-                                                }
-
-                                                &:hover {
-                                                    cursor: pointer;
-                                                    background-color: $website-red;
-                                                    color: $website-white;
-
-                                                    img {
-                                                        filter: invert(100%) brightness(100%);
-                                                    }
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
-
-
-
-                        #users-main-content {
-                            @include flex-direction(column, unset, unset, 20px);
-
-                            #user-filters {
-
-                                #filter-toolbar {
-
-                                    #action-buttons {
-                                        @include flex-direction(row, unset, center, 10px);
                                     }
                                 }
                             }
@@ -890,7 +551,7 @@ $translucent: #00000080;
 
                             &:hover {
                                 cursor: pointer;
-                                background-color: $website-light-gray;
+                                background-color: $website-black;
                             }
                         }
                     }
