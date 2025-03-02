@@ -71,7 +71,7 @@ router.post(`/users/login/:email/:password`, (req, res) => {
           res.json({
             _id: data._id,
             name: data.firstName,
-            accessName: data.firstName + " " + data.secondName,
+            accessName: "USER",
             accessLevel: process.env.ACCESS_LEVEL_USER,
           })
         } else {

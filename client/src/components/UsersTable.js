@@ -7,19 +7,22 @@ export default class UsersTable extends Component {
                 <table id="users-table">
                     <thead>
                         <tr>
-                            <th>USERNAME</th>
-                            <th>NAME</th>
+                            <th>FULL NAME</th>
                             <th>EMAIL</th>
                             <th>HOME ADDRESS</th>
+                            <th>TELEPHONE</th>
                         </tr>
                     </thead>
                     <tbody>
                         {this.props.users.map(user =>
                             <tr key={user._id}>
-                                <td>username here</td>
-                                <td>{user["name"]}</td>
+                                <td id="user-name">
+                                    <img src="/images/user.png" />
+                                    {user["firstName"]} {user["secondName"]}
+                                </td>
                                 <td>{user["email"]}</td>
-                                <td>31 Park Heath, Grangerath, Drogheda, Co. Meath</td>
+                                <td>{user["houseAddress"]}</td>
+                                <td>{user["telephoneNo"]}</td>
                             </tr>
                         )}
                     </tbody>
