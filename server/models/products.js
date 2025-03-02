@@ -1,9 +1,5 @@
 const mongoose = require("mongoose")
 
-let productPhotoSchema = new mongoose.Schema({
-    filename: { type: String }
-})
-
 let productsSchema = new mongoose.Schema({
     name: { type: String },
     category: { type: String },
@@ -12,7 +8,7 @@ let productsSchema = new mongoose.Schema({
     rating: { type: Number },
     noOfReviews: { type: Number },
     stockQuantity: { type: Number },
-    productImgs: [productPhotoSchema]
+    productImgs: { type: [String] }
 },
     {
         collection: `products`

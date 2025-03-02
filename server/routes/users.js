@@ -88,6 +88,11 @@ router.post(`/users/login/:email/:password`, (req, res) => {
 router.post("/users/cart", (req, res) => {
   const { userId, product } = req.body
 
+  if (!product || !product._id) {
+    return res.json({ errorMessage: "Invalid product data" })
+  }
+  
+
   usersModel.findById(userId, (findError, userData) => {
     if (findError || !userData) {
       return res.json({ errorMessage: "User not found" })

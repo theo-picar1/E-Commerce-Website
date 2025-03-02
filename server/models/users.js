@@ -1,5 +1,16 @@
 const mongoose = require("mongoose")
 
+const productsSchema = new mongoose.Schema({
+  name: { type: String },
+  category: { type: String },
+  price: { type: Number },
+  description: { type: [String] },
+  rating: { type: Number },
+  noOfReviews: { type: Number },
+  stockQuantity: { type: Number },
+  productImgs: { type: [String] },
+})
+
 let usersSchema = new mongoose.Schema(
   {
     firstName: { type: String, required: true },
@@ -15,16 +26,5 @@ let usersSchema = new mongoose.Schema(
   {
     collection: `users`
   })
-  
-const productsSchema = new mongoose.Schema({
-  name: { type: String },
-  category: { type: String },
-  price: { type: Number },
-  description: { type: [String] },
-  rating: { type: Number },
-  noOfReviews: { type: Number },
-  stockQuantity: { type: Number },
-  productImgs: { type: [String] },
-})
 
 module.exports = mongoose.model("users", usersSchema)
