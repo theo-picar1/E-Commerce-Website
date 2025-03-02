@@ -1,30 +1,8 @@
 import React, { Component } from "react"
 import { Link } from "react-router-dom"
 import { ACCESS_LEVEL_GUEST } from "../config/global_constants"
-import { SERVER_HOST } from "../config/global_constants"
-
-import axios from "axios"
 
 export default class ProductsGallery extends Component {
-    // componentDidMount() {
-    //     this.props.products["productImgs"].map(photo => {
-    //         return axios.get(`${SERVER_HOST}/products/photo/${photo.filename}`)
-    //             .then(res => {
-    //                 if (res.data) {
-    //                     if (res.data.errorMessage) {
-    //                         console.log(res.data.errorMessage)
-    //                     }
-    //                     else {
-    //                         document.getElementById(photo._id).src = `data:;base64,${res.data.image}`
-    //                     }
-    //                 }
-    //                 else {
-    //                     console.log("Record not found")
-    //                 }
-    //             })
-    //     })
-    // }
-
     render() {
         return (
             <div id="products-gallery-container">
