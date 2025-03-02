@@ -17,7 +17,6 @@ export default class ProductDetails extends Component {
             ))}
           </div>
         </div>
-
         <div id="product-details">
           <div id="close-button" onClick={() => closeProductDetails()}>
             <p>&#10005;</p>

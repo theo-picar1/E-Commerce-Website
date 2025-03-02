@@ -38,30 +38,28 @@ router.post(`/users/reset_user_collection`, (req, res) => {
   })
 })
 
-// Register a new user
-router.post(`/users/register/:name/:email/:password`, (req, res) => {
-  usersModel.findOne({ email: req.params.email }, (uniqueError, uniqueData) => {
-    if (uniqueData) {
-      res.json({ errorMessage: `User already exists` })
-    } else {
-      bcrypt.hash(
-        req.params.password,
-        parseInt(process.env.SALT_ROUNDS),
-        (err, hash) => {
-          usersModel.create(
-            { name: req.params.name, email: req.params.email, password: hash },
-            (error, data) => {
-              if (data) {
-                res.json({ name: data.name })
-              } else {
-                res.json({ errorMessage: `User was not registered` })
-              }
-            }
-          )
+router.post(`/users/register`, (req, res) => {
+    usersModel.findOne({ email: req.body.email }, (uniqueError, uniqueData) => {
+        if (uniqueData) {
+            res.json({ errorMessage: `User already exists` })
         }
-      )
-    }
-  })
+        else {
+            bcrypt.hash(req.body.password, parseInt(process.env.SALT_ROUNDS), (err, hash) => {
+                console.log("Request body:", req.body);
+                usersModel.create({...req.body, password: hash }, (error, data) => {
+                    if (error) {
+                        console.error("MongoDB Error:", error);
+                        return res.json({ errorMessage: "MongoDB error. User not created." });
+                    }
+                    if (!data) {
+                        console.error("User creation returned null data.");
+                        return res.json({ errorMessage: "User creation failed." });
+                    }
+                    res.json({ name: data.firstName });
+                })
+            })
+        }
+    })
 })
 
 // User login
@@ -72,9 +70,9 @@ router.post(`/users/login/:email/:password`, (req, res) => {
         if (result) {
           res.json({
             _id: data._id,
-            name: data.name,
-            accessName: "USER",
-            accessLevel: 1,
+            name: data.firstName,
+            accessName: data.firstName + " " + data.secondName,
+            accessLevel: process.env.ACCESS_LEVEL_USER,
           })
         } else {
           res.json({ errorMessage: `Incorrect password` })
@@ -89,6 +87,11 @@ router.post(`/users/login/:email/:password`, (req, res) => {
 // Add product to user's cart
 router.post("/users/cart", (req, res) => {
   const { userId, product } = req.body
+
+  if (!product || !product._id) {
+    return res.json({ errorMessage: "Invalid product data" })
+  }
+  
 
   usersModel.findById(userId, (findError, userData) => {
     if (findError || !userData) {
