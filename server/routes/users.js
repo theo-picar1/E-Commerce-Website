@@ -70,9 +70,9 @@ router.post(`/users/login/:email/:password`, (req, res) => {
         if (result) {
           res.json({
             _id: data._id,
-            name: data.name,
-            accessName: "USER",
-            accessLevel: 1,
+            name: data.firstName,
+            accessName: data.firstName + " " + data.secondName,
+            accessLevel: process.env.ACCESS_LEVEL_USER,
           })
         } else {
           res.json({ errorMessage: `Incorrect password` })
