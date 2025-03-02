@@ -13,11 +13,11 @@ export default class AddCar extends Component {
         this.state = {
             name: "",
             category: "",
-            price: 0,
+            price: 1,
             description: "",
             rating: 0.0,
             noOfReviews: 0,
-            stockQuantity: 0,
+            stockQuantity: 1,
             productImg: "",
             redirectToProducts: false,
             submittedOnce: false
@@ -141,6 +141,9 @@ export default class AddCar extends Component {
                                         className="input-field-small"
                                         name="price"
                                         type="number"
+                                        min="1"
+                                        max="1000000"
+                                        step="100"
                                         value={this.state.price}
                                         onChange={this.handleChange}
                                         style={this.state.submittedOnce && (this.state.price === null) ? { border: "thin solid red" } : {}}
@@ -170,6 +173,9 @@ export default class AddCar extends Component {
                                         className="input-field-small"
                                         name="rating"
                                         type="number"
+                                        min="0.0"
+                                        max="5"
+                                        step="0.5"
                                         value={this.state.rating}
                                         onChange={this.handleChange}
                                         style={this.state.submittedOnce && (this.state.rating === null) ? { border: "thin solid red" } : {}}
@@ -184,6 +190,9 @@ export default class AddCar extends Component {
                                         className="input-field-small"
                                         name="noOfReviews"
                                         type="number"
+                                        min="0"
+                                        max="100000"
+                                        step="10"
                                         value={this.state.noOfReviews}
                                         onChange={this.handleChange}
                                         style={this.state.submittedOnce && (this.state.noOfReviews === null) ? { border: "thin solid red" } : {}}
@@ -200,6 +209,9 @@ export default class AddCar extends Component {
                                         className="input-field-small"
                                         name="stockQuantity"
                                         type="number"
+                                        min="1"
+                                        max="1000"
+                                        step="1"
                                         value={this.state.stockQuantity}
                                         onChange={this.handleChange}
                                         style={this.state.submittedOnce && (this.state.stockQuantity === null) ? { border: "thin solid red" } : {}}
