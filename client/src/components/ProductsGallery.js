@@ -1,8 +1,30 @@
 import React, { Component } from "react"
 import { Link } from "react-router-dom"
-import {ACCESS_LEVEL_GUEST} from "../config/global_constants"
+import { ACCESS_LEVEL_GUEST } from "../config/global_constants"
+import { SERVER_HOST } from "../config/global_constants"
 
-export default class FeaturedProducts extends Component {
+import axios from "axios"
+
+export default class ProductsGallery extends Component {
+    // componentDidMount() {
+    //     this.props.products["productImgs"].map(photo => {
+    //         return axios.get(`${SERVER_HOST}/products/photo/${photo.filename}`)
+    //             .then(res => {
+    //                 if (res.data) {
+    //                     if (res.data.errorMessage) {
+    //                         console.log(res.data.errorMessage)
+    //                     }
+    //                     else {
+    //                         document.getElementById(photo._id).src = `data:;base64,${res.data.image}`
+    //                     }
+    //                 }
+    //                 else {
+    //                     console.log("Record not found")
+    //                 }
+    //             })
+    //     })
+    // }
+
     render() {
         return (
             <div id="products-gallery-container">
@@ -17,9 +39,9 @@ export default class FeaturedProducts extends Component {
                             <option value="rating-desc">Highest Rating</option>
                             <option value="rating-asc">Lowest Rating</option>
                         </select>
-                        {sessionStorage.accessLevel > ACCESS_LEVEL_GUEST ? 
+                        {sessionStorage.accessLevel > ACCESS_LEVEL_GUEST ?
                             <Link to={"/add-product"}><button className="add-button">ADD PRODUCT</button></Link>
-                        :
+                            :
                             null}
                     </div>
                 </div>
@@ -31,7 +53,7 @@ export default class FeaturedProducts extends Component {
                                     <Link to={"/edit-product/" + product._id}><button className="edit-button"><img src="images/edit-icon.png" className="website-icon" /></button></Link>
                                     <Link to={"/delete-product/" + product._id}><button className="delete-button"><img src="images/delete-icon.png" className="website-icon" /></button></Link>
                                 </div>
-                            :
+                                :
                                 null}
                             <div className="product-image-container">
                                 {product["productImgs"].map((img) => (
@@ -52,7 +74,7 @@ export default class FeaturedProducts extends Component {
                                 <p className="product-price">€{product["price"]}.99</p>
                                 <button
                                     className="add-to-cart-button"
-                                    onClick={this.props.incrementCartCounter}
+                                    onClick={() => this.props.addProductToCart(product)}
                                 >
                                     <img src="/images/shopping-cart.png" />
                                     <p>ADD TO CART</p>
@@ -62,6 +84,6 @@ export default class FeaturedProducts extends Component {
                     ))}
                 </div>
             </div>
-        );
+        )
     }
 }
