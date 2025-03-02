@@ -1,6 +1,5 @@
 const mongoose = require("mongoose")
 
-// Define the products schema
 const productsSchema = new mongoose.Schema({
   name: { type: String },
   category: { type: String },
@@ -12,18 +11,16 @@ const productsSchema = new mongoose.Schema({
   productImgs: { type: [String] },
 })
 
-// Define the users schema
 const usersSchema = new mongoose.Schema(
   {
     name: { type: String, required: true },
     email: { type: String, required: true },
     password: { type: String, required: true },
-    cart: [productsSchema], // Add productsSchema as an array for the cart
+    cart: [productsSchema],
   },
   {
-    collection: "users", // Specify the collection name
+    collection: "users",
   }
 )
 
-// Export the users model
 module.exports = mongoose.model("users", usersSchema)

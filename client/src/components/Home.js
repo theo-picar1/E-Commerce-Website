@@ -300,6 +300,10 @@ export default class Home extends Component {
   }
 
   toggleCartVisibility = () => {
+    if(!this.state.loggedInUser){
+      alert("User not logged in")
+      return
+    }
     this.setState((prev) => ({ cartVisibility: !prev.cartVisibility }))
   }
 

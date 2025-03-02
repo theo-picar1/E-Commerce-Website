@@ -802,7 +802,7 @@ $translucent: #00000080;
   }
 
   button {
-    background-color: #007bff;
+    background-color: $website-red;
     color: #fff;
     border: none;
     padding: 10px 20px;
@@ -811,7 +811,7 @@ $translucent: #00000080;
     margin-top: 20px;
 
     &:hover {
-      background-color: #0056b3;
+      background-color: $website-navy;
     }
   }
 }
@@ -865,6 +865,7 @@ $translucent: #00000080;
   }
 }
 
+// Shopping Cart
 .cartSidebar {
   position: fixed;
   top: 0;
