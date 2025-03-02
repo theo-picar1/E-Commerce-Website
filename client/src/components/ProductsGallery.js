@@ -74,7 +74,7 @@ export default class ProductsGallery extends Component {
                                 <p className="product-price">€{product["price"]}.99</p>
                                 <button
                                     className="add-to-cart-button"
-                                    onClick={this.props.incrementCartCounter}
+                                    onClick={() => this.props.addProductToCart(product)}
                                 >
                                     <img src="/images/shopping-cart.png" />
                                     <p>ADD TO CART</p>
@@ -84,6 +84,6 @@ export default class ProductsGallery extends Component {
                     ))}
                 </div>
             </div>
-        );
+        )
     }
 }

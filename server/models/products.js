@@ -1,4 +1,4 @@
-const mongoose = require(`mongoose`)
+const mongoose = require("mongoose")
 
 let productPhotoSchema = new mongoose.Schema({
     filename: { type: String }
@@ -18,4 +18,4 @@ let productsSchema = new mongoose.Schema({
         collection: `products`
     })
 
-module.exports = mongoose.model(`products`, productsSchema)
+module.exports = mongoose.model("products", productsSchema)

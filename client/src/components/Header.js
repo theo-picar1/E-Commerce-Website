@@ -1,11 +1,11 @@
-import React, { Component } from "react"
-import { Link } from "react-router-dom"
-import { ACCESS_LEVEL_GUEST } from "../config/global_constants"
+import React, { Component } from "react";
+import { Link } from "react-router-dom";
+import { ACCESS_LEVEL_GUEST } from "../config/global_constants";
 
 export default class Header extends Component {
     handleSearchChange = (e) => {
-        this.props.onSearch(e.target.value)
-    }
+        this.props.onSearch(e.target.value);
+    };
 
     constructor(props) {
         super(props)
@@ -22,6 +22,8 @@ export default class Header extends Component {
     }
 
     render() {
+        const { toggleCartVisibility, cartCounter, showCustomers, searchValue, showCustomersOnClick, showProductsOnClick } =
+            this.props;
         return (
             <div id="header">
                 <div id="header-content">
@@ -48,9 +50,9 @@ export default class Header extends Component {
                         </div>
                     }
                     <div id="user-tools">
-                        <div id="shopping-cart-button">
+                        <div onClick={() => toggleCartVisibility()} id="shopping-cart-button">
                             <img src="/images/shopping-cart.png" />
-                            <p>{this.props.cartCounter}</p>
+                            <p>{cartCounter}</p>
                         </div>
                         {!this.props.showCustomers ?
                             <button className="change-view-button" onClick={this.props.showCustomersOnClick}>
@@ -75,7 +77,7 @@ export default class Header extends Component {
                                         <div>
                                             <p>Edit profile</p>
                                         </div>
-                                        <hr/>
+                                        <hr />
                                         <div>
                                             <Link className="link" to={"/logout"}><p id="sign-out">Sign out</p></Link>
                                         </div>
