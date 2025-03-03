@@ -63,7 +63,24 @@ export default class Home extends Component {
       }
     })
 
-    axios.get(`${SERVER_HOST}/users`)
+    console.log(sessionStorage.getItem("user"))
+
+    if (sessionStorage.getItem("user")) {
+      const user = sessionStorage.getItem("user")
+
+      if (user) {
+        this.setState({ loggedInUser: JSON.parse(user) }, () =>
+          this.incrementCartCounter()
+        )
+      } else {
+        this.createNonLoggedInUser()
+      }
+    } else {
+      console.log("you are logged in")
+    }
+
+    axios
+      .get(`${SERVER_HOST}/users`)
       .then((res) => {
         if (res.data) {
           console.log(res.data)
@@ -72,11 +89,10 @@ export default class Home extends Component {
           } else {
             console.log("Users have been successfully retrieved")
 
-            this.setState(
-              {
-                users: res.data,
-                originalUsers: res.data
-              })
+            this.setState({
+              users: res.data,
+              originalUsers: res.data,
+            })
 
             const userId = sessionStorage.getItem("userId")
 
@@ -155,7 +171,50 @@ export default class Home extends Component {
     )
   }
 
+  removeProductFromUnLoggedUserCart = (product) => {
+    let user = JSON.parse(sessionStorage.getItem("user"))
+
+    if (!user) {
+      console.error("No guest user found. Cannot remove product.")
+      return
+    }
+
+    console.log(user.cart)
+
+    const productIndex = user.cart.findIndex(
+      (cartProduct) => cartProduct.name === product.name
+    )
+
+    if (productIndex === -1) {
+      console.error("Product not found in cart.")
+      return
+    }
+
+    user.cart.splice(productIndex, 1)
+
+    sessionStorage.setItem("user", JSON.stringify(user))
+
+    console.log("Product quantity decreased or removed from cart successfully")
+
+    this.setState(
+      (prevState) => ({
+        loggedInUser: user,
+        cartCounter: user.cart.reduce(
+          (total, item) => total + item.quantity,
+          0
+        ),
+      }),
+      () => {
+        this.incrementCartCounter()
+      }
+    )
+  }
+
   deleteProductFromCart = (product) => {
+    if (this.state.loggedInUser._id == "guest") {
+      this.removeProductFromUnLoggedUserCart(product)
+      return
+    }
     const userId = sessionStorage.getItem("userId")
 
     if (!userId) {
@@ -164,7 +223,6 @@ export default class Home extends Component {
     }
 
     console.log("User ID:", userId)
-    console.log("Product to be removed:", product)
 
     axios
       .delete(`${SERVER_HOST}/users/cart`, {
@@ -190,7 +248,6 @@ export default class Home extends Component {
             }
 
             cart.splice(indexToRemove, 1)
-
             loggedInUser.cart = cart
 
             return { loggedInUser, cartCounter: cart.length }
@@ -198,6 +255,7 @@ export default class Home extends Component {
         }
       })
       .catch((error) => {
+        alert("Error removing product from cart")
         console.error("Error removing product from cart:", error)
       })
   }
@@ -230,7 +288,37 @@ export default class Home extends Component {
     })
   }
 
+  addProductToUnLoggedUserCart = (product) => {
+    let user = JSON.parse(sessionStorage.getItem("user"))
+
+    if (!user) {
+      console.error("No guest user found. Creating one...")
+      this.createNonLoggedInUser() 
+      user = JSON.parse(sessionStorage.getItem("user"))
+    }
+
+    user.cart.push(product)
+
+    sessionStorage.setItem("user", JSON.stringify(user))
+
+    console.log("Product added to cart successfully")
+
+    this.setState(
+      (prevState) => ({
+        loggedInUser: user,
+        cartCounter: user.cart.length,
+      }),
+      () => {
+        this.incrementCartCounter()
+      }
+    )
+  }
+
   addProductToCart = (product) => {
+    if (this.state.loggedInUser._id == "guest") {
+      this.addProductToUnLoggedUserCart(product)
+      return
+    }
     const userId = sessionStorage.getItem("userId")
 
     console.log("User ID:", userId)
@@ -305,11 +393,30 @@ export default class Home extends Component {
     )
   }
 
+  createNonLoggedInUser = () => {
+    const user = {
+      _id: "guest",
+      firstName: "Guest",
+      secondName: "User",
+      email: "",
+      password: "",
+      houseAddress: "",
+      telephoneNo: "",
+      accessLevel: parseInt(process.env.ACCESS_LEVEL_USER) || 1,
+      profilePhotoFilename: "",
+      cart: [],
+    }
+
+    sessionStorage.setItem("user", JSON.stringify(user))
+
+    this.setState({ loggedInUser: user })
+  }
+
   toggleCartVisibility = () => {
     if (!this.state.loggedInUser) {
-      alert("User not logged in")
-      return
+      this.createNonLoggedInUser()
     }
+
     this.setState((prev) => ({ cartVisibility: !prev.cartVisibility }))
   }
 
@@ -342,7 +449,7 @@ export default class Home extends Component {
         {loggedInUser ? (
           <ShoppingCartSidebar
             products={loggedInUser.cart}
-            addProductToCart={addProductToCart}
+            addProductToCart={this.addProductToCart}
             cartVisibility={cartVisibility}
             toggleCartVisibility={this.toggleCartVisibility}
             deleteProductFromCart={deleteProductFromCart}
