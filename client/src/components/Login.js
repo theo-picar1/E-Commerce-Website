@@ -48,7 +48,8 @@ export default class Login extends Component {
 
               sessionStorage.name = res.data.accessName
               sessionStorage.accessLevel = res.data.accessLevel
-              sessionStorage.setItem("userId", res.data._id) // Added userId to sessionStorage
+              sessionStorage.setItem("userId", res.data._id)
+              sessionStorage.removeItem("user")
 
               this.setState({
                 isLoggedIn: true,
