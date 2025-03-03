@@ -1,6 +1,6 @@
-import React, {Component} from "react"
+import React, { Component } from "react"
 
-import {ACCESS_LEVEL_GUEST, ACCESS_LEVEL_ADMIN} from "../config/global_constants"
+import { ACCESS_LEVEL_GUEST, ACCESS_LEVEL_ADMIN } from "../config/global_constants"
 
 export default class Filters extends Component {
     constructor(props) {
@@ -23,13 +23,15 @@ export default class Filters extends Component {
     }
 
     handleCheckboxes = () => {
-        let checkboxes = document.getElementsByClassName("instrument-checkbox")
+        let checkboxes = document.getElementsByClassName("instrument-checkbox");
 
-        let selectedCheckboxes = Array.from(checkboxes).filter(checkbox => checkbox.checked).map(checkbox => checkbox.value)
+        let selectedCheckboxes = Array.from(checkboxes)
+            .filter(checkbox => checkbox.checked)
+            .map(checkbox => checkbox.value);
 
-        this.setState({
-            checkedInstruments: selectedCheckboxes
-        })
+        this.setState({ checkedInstruments: selectedCheckboxes });
+
+        this.props.onFilterChange(selectedCheckboxes)
     }
 
     render() {
@@ -56,9 +58,9 @@ export default class Filters extends Component {
                 <div className="filter-section">
                     <p className="filter-type-subheading">INSTRUMENT</p>
                     <div className="section-content" id="instrument-checkboxes">
-                        { this.props.categories.map(category =>
+                        {this.props.categories.map(category =>
                             <div key={category}>
-                                <input type="checkbox" key={ category } className="instrument-checkbox" value={ category } onChange={ this.handleCheckboxes }/>
+                                <input type="checkbox" key={category} className="instrument-checkbox" value={category} onChange={this.handleCheckboxes} />
                                 <p>{category}</p>
                             </div>
                         )}
@@ -72,7 +74,7 @@ export default class Filters extends Component {
                         <input type="text" placeholder="max" name="maxStock" value={this.state.maxStock} onChange={this.handleChange}/>
                     </div>
                 </div> */}
-            </div> 
+            </div>
         )
     }
 }

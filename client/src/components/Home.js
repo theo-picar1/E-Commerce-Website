@@ -25,7 +25,8 @@ export default class Home extends Component {
       sortBy: ``,
       sortType: ``,
       showProductDetails: false,
-      product: null,
+      product: [],
+      checkedInstruments: [],
       searchValue: "",
       users: [],
       originalUsers: [],
@@ -264,17 +265,37 @@ export default class Home extends Component {
     this.setState({ showProductDetails: false, product: null })
   }
 
-  handleSearch = (searchValue) => {
-    searchValue = searchValue.toLowerCase()
-    const filteredProducts = this.state.originalProducts.filter((product) =>
-      product.name.toLowerCase().includes(searchValue)
-    )
+  handleFilterChange = (selectedCategories) => {
+    this.setState({ checkedInstruments: selectedCategories }, () => {
+      this.applyFilters();
+    });
+  };
 
-    this.setState({
-      searchValue,
-      products: filteredProducts,
-    })
-  }
+  handleSearch = (searchValue) => {
+    this.setState({ searchValue }, () => {
+      this.applyFilters();
+    });
+  };
+
+  applyFilters = () => {
+    const { searchValue, checkedInstruments, originalProducts } = this.state;
+
+    let filteredProducts = originalProducts;
+
+    if (searchValue) {
+      filteredProducts = filteredProducts.filter((product) =>
+        product.name.toLowerCase().includes(searchValue.toLowerCase())
+      );
+    }
+
+    if (checkedInstruments.length > 0) {
+      filteredProducts = filteredProducts.filter((product) =>
+        checkedInstruments.includes(product.category)
+      );
+    }
+
+    this.setState({ products: filteredProducts });
+  };
 
   showCustomerTable = () => {
     this.setState({
@@ -293,7 +314,7 @@ export default class Home extends Component {
 
     if (!user) {
       console.error("No guest user found. Creating one...")
-      this.createNonLoggedInUser() 
+      this.createNonLoggedInUser()
       user = JSON.parse(sessionStorage.getItem("user"))
     }
 
@@ -476,7 +497,7 @@ export default class Home extends Component {
           <>
             {!this.state.showCustomers ? (
               <div id="products-main-content">
-                <Filters categories={categories} />
+                <Filters categories={categories} onFilterChange={this.handleFilterChange} />
                 <ProductsGallery
                   products={products}
                   incrementCartCounter={incrementCartCounter}

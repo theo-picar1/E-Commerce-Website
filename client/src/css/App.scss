@@ -570,7 +570,7 @@ $translucent: #00000080;
             tr:nth-child(odd) {
               &:hover {
                 cursor: pointer;
-                background-color: $website-black;
+                background-color: $website-light-gray;
               }
             }
           }
