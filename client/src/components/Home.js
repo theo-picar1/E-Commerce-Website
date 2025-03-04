@@ -38,31 +38,36 @@ export default class Home extends Component {
   }
 
   componentDidMount() {
-    axios.get(`${SERVER_HOST}/products`).then((res) => {
-      if (res.data) {
-        if (res.data.errorMessage) {
-          console.log(res.data.errorMessage)
-        } else {
-          console.log("Products have been successfully retrieved/read")
+    axios
+      .get(`${SERVER_HOST}/products`)
+      .then((res) => {
+        if (res.data) {
+          if (res.data.errorMessage) {
+            console.log(res.data.errorMessage)
+          } else {
+            console.log("Products have been successfully retrieved/read")
 
-          let categories = []
+            let categories = []
 
-          res.data.forEach((product) => {
-            if (product["category"]) {
-              categories.push(product["category"])
-            }
-          })
+            res.data.forEach((product) => {
+              if (product["category"]) {
+                categories.push(product["category"])
+              }
+            })
 
-          let uniqueCategories = [...new Set(categories)]
+            let uniqueCategories = [...new Set(categories)]
 
-          this.setState({
-            products: res.data,
-            originalProducts: res.data,
-            categories: uniqueCategories,
-          })
+            this.setState({
+              products: res.data,
+              originalProducts: res.data,
+              categories: uniqueCategories,
+            })
+          }
         }
-      }
-    })
+      })
+      .catch((err) => {
+        console.log("Error getting products:" + err)
+      })
 
     console.log(sessionStorage.getItem("user"))
 
@@ -116,8 +121,8 @@ export default class Home extends Component {
           }
         }
       })
-      .catch((error) => {
-        console.error("Error fetching users:", error)
+      .catch((err) => {
+        console.error("Error fetching users:", err)
       })
   }
 
@@ -255,9 +260,8 @@ export default class Home extends Component {
           })
         }
       })
-      .catch((error) => {
-        alert("Error removing product from cart")
-        console.error("Error removing product from cart:", error)
+      .catch((err) => {
+        console.error("Error removing product from cart:", err)
       })
   }
 
@@ -265,37 +269,57 @@ export default class Home extends Component {
     this.setState({ showProductDetails: false, product: null })
   }
 
-  handleFilterChange = (selectedCategories) => {
-    this.setState({ checkedInstruments: selectedCategories }, () => {
-      this.applyFilters();
-    });
-  };
+  handleFilterChange = ({ checkedInstruments = [], price }) => {
+    this.setState(
+      {
+        checkedInstruments: Array.isArray(checkedInstruments)
+          ? checkedInstruments
+          : [],
+        price,
+      },
+      () => {
+        this.applyFilters()
+      }
+    )
+  }
 
   handleSearch = (searchValue) => {
     this.setState({ searchValue }, () => {
-      this.applyFilters();
-    });
-  };
+      this.applyFilters()
+    })
+  }
 
   applyFilters = () => {
-    const { searchValue, checkedInstruments, originalProducts } = this.state;
+    const { searchValue, checkedInstruments, originalProducts, price } =
+      this.state
 
-    let filteredProducts = originalProducts;
+    if (!originalProducts) {
+      console.error("originalProducts is undefined")
+      return
+    }
+
+    let filteredProducts = [...originalProducts]
 
     if (searchValue) {
       filteredProducts = filteredProducts.filter((product) =>
         product.name.toLowerCase().includes(searchValue.toLowerCase())
-      );
+      )
     }
 
-    if (checkedInstruments.length > 0) {
+    if (checkedInstruments && checkedInstruments.length > 0) {
       filteredProducts = filteredProducts.filter((product) =>
         checkedInstruments.includes(product.category)
-      );
+      )
     }
 
-    this.setState({ products: filteredProducts });
-  };
+    if (price) {
+      filteredProducts = filteredProducts.filter(
+        (product) => product.price <= price
+      )
+    }
+
+    this.setState({ products: filteredProducts })
+  }
 
   showCustomerTable = () => {
     this.setState({
@@ -497,7 +521,10 @@ export default class Home extends Component {
           <>
             {!this.state.showCustomers ? (
               <div id="products-main-content">
-                <Filters categories={categories} onFilterChange={this.handleFilterChange} />
+                <Filters
+                  categories={categories}
+                  onFilterChange={this.handleFilterChange}
+                />
                 <ProductsGallery
                   products={products}
                   incrementCartCounter={incrementCartCounter}

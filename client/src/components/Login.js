@@ -60,6 +60,8 @@ export default class Login extends Component {
             console.log("Login failed")
             return
           }
+        }).catch((err) => {
+          console.log("Error logging in: " + err)
         })
     }
   }

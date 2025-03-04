@@ -64,6 +64,8 @@ export default class AddCar extends Component {
                     else {
                         console.log("Record not added")
                     }
+                }).catch(err => {
+                    console.log("Error adding product:" + err)
                 })
         }
         else {

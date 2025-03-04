@@ -44,6 +44,8 @@ export default class EditCar extends Component {
                 else {
                     console.log(`Record not found`)
                 }
+            }).catch(err => {
+                console.log("Error getting record: "+ err)
             })
     }
 
@@ -80,6 +82,8 @@ export default class EditCar extends Component {
                 else {
                     console.log(`Record not updated`)
                 }
+            }).catch(err => {
+                console.log("Error updating record: "+ err)
             })
     }
 

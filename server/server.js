@@ -19,19 +19,18 @@ app.listen(process.env.SERVER_PORT, () => {
   console.log(`Connected to port ` + process.env.SERVER_PORT)
 })
 
-// New route for testing
-app.post("/users/cart", (req, res) => {
-  console.log("hello") // Log "hello" when a POST request is received
-  res.send("Received POST request") // Send a response
-})
-
 // Error Handling
 const createError = require("http-errors")
-app.use((req, res, next) => next(createError(404))) // Handles 404 errors
+app.use((req, res, next) => next(createError(404)))
 app.use((err, req, res, next) => {
   console.error(err.message)
   if (!err.statusCode) {
     err.statusCode = 500
   }
-  res.status(err.statusCode).send(err.message) // Handles other errors
+  if (err instanceof ReferenceError) {
+    err.statusCode = 400
+    err.message =
+      "Cannot reference a variable that has not been declared. This can be caused in run-time if the user did not input a parameter that is required by a router"
+  }
+  res.status(err.statusCode).send(err.message)
 })
