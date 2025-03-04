@@ -28,6 +28,8 @@ export default class DeleteProduct extends Component {
         } else {
           console.log("Record not deleted")
         }
+      }).catch((err) => {
+        console.log("Error deleting record:" + err)
       })
   }
 

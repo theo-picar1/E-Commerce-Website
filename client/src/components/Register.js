@@ -72,6 +72,8 @@ export default class Register extends Component {
                     else {
                         console.log("Registration failed")
                     }
+                }).catch(err => {
+                    console.log("Error registering user: " + err)
                 })
         }
         else {
