@@ -269,19 +269,15 @@ export default class Home extends Component {
     this.setState({ showProductDetails: false, product: null })
   }
 
-  handleFilterChange = ({ checkedInstruments = [], price }) => {
-    this.setState(
-      {
-        checkedInstruments: Array.isArray(checkedInstruments)
-          ? checkedInstruments
-          : [],
-        price,
-      },
-      () => {
-        this.applyFilters()
-      }
-    )
+  handleFilterChange = ({ checkedInstruments = [], price, minRating, maxRating }) => {
+    this.setState({
+      checkedInstruments: Array.isArray(checkedInstruments) ? checkedInstruments : [],
+      price: price ?? 150000,
+      minRating: minRating ?? 0,
+      maxRating: maxRating ?? 5
+    }, this.applyFilters)
   }
+
 
   handleSearch = (searchValue) => {
     this.setState({ searchValue }, () => {
@@ -290,34 +286,23 @@ export default class Home extends Component {
   }
 
   applyFilters = () => {
-    const { searchValue, checkedInstruments, originalProducts, price } =
-      this.state
+    const { searchValue, checkedInstruments, originalProducts, price, minRating, maxRating } = this.state
 
-    if (!originalProducts) {
-      console.error("originalProducts is undefined")
+    if (!originalProducts || originalProducts.length === 0) {
+      console.error("No products available for filtering.")
       return
     }
 
-    let filteredProducts = [...originalProducts]
+    let min = parseFloat(minRating) || 0
+    let max = parseFloat(maxRating) || 5
 
-    if (searchValue) {
-      filteredProducts = filteredProducts.filter((product) =>
-        product.name.toLowerCase().includes(searchValue.toLowerCase())
-      )
-    }
+    let filteredProducts = originalProducts
+      .filter(product => !searchValue || product.name.toLowerCase().includes(searchValue.toLowerCase()))
+      .filter(product => !checkedInstruments.length || checkedInstruments.includes(product.category))
+      .filter(product => !price || product.price <= price)
+      .filter(product => product.rating >= min && product.rating <= max)
 
-    if (checkedInstruments && checkedInstruments.length > 0) {
-      filteredProducts = filteredProducts.filter((product) =>
-        checkedInstruments.includes(product.category)
-      )
-    }
-
-    if (price) {
-      filteredProducts = filteredProducts.filter(
-        (product) => product.price <= price
-      )
-    }
-
+    console.log("Filtered Products:", filteredProducts)
     this.setState({ products: filteredProducts })
   }
 

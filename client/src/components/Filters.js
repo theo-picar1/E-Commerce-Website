@@ -27,15 +27,18 @@ export default class Filters extends Component {
 
         let selectedCheckboxes = Array.from(checkboxes)
             .filter(checkbox => checkbox.checked)
-            .map(checkbox => checkbox.value)
+            .map(checkbox => checkbox.value);
 
-        this.setState({ checkedInstruments: selectedCheckboxes })
-
-        this.props.onFilterChange({
-            checkedInstruments: selectedCheckboxes,
-            price: this.state.price
+        this.setState({ checkedInstruments: selectedCheckboxes }, () => {
+            this.props.onFilterChange({
+                checkedInstruments: selectedCheckboxes,
+                price: this.state.price,
+                minRating: this.state.minRating || 0,
+                maxRating: this.state.maxRating || 5
+            })
         })
     }
+
 
     handlePriceChange = (e) => {
         const price = e.target.value
@@ -43,6 +46,23 @@ export default class Filters extends Component {
             this.props.onFilterChange({
                 checkedInstruments: this.state.checkedInstruments,
                 price: this.state.price,
+                minRating: this.state.minRating || 0,
+                maxRating: this.state.maxRating || 5
+            })
+        })
+    }
+
+
+    handleRatingChange = (e) => {
+        let { name, value } = e.target
+        value = value ? Math.max(0, Math.min(5, parseFloat(value))) : ""; // Ensure rating stays between 0-5
+
+        this.setState({ [name]: value }, () => {
+            this.props.onFilterChange({
+                checkedInstruments: this.state.checkedInstruments,
+                price: this.state.price,
+                minRating: this.state.minRating || 0,
+                maxRating: this.state.maxRating || 5
             })
         })
     }
@@ -63,14 +83,14 @@ export default class Filters extends Component {
                             onChange={this.handlePriceChange} />
                     </div>
                 </div>
-                {/* <div className="filter-section">
+                {<div className="filter-section">
                     <p className="filter-type-subheading">RATING</p>
                     <div className="section-content min-max-section">
-                        <input type="text" id="min-rating" placeholder="min" name="minRating" value={this.state.minRating} onChange={this.handleChange}/>
+                        <input type="text" id="min-rating" placeholder="min" name="minRating" value={this.state.minRating} onChange={this.handleRatingChange} />
                         <p>-</p>
-                        <input type="text" id="max-rating" placeholder="max" name="maxRating" value={this.state.maxRating} onChange={this.handleChange}/>
+                        <input type="text" id="max-rating" placeholder="max" name="maxRating" value={this.state.maxRating} onChange={this.handleRatingChange} />
                     </div>
-                </div> */}
+                </div>}
                 <div className="filter-section">
                     <p className="filter-type-subheading">INSTRUMENT</p>
                     <div className="section-content" id="instrument-checkboxes">
@@ -82,14 +102,14 @@ export default class Filters extends Component {
                         )}
                     </div>
                 </div>
-                {/* <div className="filter-section">
+                <div className="filter-section">
                     <p className="filter-type-subheading">STOCK QUANTITY</p>
                     <div className="section-content min-max-section">
-                        <input type="text" placeholder="min" name="minStock" value={this.state.minStock} onChange={this.handleChange}/>
+                        <input type="text" placeholder="min" name="minStock" value={this.state.minStock} onChange={this.handleChange} />
                         <p>-</p>
-                        <input type="text" placeholder="max" name="maxStock" value={this.state.maxStock} onChange={this.handleChange}/>
+                        <input type="text" placeholder="max" name="maxStock" value={this.state.maxStock} onChange={this.handleChange} />
                     </div>
-                </div> */}
+                </div>
             </div>
         )
     }
