@@ -8,8 +8,8 @@ export default class Filters extends Component {
 
         this.state = {
             price: 150000,
-            //minRating: ``,
-            //maxRating: ``,
+            minRating: 0,
+            maxRating: 5,
             checkedInstruments: [],
             //minStock: ``,
             //maxStock: ``
@@ -102,14 +102,14 @@ export default class Filters extends Component {
                         )}
                     </div>
                 </div>
-                <div className="filter-section">
+                {/* <div className="filter-section">
                     <p className="filter-type-subheading">STOCK QUANTITY</p>
                     <div className="section-content min-max-section">
                         <input type="text" placeholder="min" name="minStock" value={this.state.minStock} onChange={this.handleChange} />
                         <p>-</p>
                         <input type="text" placeholder="max" name="maxStock" value={this.state.maxStock} onChange={this.handleChange} />
                     </div>
-                </div>
+                </div> */}
             </div>
         )
     }
