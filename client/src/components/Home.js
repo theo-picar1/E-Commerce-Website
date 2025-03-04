@@ -265,22 +265,30 @@ export default class Home extends Component {
     this.setState({ showProductDetails: false, product: null })
   }
 
-  handleFilterChange = (selectedCategories) => {
-    this.setState({ checkedInstruments: selectedCategories }, () => {
-      this.applyFilters();
-    });
-  };
+  handleFilterChange = ({ checkedInstruments = [], price }) => {
+    this.setState({
+      checkedInstruments: Array.isArray(checkedInstruments) ? checkedInstruments : [],
+      price
+    }, () => {
+      this.applyFilters()
+    })
+  }
 
   handleSearch = (searchValue) => {
     this.setState({ searchValue }, () => {
-      this.applyFilters();
-    });
-  };
+      this.applyFilters()
+    })
+  }
 
   applyFilters = () => {
-    const { searchValue, checkedInstruments, originalProducts } = this.state;
+    const { searchValue, checkedInstruments, originalProducts, price } = this.state
 
-    let filteredProducts = originalProducts;
+    if (!originalProducts) {
+      console.error("originalProducts is undefined")
+      return
+    }
+
+    let filteredProducts = [...originalProducts]
 
     if (searchValue) {
       filteredProducts = filteredProducts.filter((product) =>
@@ -288,14 +296,21 @@ export default class Home extends Component {
       );
     }
 
-    if (checkedInstruments.length > 0) {
+    if (checkedInstruments && checkedInstruments.length > 0) {
       filteredProducts = filteredProducts.filter((product) =>
         checkedInstruments.includes(product.category)
-      );
+      )
     }
 
-    this.setState({ products: filteredProducts });
-  };
+    if (price) {
+      filteredProducts = filteredProducts.filter((product) =>
+        product.price <= price
+      )
+    }
+
+    this.setState({ products: filteredProducts })
+  }
+
 
   showCustomerTable = () => {
     this.setState({
@@ -497,7 +512,8 @@ export default class Home extends Component {
           <>
             {!this.state.showCustomers ? (
               <div id="products-main-content">
-                <Filters categories={categories} onFilterChange={this.handleFilterChange} />
+                <Filters categories={categories}
+                  onFilterChange={this.handleFilterChange} />
                 <ProductsGallery
                   products={products}
                   incrementCartCounter={incrementCartCounter}

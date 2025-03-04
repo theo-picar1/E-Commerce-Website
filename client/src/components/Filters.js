@@ -7,7 +7,7 @@ export default class Filters extends Component {
         super(props)
 
         this.state = {
-            //price: ``,
+            price: 150000,
             //minRating: ``,
             //maxRating: ``,
             checkedInstruments: [],
@@ -23,30 +23,46 @@ export default class Filters extends Component {
     }
 
     handleCheckboxes = () => {
-        let checkboxes = document.getElementsByClassName("instrument-checkbox");
+        let checkboxes = document.getElementsByClassName("instrument-checkbox")
 
         let selectedCheckboxes = Array.from(checkboxes)
             .filter(checkbox => checkbox.checked)
-            .map(checkbox => checkbox.value);
+            .map(checkbox => checkbox.value)
 
-        this.setState({ checkedInstruments: selectedCheckboxes });
+        this.setState({ checkedInstruments: selectedCheckboxes })
 
-        this.props.onFilterChange(selectedCheckboxes)
+        this.props.onFilterChange({
+            checkedInstruments: selectedCheckboxes,
+            price: this.state.price
+        })
     }
+
+    handlePriceChange = (e) => {
+        const price = e.target.value
+        this.setState({ price }, () => {
+            this.props.onFilterChange({
+                checkedInstruments: this.state.checkedInstruments,
+                price: this.state.price,
+            })
+        })
+    }
+
 
     render() {
         return (
             <div id="product-filters">
                 <p className="subheading">FILTERS</p>
                 {sessionStorage.accessLevel >= ACCESS_LEVEL_ADMIN ? <h1>Testing adminstration code</h1> : null}
-                {/* <div className="filter-section">
+                <div className="filter-section">
                     <p className="filter-type-subheading">PRICE RANGE</p>
-                    <div className="section-content"id="price-range-section">
-                        <p>€1</p>
-                        <input type="range" min="1" max="5000" id="price-range-slider" name="price" value={this.state.price} onChange={this.handleChange}/>
-                        <p>€5000+</p>
+                    <div className="section-content" id="price-range-section">
+                        <input type="range" min="1" max="150000"
+                            id="price-range-slider"
+                            name="price"
+                            value={this.state.price}
+                            onChange={this.handlePriceChange} />
                     </div>
-                </div> */}
+                </div>
                 {/* <div className="filter-section">
                     <p className="filter-type-subheading">RATING</p>
                     <div className="section-content min-max-section">
