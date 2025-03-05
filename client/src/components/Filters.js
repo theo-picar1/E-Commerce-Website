@@ -76,7 +76,7 @@ export default class Filters extends Component {
                 <div className="filter-section">
                     <p className="filter-type-subheading">PRICE RANGE</p>
                     <div className="section-content" id="price-range-section">
-                        <input type="range" min="1" max="150000"
+                        <input type="range" min="1" max="7000"
                             id="price-range-slider"
                             name="price"
                             value={this.state.price}
