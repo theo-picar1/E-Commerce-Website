@@ -658,7 +658,7 @@ p {
         color: $website-red;
 
         #super {
-          color: black;
+          color: $website-black;
         }
       }
 
@@ -724,7 +724,7 @@ p {
         padding: 10px 0;
         border: none;
         background-color: $website-red;
-        color: white;
+        color: $website-white;
         letter-spacing: -1px;
         font-size: 14px;
         font-weight: 800;
@@ -765,7 +765,7 @@ p {
         padding: 10px 0;
         border: none;
         background-color: $website-red;
-        color: white;
+        color: $website-white;
         letter-spacing: -1px;
         font-size: 14px;
         font-weight: 800;
@@ -800,7 +800,7 @@ p {
   display: flex;
   justify-content: space-between;
   padding: 20px;
-  background-color: #fff;
+  background-color: $website-white;
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   max-width: 1200px;
@@ -810,7 +810,7 @@ p {
     display: flex;
     justify-content: space-between;
     padding: 20px;
-    background-color: #fff;
+    background-color: $website-white;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     width: 1200px;
@@ -874,7 +874,7 @@ p {
 
     button {
       background-color: $website-red;
-      color: #fff;
+      color: $website-white;
       border: none;
       padding: 10px 20px;
       border-radius: 5px;
@@ -917,7 +917,7 @@ p {
 
   button {
     background-color: $website-red;
-    color: #fff;
+    color: $website-white;
     border: none;
     padding: 10px 20px;
     border-radius: 5px;
@@ -950,7 +950,7 @@ p {
         color: $website-red;
 
         #super {
-          color: black;
+          color: $website-black;
         }
       }
 
@@ -960,7 +960,7 @@ p {
         padding: 10px 0;
         border: none;
         background-color: $website-red;
-        color: white;
+        color: $website-white;
         letter-spacing: -1px;
         font-size: 14px;
         font-weight: 800;
@@ -983,7 +983,7 @@ p {
       padding: 10px 0;
       border: none;
       background-color: $website-red;
-      color: white;
+      color: $website-white;
       letter-spacing: -1px;
       font-size: 14px;
       font-weight: 800;
@@ -1003,7 +1003,7 @@ p {
   right: 0;
   width: 400px;
   height: 100%;
-  background-color: #fff;
+  background-color: $website-white;
   box-shadow: -4px 0 10px rgba(0, 0, 0, 0.1);
   display: flex;
   flex-direction: column;
@@ -1011,7 +1011,7 @@ p {
   z-index: 1001;
 
   .cart-header {
-    border-bottom: 1px solid #e5e5e5;
+    border-bottom: 1px solid $website-light-black;
     padding-bottom: 20px;
     margin-bottom: 20px;
     position: relative;
@@ -1020,13 +1020,13 @@ p {
       font-size: 24px;
       letter-spacing: 1px;
       font-weight: bold;
-      color: #333;
+      color: $website-light-black;
     }
 
     p {
       margin-top: 8px;
       font-size: 14px;
-      color: #888;
+      color: $website-gray;
     }
 
     .close-btn {
@@ -1036,7 +1036,7 @@ p {
       font-size: 28px;
       background: none;
       border: none;
-      color: #aaa;
+      color: $website-light-gray;
       cursor: pointer;
     }
   }
@@ -1052,7 +1052,7 @@ p {
     display: flex;
     align-items: center;
     padding: 20px 0;
-    border-bottom: 1px solid #e5e5e5;
+    border-bottom: 1px solid $website-white;
 
     &:last-child {
       border-bottom: none;
@@ -1062,7 +1062,7 @@ p {
       width: 80px;
       height: 80px;
       object-fit: cover;
-      border: 1px solid #ddd;
+      border: 1px solid $website-light-gray;
       margin-right: 20px;
     }
 
@@ -1071,13 +1071,13 @@ p {
 
       h4 {
         font-size: 18px;
-        color: #333;
+        color: $website-light-black;
         margin-bottom: 8px;
       }
 
       p {
         font-size: 16px;
-        color: #666;
+        color: $website-light-black;
         margin-bottom: 12px;
       }
     }
@@ -1090,20 +1090,20 @@ p {
     label {
       font-size: 14px;
       margin-right: 10px;
-      color: #555;
+      color: $website-light-black;
     }
 
     .qty-btn {
       width: 32px;
       height: 32px;
       border: none;
-      background-color: #fff;
+      background-color: $website-white;
       font-size: 18px;
       cursor: pointer;
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      color: #333;
+      color: $website-light-black;
       margin: 0 5px;
     }
 
@@ -1111,7 +1111,7 @@ p {
       width: 32px;
       text-align: center;
       font-size: 16px;
-      color: #333;
+      color: $website-light-black;
     }
   }
 
@@ -1119,13 +1119,13 @@ p {
     background: none;
     border: none;
     font-size: 20px;
-    color: #e74c3c;
+    color: $website-red;
     cursor: pointer;
     margin-left: 15px;
   }
 
   .cart-footer {
-    border-top: 1px solid #e5e5e5;
+    border-top: 1px solid $website-light-black;
     padding-top: 20px;
 
     .subtotal {
@@ -1133,20 +1133,24 @@ p {
       justify-content: space-between;
       font-size: 18px;
       font-weight: bold;
-      color: #333;
+      color: $website-light-black;
       margin-bottom: 20px;
     }
 
     .checkout-btn {
       width: 100%;
       padding: 15px;
-      background-color: #ff6600;
-      color: #fff;
+      background-color: $website-red;
+      color: $website-white;
       border: none;
       font-size: 18px;
       text-align: center;
-      cursor: pointer;
       border-radius: 4px;
+
+      &:hover {
+        cursor: pointer;
+        filter: opacity(0.75);
+      }
     }
   }
 }
