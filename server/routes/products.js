@@ -42,7 +42,7 @@ router.get(`/products/:id`, (req, res, next) => {
 
 // Update one record
 router.put(`/products/:id`, (req, res, next) => {
-  jwt.verify(req.headers.authorization, process.env.JWT_PRIVATE_KEY, { algorithm: "HS256" }, (err, decodedToken) => {
+  jwt.verify(req.headers.authorization, JWT_PRIVATE_KEY, { algorithm: "HS256" }, (err, decodedToken) => {
     if (err) {
       return next(createError(401))
     }
@@ -70,7 +70,7 @@ router.put(`/products/:id`, (req, res, next) => {
 
 // Delete one record
 router.delete(`/products/:id`, (req, res, next) => {
-  jwt.verify(req.headers.authorization, process.env.JWT_PRIVATE_KEY, { algorithm: "HS256" }, (err, decodedToken) => {
+  jwt.verify(req.headers.authorization, JWT_PRIVATE_KEY, { algorithm: "HS256" }, (err, decodedToken) => {
     if (err) {
       return next(createError(401))
     }
@@ -94,19 +94,20 @@ router.delete(`/products/:id`, (req, res, next) => {
 
 // Add new record
 router.post(`/products`, (req, res, next) => {
-  jwt.verify(req.headers.authorization, process.env.JWT_PRIVATE_KEY, { algorithm: "HS256" }, (err, decodedToken) => {
-    if(err)
-  productsModel.create(req.body, (err, data) => {
-    if (err) {
-      return next(err)
-    }
+  jwt.verify(req.headers.authorization, JWT_PRIVATE_KEY, { algorithm: "HS256" }, (err, decodedToken) => {
+    if (err)
+      productsModel.create(req.body, (err, data) => {
+        if (err) {
+          return next(err)
+        }
 
-    if (!data) {
-      return next(createError(401))
-    }
+        if (!data) {
+          return next(createError(401))
+        }
 
-    res.json(data)
-  })})
+        res.json(data)
+      })
+  })
 })
 
 // // Get photos for product

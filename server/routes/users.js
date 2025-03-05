@@ -6,6 +6,8 @@ const jwt = require('jsonwebtoken')
 const fs = require('fs')
 const JWT_PRIVATE_KEY = fs.readFileSync(process.env.JWT_PRIVATE_KEY_FILENAME, 'utf8')
 
+const createError = require('http-errors');
+
 // Get all users
 router.get(`/users`, (req, res, next) => {
   usersModel.find((err, data) => {
@@ -65,7 +67,6 @@ router.post(`/users/register`, (req, res, next) => {
           console.log("Request body:", req.body)
           usersModel.create({ ...req.body, password: hash }, (error, data) => {
             if (!data) {
-              console.error("User creation returned null data.")
               res.json({ errorMessage: "User creation failed." })
             }
             const token = jwt.sign({email: data.email, accessLevel:data.accessLevel}, JWT_PRIVATE_KEY, {algorithm: 'HS256', expiresIn:process.env.JWT_EXPIRY})     
@@ -90,11 +91,13 @@ router.post(`/users/login/:email/:password`, (req, res, next) => {
           return next(err)
         }
         if (result) {
+          const token = jwt.sign({email:data.email, accessLevel:data.accessLevel}, JWT_PRIVATE_KEY, {algorithm:'HS256', expiresIn:process.env.JWT_EXPIRY})
           res.json({
             _id: data._id,
             name: data.firstName,
             accessName: data.firstName + " " + data.secondName,
             accessLevel: process.env.ACCESS_LEVEL_USER,
+            token: token
           })
         } else {
           res.json({ errorMessage: `Incorrect password` })

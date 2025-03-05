@@ -44,6 +44,7 @@ export default class Login extends Component {
               localStorage.name = res.data.accessName
               localStorage.accessLevel = res.data.accessLevel
               localStorage.id = res.data._id
+              localStorage.token = res.data.token
               localStorage.removeItem("user")
 
               this.setState({
