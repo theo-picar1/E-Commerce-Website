@@ -2,6 +2,10 @@ const router = require(`express`).Router()
 const usersModel = require(`../models/users`)
 const bcrypt = require("bcryptjs")
 
+const jwt = require('jsonwebtoken')
+const fs = require('fs')
+const JWT_PRIVATE_KEY = fs.readFileSync(process.env.JWT_PRIVATE_KEY_FILENAME, 'utf8')
+
 // Get all users
 router.get(`/users`, (req, res, next) => {
   usersModel.find((err, data) => {
@@ -57,23 +61,16 @@ router.post(`/users/register`, (req, res, next) => {
     if (uniqueData) {
       res.json({ errorMessage: `User already exists` })
     } else {
-      bcrypt.hash(
-        req.body.password,
-        parseInt(process.env.SALT_ROUNDS),
-        (err, hash) => {
+      bcrypt.hash(req.body.password, parseInt(process.env.SALT_ROUNDS), (err, hash) => {
           console.log("Request body:", req.body)
           usersModel.create({ ...req.body, password: hash }, (error, data) => {
-            if (error) {
-              console.error("MongoDB Error:", error)
-              return res.json({
-                errorMessage: "MongoDB error. User not created.",
-              })
-            }
             if (!data) {
               console.error("User creation returned null data.")
-              return res.json({ errorMessage: "User creation failed." })
+              res.json({ errorMessage: "User creation failed." })
             }
-            res.json({ name: data.firstName })
+            const token = jwt.sign({email: data.email, accessLevel:data.accessLevel}, JWT_PRIVATE_KEY, {algorithm: 'HS256', expiresIn:process.env.JWT_EXPIRY})     
+
+            res.json({ name: data.firstName, token: token })
           })
         }
       )
@@ -96,7 +93,7 @@ router.post(`/users/login/:email/:password`, (req, res, next) => {
           res.json({
             _id: data._id,
             name: data.firstName,
-            accessName: "USER",
+            accessName: data.firstName + " " + data.secondName,
             accessLevel: process.env.ACCESS_LEVEL_USER,
           })
         } else {

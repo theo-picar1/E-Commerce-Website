@@ -30,26 +30,21 @@ export default class Login extends Component {
     })
 
     if (this.state.email !== "" && this.state.password !== "") {
-      axios
-        .post(
-          `${SERVER_HOST}/users/login/${this.state.email}/${this.state.password}`
-        )
+      axios.post(`${SERVER_HOST}/users/login/${this.state.email}/${this.state.password}`)
         .then((res) => {
           console.log(res.data)
-          sessionStorage.name = "GUEST"
-          sessionStorage.accessLevel = ACCESS_LEVEL_GUEST
-          sessionStorage.setItem("userId", null)
 
           if (res.data) {
             if (res.data.errorMessage) {
               console.log(res.data.errorMessage)
-            } else {
+            } 
+            else {
               console.log("User logged in")
 
-              sessionStorage.name = res.data.accessName
-              sessionStorage.accessLevel = res.data.accessLevel
-              sessionStorage.setItem("userId", res.data._id)
-              sessionStorage.removeItem("user")
+              localStorage.name = res.data.accessName
+              localStorage.accessLevel = res.data.accessLevel
+              localStorage.id = res.data._id
+              localStorage.removeItem("user")
 
               this.setState({
                 isLoggedIn: true,

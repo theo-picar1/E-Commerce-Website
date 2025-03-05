@@ -65,7 +65,7 @@ export default class Header extends Component {
                                 <p>PRODUCTS</p>
                             </button>
                         }
-                        {sessionStorage.accessLevel > ACCESS_LEVEL_GUEST ? (
+                        {localStorage.accessLevel > ACCESS_LEVEL_GUEST ? (
                             <div id="user-status-container" onClick={this.toggleModal}>
                                 <p id="user-status"></p>
                                 <div>

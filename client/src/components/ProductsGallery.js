@@ -17,7 +17,7 @@ export default class ProductsGallery extends Component {
                             <option value="rating-desc">Highest Rating</option>
                             <option value="rating-asc">Lowest Rating</option>
                         </select>
-                        {sessionStorage.accessLevel > ACCESS_LEVEL_GUEST ?
+                        {localStorage.accessLevel > ACCESS_LEVEL_GUEST ?
                             <Link to={"/add-product"}><button className="add-button">ADD PRODUCT</button></Link>
                             :
                             null}
@@ -26,7 +26,7 @@ export default class ProductsGallery extends Component {
                 <div id="products-gallery">
                     {this.props.products.map((product) => (
                         <div className="product" key={product._id}>
-                            {sessionStorage.accessLevel > ACCESS_LEVEL_GUEST ?
+                            {localStorage.accessLevel > ACCESS_LEVEL_GUEST ?
                                 <div className="action-buttons">
                                     <Link to={"/edit-product/" + product._id}><button className="edit-button"><img src="images/edit-icon.png" className="website-icon" /></button></Link>
                                     <Link to={"/delete-product/" + product._id}><button className="delete-button"><img src="images/delete-icon.png" className="website-icon" /></button></Link>
