@@ -297,6 +297,51 @@ export default class Home extends Component {
     this.setState({ products: filteredProducts })
   }
 
+  handleSearchUsers = (searchValue) => {
+    this.setState({ searchValue }, this.applyUserFilters)
+  }
+
+  applyUserFilters = () => {
+    const { searchValue, originalUsers } = this.state
+
+    if (!originalUsers || originalUsers.length === 0) {
+      console.error("No users available for filtering.")
+      return
+    }
+
+    // Ensure search input is valid (trim spaces and lowercase)
+    const searchQuery = searchValue ? searchValue.trim().toLowerCase() : ""
+
+    // If search is empty, reset to original users list
+    if (!searchQuery) {
+      console.log("Search is empty, resetting user list.")
+      this.setState({ users: originalUsers })
+      return
+    }
+
+    let filteredUsers = originalUsers.filter(user => {
+      const fullName = `${user.firstName} ${user.secondName}`.toLowerCase()  // Combine names
+      return fullName.includes(searchQuery) // Search full name properly
+    });
+
+    console.log("Search Query:", searchQuery)
+    console.log("Filtered Users:", filteredUsers)
+
+    this.setState({ users: filteredUsers })
+  }
+
+  handleSortUsers = (sortOption) => {
+    let sortedUsers = [...this.state.users];
+
+    if (sortOption === "name-asc") {
+      sortedUsers.sort((a, b) => (a.firstName + " " + a.secondName).localeCompare(b.firstName + " " + b.secondName));
+    } else if (sortOption === "name-desc") {
+      sortedUsers.sort((a, b) => (b.firstName + " " + b.secondName).localeCompare(a.firstName + " " + a.secondName));
+    }
+
+    this.setState({ users: sortedUsers });
+  }
+
   showCustomerTable = () => {
     this.setState({
       showCustomers: true,
@@ -506,7 +551,12 @@ export default class Home extends Component {
               </div>
             ) : (
               <div id="users-main-content">
-                <UserFilters users={this.state.users} />
+                <UserFilters
+                  searchValue={this.state.searchValue}
+                  onSearch={this.handleSearchUsers}
+                  onSort={this.handleSortUsers}
+                  users={this.state.users}
+                />
                 <UsersTable users={this.state.users} />
               </div>
             )}

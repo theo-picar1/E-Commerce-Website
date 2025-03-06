@@ -10,6 +10,7 @@ export default class ProductsGallery extends Component {
                     <p className="subheading">FEATURED PRODUCTS</p>
                     <div id="product-tools">
                         <select onChange={this.props.onSort}>
+                            <option value="default">Sort by</option>
                             <option value="name-asc">Name (A-Z)</option>
                             <option value="name-desc">Name (Z-A)</option>
                             <option value="price-desc">Highest Price</option>
