@@ -30,6 +30,7 @@ export default class UserFilters extends Component {
                         </div>
                     }
                     <select onChange={this.handleSortChange}>
+                        <option value="default">Sort by</option>
                         <option value="name-asc">Name (A-Z)</option>
                         <option value="name-desc">Name (Z-A)</option>
                     </select>
