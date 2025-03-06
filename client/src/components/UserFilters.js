@@ -6,6 +6,12 @@ export default class UserFilters extends Component {
         this.props.onSearch(e.target.value)
     }
 
+    handleSortChange = (e) => {
+        if (this.props.onSort) {
+            this.props.onSort(e.target.value)
+        }
+    }
+
     render() {
         return (
             <div id="user-filters">
@@ -23,11 +29,9 @@ export default class UserFilters extends Component {
                             <img src="/images/search.png" className="website-icon" />
                         </div>
                     }
-                    <select>
-                        <option>Name (A-Z)</option>
-                        <option>Name (Z-A)</option>
-                        <option>Username (A-Z)</option>
-                        <option>Username (Z-A)</option>
+                    <select onChange={this.handleSortChange}>
+                        <option value="name-asc">Name (A-Z)</option>
+                        <option value="name-desc">Name (Z-A)</option>
                     </select>
                     <div id="action-buttons">
                         <button className="add-button">ADD USER</button>

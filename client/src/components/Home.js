@@ -339,6 +339,17 @@ export default class Home extends Component {
     this.setState({ users: filteredUsers })
   }
 
+  handleSortUsers = (sortOption) => {
+    let sortedUsers = [...this.state.users];
+
+    if (sortOption === "name-asc") {
+      sortedUsers.sort((a, b) => (a.firstName + " " + a.secondName).localeCompare(b.firstName + " " + b.secondName));
+    } else if (sortOption === "name-desc") {
+      sortedUsers.sort((a, b) => (b.firstName + " " + b.secondName).localeCompare(a.firstName + " " + a.secondName));
+    }
+
+    this.setState({ users: sortedUsers });
+  }
 
   showCustomerTable = () => {
     this.setState({
@@ -557,6 +568,7 @@ export default class Home extends Component {
                 <UserFilters
                   searchValue={this.state.searchValue}
                   onSearch={this.handleSearchUsers}
+                  onSort={this.handleSortUsers}
                   users={this.state.users}
                 />
                 <UsersTable users={this.state.users} />
