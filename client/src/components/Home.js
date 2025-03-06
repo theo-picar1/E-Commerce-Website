@@ -306,6 +306,30 @@ export default class Home extends Component {
     this.setState({ products: filteredProducts })
   }
 
+  // handleSearchUsers = (searchValue) => {
+  //   this.setState({ searchValue }, this.applyUserFilters)
+  // }
+
+  // applyUserFilters = () => {
+  //   const { searchValue, originalUsers } = this.state
+
+  //   if (!originalUsers || originalUsers.length === 0) {
+  //     console.error("No users available for filtering.")
+  //     return;
+  //   }
+
+  //   const searchQuery = searchValue.trim().toLowerCase();
+
+  //   const filteredUsers = searchQuery
+  //     ? originalUsers.filter(user =>
+  //       user.fullName?.toLowerCase().includes(searchQuery)
+  //     )
+  //     : originalUsers
+
+  //   this.setState({ users: filteredUsers })
+  // }
+
+
   showCustomerTable = () => {
     this.setState({
       showCustomers: true,
@@ -520,7 +544,11 @@ export default class Home extends Component {
               </div>
             ) : (
               <div id="users-main-content">
-                <UserFilters users={this.state.users} />
+                <UserFilters
+                  searchValue={this.state.searchValue}
+                  onSearch={this.handleSearchUsers}
+                  users={this.state.users}
+                />
                 <UsersTable users={this.state.users} />
               </div>
             )}
