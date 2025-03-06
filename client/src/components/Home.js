@@ -306,28 +306,38 @@ export default class Home extends Component {
     this.setState({ products: filteredProducts })
   }
 
-  // handleSearchUsers = (searchValue) => {
-  //   this.setState({ searchValue }, this.applyUserFilters)
-  // }
+  handleSearchUsers = (searchValue) => {
+    this.setState({ searchValue }, this.applyUserFilters)
+  }
 
-  // applyUserFilters = () => {
-  //   const { searchValue, originalUsers } = this.state
+  applyUserFilters = () => {
+    const { searchValue, originalUsers } = this.state
 
-  //   if (!originalUsers || originalUsers.length === 0) {
-  //     console.error("No users available for filtering.")
-  //     return;
-  //   }
+    if (!originalUsers || originalUsers.length === 0) {
+      console.error("No users available for filtering.")
+      return
+    }
 
-  //   const searchQuery = searchValue.trim().toLowerCase();
+    // Ensure search input is valid (trim spaces and lowercase)
+    const searchQuery = searchValue ? searchValue.trim().toLowerCase() : ""
 
-  //   const filteredUsers = searchQuery
-  //     ? originalUsers.filter(user =>
-  //       user.fullName?.toLowerCase().includes(searchQuery)
-  //     )
-  //     : originalUsers
+    // If search is empty, reset to original users list
+    if (!searchQuery) {
+      console.log("Search is empty, resetting user list.")
+      this.setState({ users: originalUsers })
+      return
+    }
 
-  //   this.setState({ users: filteredUsers })
-  // }
+    let filteredUsers = originalUsers.filter(user => {
+      const fullName = `${user.firstName} ${user.secondName}`.toLowerCase()  // Combine names
+      return fullName.includes(searchQuery) // Search full name properly
+    });
+
+    console.log("Search Query:", searchQuery)
+    console.log("Filtered Users:", filteredUsers)
+
+    this.setState({ users: filteredUsers })
+  }
 
 
   showCustomerTable = () => {

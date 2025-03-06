@@ -1,16 +1,16 @@
-import React, {Component} from "react"
+import React, { Component } from "react"
 
 export default class UserFilters extends Component {
 
     handleSearchChange = (e) => {
         this.props.onSearch(e.target.value)
     }
-    
+
     render() {
         return (
             <div id="user-filters">
                 <div id="filter-toolbar">
-                {!this.props.showCustomers &&
+                    {!this.props.showCustomers &&
                         <div className="searchbar-container">
                             <input
                                 type="text"
