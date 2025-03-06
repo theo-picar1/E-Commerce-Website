@@ -3,10 +3,12 @@ import { Redirect, Link } from "react-router-dom"
 
 import axios from "axios"
 
+import { ACCESS_LEVEL_ADMIN } from "../config/global_constants"
+
 import { SERVER_HOST } from "../config/global_constants"
 
 
-export default class EditCar extends Component {
+export default class EditProduct extends Component {
     constructor(props) {
         super(props)
 
@@ -18,12 +20,12 @@ export default class EditCar extends Component {
             rating: 0.0,
             noOfReviews: 0,
             stockQuantity: 0,
-            redirectToProducts: false
+            redirectToProducts: localStorage.accessLevel < ACCESS_LEVEL_ADMIN
         }
     }
 
     componentDidMount() {
-        axios.get(`${SERVER_HOST}/products/${this.props.match.params.id}`)
+        axios.get(`${SERVER_HOST}/products/${this.props.match.params.id}`, {headers:{"authorization":localStorage.token}})
             .then(res => {
                 if (res.data) {
                     if (res.data.errorMessage) {
@@ -45,7 +47,7 @@ export default class EditCar extends Component {
                     console.log(`Record not found`)
                 }
             }).catch(err => {
-                console.log("Error getting record: "+ err)
+                console.log("Error getting record: " + err)
             })
     }
 
@@ -68,7 +70,7 @@ export default class EditCar extends Component {
             productImgs: this.state.productImg
         }
 
-        axios.put(`${SERVER_HOST}/products/${this.props.match.params.id}`, productObject)
+        axios.put(`${SERVER_HOST}/products/${this.props.match.params.id}`, productObject, { headers: { "authorization": localStorage.token } })
             .then(res => {
                 if (res.data) {
                     if (res.data.errorMessage) {
@@ -83,7 +85,7 @@ export default class EditCar extends Component {
                     console.log(`Record not updated`)
                 }
             }).catch(err => {
-                console.log("Error updating record: "+ err)
+                console.log("Error updating record: " + err)
             })
     }
 

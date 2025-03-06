@@ -38,8 +38,7 @@ export default class Home extends Component {
   }
 
   componentDidMount() {
-    axios
-      .get(`${SERVER_HOST}/products`)
+    axios.get(`${SERVER_HOST}/products`)
       .then((res) => {
         if (res.data) {
           if (res.data.errorMessage) {
@@ -69,10 +68,8 @@ export default class Home extends Component {
         console.log("Error getting products:" + err)
       })
 
-    console.log(sessionStorage.getItem("user"))
-
-    if (sessionStorage.getItem("user")) {
-      const user = sessionStorage.getItem("user")
+    if (localStorage.getItem("user")) {
+      const user = localStorage.getItem("user")
 
       if (user) {
         this.setState({ loggedInUser: JSON.parse(user) }, () =>
@@ -100,12 +97,10 @@ export default class Home extends Component {
               originalUsers: res.data,
             })
 
-            const userId = sessionStorage.getItem("userId")
+            const userId = localStorage.id
 
             if (userId) {
               const loggedInUser = res.data.find((user) => user._id === userId)
-
-              console.log("Logged-in user:", loggedInUser.cart)
 
               this.setState(
                 {
@@ -178,14 +173,12 @@ export default class Home extends Component {
   }
 
   removeProductFromUnLoggedUserCart = (product) => {
-    let user = JSON.parse(sessionStorage.getItem("user"))
+    let user = JSON.parse(localStorage.getItem("user"))
 
     if (!user) {
       console.error("No guest user found. Cannot remove product.")
       return
     }
-
-    console.log(user.cart)
 
     const productIndex = user.cart.findIndex(
       (cartProduct) => cartProduct.name === product.name
@@ -198,7 +191,7 @@ export default class Home extends Component {
 
     user.cart.splice(productIndex, 1)
 
-    sessionStorage.setItem("user", JSON.stringify(user))
+    localStorage.setItem("user", JSON.stringify(user))
 
     console.log("Product quantity decreased or removed from cart successfully")
 
@@ -221,14 +214,12 @@ export default class Home extends Component {
       this.removeProductFromUnLoggedUserCart(product)
       return
     }
-    const userId = sessionStorage.getItem("userId")
+    const userId = localStorage.id
 
     if (!userId) {
       console.error("User ID not found in session storage")
       return
     }
-
-    console.log("User ID:", userId)
 
     axios
       .delete(`${SERVER_HOST}/users/cart`, {
@@ -237,7 +228,8 @@ export default class Home extends Component {
       .then((response) => {
         if (response.data.errorMessage) {
           console.log(response.data.errorMessage)
-        } else {
+        } 
+        else {
           console.log("Product has been successfully removed from cart")
 
           this.setState((prevState) => {
@@ -302,7 +294,6 @@ export default class Home extends Component {
       .filter(product => !price || product.price <= price)
       .filter(product => product.rating >= min && product.rating <= max)
 
-    console.log("Filtered Products:", filteredProducts)
     this.setState({ products: filteredProducts })
   }
 
@@ -364,17 +355,17 @@ export default class Home extends Component {
   }
 
   addProductToUnLoggedUserCart = (product) => {
-    let user = JSON.parse(sessionStorage.getItem("user"))
+    let user = JSON.parse(localStorage.getItem("user"))
 
     if (!user) {
       console.error("No guest user found. Creating one...")
       this.createNonLoggedInUser()
-      user = JSON.parse(sessionStorage.getItem("user"))
+      user = JSON.parse(localStorage.getItem("user"))
     }
 
     user.cart.push(product)
 
-    sessionStorage.setItem("user", JSON.stringify(user))
+    localStorage.setItem("user", JSON.stringify(user))
 
     console.log("Product added to cart successfully")
 
@@ -390,20 +381,16 @@ export default class Home extends Component {
   }
 
   addProductToCart = (product) => {
-    if (this.state.loggedInUser._id == "guest") {
+    if (this.state.loggedInUser._id === "guest") {
       this.addProductToUnLoggedUserCart(product)
       return
     }
-    const userId = sessionStorage.getItem("userId")
-
-    console.log("User ID:", userId)
+    const userId = localStorage.id
 
     if (!userId) {
       alert("User not logged in")
       return
     }
-
-    console.log(this.state.users)
 
     axios
       .post(`${SERVER_HOST}/users/cart`, { userId, product })
@@ -482,7 +469,7 @@ export default class Home extends Component {
       cart: [],
     }
 
-    sessionStorage.setItem("user", JSON.stringify(user))
+    localStorage.setItem("user", JSON.stringify(user))
 
     this.setState({ loggedInUser: user })
   }
@@ -515,7 +502,6 @@ export default class Home extends Component {
       deleteProductFromCart,
     } = this
 
-    console.log(cartCounter)
 
     return (
       <div className="page-content">

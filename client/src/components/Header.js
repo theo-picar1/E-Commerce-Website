@@ -50,10 +50,12 @@ export default class Header extends Component {
                         </div>
                     }
                     <div id="user-tools">
-                        <div onClick={() => toggleCartVisibility()} id="shopping-cart-button">
-                            <img src="/images/shopping-cart.png" />
-                            <p>{cartCounter}</p>
-                        </div>
+                        {!this.props.showCustomers &&
+                            <div onClick={() => toggleCartVisibility()} id="shopping-cart-button">
+                                <img src="/images/shopping-cart.png" />
+                                <p>{cartCounter}</p>
+                            </div>
+                        }
                         {!this.props.showCustomers ?
                             <button className="change-view-button" onClick={this.props.showCustomersOnClick}>
                                 <img src="images/user.png" />
@@ -65,7 +67,7 @@ export default class Header extends Component {
                                 <p>PRODUCTS</p>
                             </button>
                         }
-                        {sessionStorage.accessLevel > ACCESS_LEVEL_GUEST ? (
+                        {localStorage.accessLevel > ACCESS_LEVEL_GUEST ? (
                             <div id="user-status-container" onClick={this.toggleModal}>
                                 <p id="user-status"></p>
                                 <div>

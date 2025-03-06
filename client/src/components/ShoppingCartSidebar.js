@@ -1,6 +1,8 @@
 import React, { Component } from "react"
 import { Link } from "react-router-dom"
 
+import BuyProducts from "./BuyProducts"
+
 export default class ShoppingCart extends Component {
   constructor(props) {
     super(props)
@@ -114,9 +116,9 @@ export default class ShoppingCart extends Component {
             <span>SUBTOTAL</span>
             <span id="subtotal">${this.calculateSubtotal()}</span>
           </div>
-          <Link to="/payPage">
+          <BuyProducts totalPrice={this.calculateSubtotal()}>
             <button className="checkout-btn">REVIEW &amp; PAY</button>
-          </Link>
+          </BuyProducts>
         </div>
       </div>
     )

@@ -3,10 +3,12 @@ import { Redirect, Link } from "react-router-dom"
 
 import axios from "axios"
 
+import { ACCESS_LEVEL_ADMIN } from "../config/global_constants"
+
 import { SERVER_HOST } from "../config/global_constants"
 
 
-export default class AddCar extends Component {
+export default class AddProduct extends Component {
     constructor(props) {
         super(props)
 
@@ -19,7 +21,7 @@ export default class AddCar extends Component {
             noOfReviews: 0,
             stockQuantity: 1,
             productImg: "",
-            redirectToProducts: false,
+            redirectToProducts: localStorage.accessLevel < ACCESS_LEVEL_ADMIN,
             submittedOnce: false
         }
     }
@@ -50,7 +52,7 @@ export default class AddCar extends Component {
         const inputs = this.validateInputs()
 
         if (Object.values(inputs).every(value => value !== "")) {
-            axios.post(`${SERVER_HOST}/products`, productObject)
+            axios.post(`${SERVER_HOST}/products`, productObject, {headers:{"authorization":localStorage.token}})
                 .then(res => {
                     if (res.data) {
                         if (res.data.errorMessage) {

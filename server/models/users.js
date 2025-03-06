@@ -21,7 +21,7 @@ let usersSchema = new mongoose.Schema(
     telephoneNo: { type: String, required: true },
     accessLevel: { type: Number, default: parseInt(process.env.ACCESS_LEVEL_USER) },
     profilePhotoFilename: { type: String, default: "" },
-    cart: [productsSchema],
+    cart: { type: [productsSchema], default: [] }
   },
   {
     collection: `users`
