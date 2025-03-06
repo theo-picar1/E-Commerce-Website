@@ -36,6 +36,7 @@ export default class Home extends Component {
       showProducts: true,
       loggedInUser: null,
       cartVisibility: false,
+      guestUserCreated: false,
     }
   }
 
@@ -105,14 +106,12 @@ export default class Home extends Component {
 
     // So that guests can use shopping cart, we make a temporary user with just a generic id
     // If nothing is found, it is assumed that the user is already logged in
-    if (localStorage.getItem("user")) {
-      const user = localStorage.getItem("user")
-
-      // JSON.parse converts a string into an object
-      this.setState({ loggedInUser: JSON.parse(user) }, () =>
-        this.incrementCartCounter()
-      )
-    }
+    if (!this.state.guestUserCreated) {
+        console.log("you are not logged in")
+        this.createNonLoggedInUser()
+      } else {
+        console.log("you are logged in")
+      }
   }
 
   // Counter to show total items in shopping cart
@@ -169,12 +168,6 @@ export default class Home extends Component {
 
   addProductToUnLoggedUserCart = (product) => {
     let user = JSON.parse(localStorage.getItem("user"))
-
-    if (!user) {
-      console.error("No guest user found. Creating one...")
-      this.createNonLoggedInUser()
-      user = JSON.parse(localStorage.getItem("user"))
-    }
 
     user.cart.push(product)
 
@@ -467,10 +460,6 @@ export default class Home extends Component {
   }
 
   toggleCartVisibility = () => {
-    if (!this.state.loggedInUser) {
-      this.createNonLoggedInUser()
-    }
-
     this.setState((prev) => ({ cartVisibility: !prev.cartVisibility }))
   }
 
