@@ -21,6 +21,7 @@ export default class AddProduct extends Component {
             noOfReviews: 0,
             stockQuantity: 1,
             productImg: "",
+            // Stops users that are not admins from seeing the add page
             redirectToProducts: localStorage.accessLevel < ACCESS_LEVEL_ADMIN,
             submittedOnce: false
         }
@@ -45,35 +46,42 @@ export default class AddProduct extends Component {
             productImgs: this.state.productImg
         }
 
+        // To show error messages after the first submit attempt, be it successful or unsuccessful
         this.setState({
             submittedOnce: true
         })
 
+        // returns the state of every field needed for adding products
         const inputs = this.validateInputs()
 
+        // Only do the axios method if the value of every field is NOT blank
         if (Object.values(inputs).every(value => value !== "")) {
-            axios.post(`${SERVER_HOST}/products`, productObject, {headers:{"authorization":localStorage.token}})
+            // headers bit makes sure that the token is not invalid. This is checked in corresponding router method
+            axios.post(`${SERVER_HOST}/products`, productObject, { headers: { "authorization": localStorage.token } })
                 .then(res => {
+                    // Check if there was any response from backend
                     if (res.data) {
+                        // If error response, show the error
                         if (res.data.errorMessage) {
                             console.log(res.data.errorMessage)
                         }
+                        // Otherwise we assume it is correct, so we proceed with whatever we want to do
                         else {
                             console.log("Record added")
                             this.setState({ redirectToProducts: true })
                         }
                     }
+                    // No response at all from backend
                     else {
                         console.log("Record not added")
                     }
-                }).catch(err => {
-                    console.log("Error adding product:" + err)
                 })
         }
+        // Do this if one field is blank
         else {
             e.preventDefault()
 
-            console.log("Error adding product!!!")
+            console.log("Please fill in all fields!!!")
 
             return
         }

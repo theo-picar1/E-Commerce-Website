@@ -1,5 +1,7 @@
-import React, { Component } from "react";
-import { Link } from "react-router-dom/cjs/react-router-dom";
+import React, { Component } from "react"
+import { Link } from "react-router-dom/cjs/react-router-dom"
+
+// Just filler content
 
 export default class Footer extends Component {
   render() {

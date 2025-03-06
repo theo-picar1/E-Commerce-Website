@@ -25,7 +25,9 @@ export default class EditProduct extends Component {
     }
 
     componentDidMount() {
-        axios.get(`${SERVER_HOST}/products/${this.props.match.params.id}`, {headers:{"authorization":localStorage.token}})
+        // This is to find the product in the DB (by id) and put its values in the input fields
+        // handleSubmit is where the editing happens
+        axios.get(`${SERVER_HOST}/products/${this.props.match.params.id}`, { headers: { "authorization": localStorage.token } })
             .then(res => {
                 if (res.data) {
                     if (res.data.errorMessage) {
@@ -46,8 +48,6 @@ export default class EditProduct extends Component {
                 else {
                     console.log(`Record not found`)
                 }
-            }).catch(err => {
-                console.log("Error getting record: " + err)
             })
     }
 
@@ -55,7 +55,7 @@ export default class EditProduct extends Component {
         this.setState({ [e.target.name]: e.target.value })
     }
 
-
+    // This is where the actual editing happens
     handleSubmit = (e) => {
         e.preventDefault()
 
@@ -70,6 +70,8 @@ export default class EditProduct extends Component {
             productImgs: this.state.productImg
         }
 
+        // Finds the product with matching id in the DB
+        // Also passing the new values as an object so you don't have to do /:email/:price/:etc
         axios.put(`${SERVER_HOST}/products/${this.props.match.params.id}`, productObject, { headers: { "authorization": localStorage.token } })
             .then(res => {
                 if (res.data) {
