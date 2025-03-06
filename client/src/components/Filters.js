@@ -25,9 +25,7 @@ export default class Filters extends Component {
     handleCheckboxes = () => {
         let checkboxes = document.getElementsByClassName("instrument-checkbox")
 
-        let selectedCheckboxes = Array.from(checkboxes)
-            .filter(checkbox => checkbox.checked)
-            .map(checkbox => checkbox.value);
+        let selectedCheckboxes = Array.from(checkboxes).filter(checkbox => checkbox.checked).map(checkbox => checkbox.value)
 
         this.setState({ checkedInstruments: selectedCheckboxes }, () => {
             this.props.onFilterChange({

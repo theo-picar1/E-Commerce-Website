@@ -95,18 +95,24 @@ router.delete(`/products/:id`, (req, res, next) => {
 // Add new record
 router.post(`/products`, (req, res, next) => {
   jwt.verify(req.headers.authorization, JWT_PRIVATE_KEY, { algorithm: "HS256" }, (err, decodedToken) => {
-    if (err)
-      productsModel.create(req.body, (err, data) => {
-        if (err) {
-          return next(err)
-        }
+    if (err) {
+      return next(createError(401))
+    }
+    else {
+      if (decodedToken.accessLevel >= process.env.ACCESS_LEVEL_ADMIN) {
+        productsModel.create(req.body, (err, data) => {
+          if (err) {
+            return next(err)
+          }
 
-        if (!data) {
-          return next(createError(401))
-        }
+          if (!data) {
+            return next(createError(401))
+          }
 
-        res.json(data)
-      })
+          res.json(data)
+        })
+      }
+    }
   })
 })
 

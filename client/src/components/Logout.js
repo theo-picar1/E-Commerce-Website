@@ -32,8 +32,6 @@ export default class Logout extends Component {
             else {
                 console.log("Logout failed")
             }
-        }).catch(err => {
-            console.log("Error logging out: " + err)
         })
     }
 
