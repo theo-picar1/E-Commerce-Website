@@ -8,7 +8,7 @@ import { ACCESS_LEVEL_ADMIN } from "../config/global_constants"
 import { SERVER_HOST } from "../config/global_constants"
 
 
-export default class EditCar extends Component {
+export default class EditProduct extends Component {
     constructor(props) {
         super(props)
 
