@@ -6,6 +6,7 @@ import { ACCESS_LEVEL_ADMIN } from "../config/global_constants"
 
 import { SERVER_HOST } from "../config/global_constants"
 
+// Refer back to AddProduct.js! DeleteProduct.js and EditProduct.js have code that is explained in AddProduct
 export default class DeleteProduct extends Component {
   constructor(props) {
     super(props)
@@ -16,7 +17,7 @@ export default class DeleteProduct extends Component {
   }
 
   componentDidMount() {
-    // match.params.id is used to get the id from the passed in URL (product._id)
+    // match.params.id is used to get the id from the passed in URL (product._id). It's sent through a <Link>
     axios.delete(`${SERVER_HOST}/products/${this.props.match.params.id}`, { headers: { "authorization": localStorage.token } })
       .then((res) => {
         if (res.data) {

@@ -20,8 +20,7 @@ export default class PurchaseHistory extends Component {
   getPurchaseHistory = () => {
     let userId = localStorage.id
     console.log(userId)
-    axios
-      .get(`${SERVER_HOST}/users/${userId}/purchaseHistory`)
+    axios.get(`${SERVER_HOST}/users/${userId}/purchaseHistory`)
       .then((res) => {
         if (res.data) {
           if (res.data.errorMessage) {
@@ -33,9 +32,6 @@ export default class PurchaseHistory extends Component {
             })
           }
         }
-      })
-      .catch((err) => {
-        console.error("Error:", err)
       })
   }
 
@@ -64,8 +60,7 @@ export default class PurchaseHistory extends Component {
     )
     history.totalAmount = totalAmount
 
-    axios
-      .post(`${SERVER_HOST}/users/id/addToPurchaseHistory`, {
+    axios.post(`${SERVER_HOST}/users/id/addToPurchaseHistory`, {
         userId: localStorage.id,
         history,
       })

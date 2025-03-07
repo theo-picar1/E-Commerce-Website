@@ -4,10 +4,8 @@ const bcrypt = require("bcryptjs")
 
 const jwt = require("jsonwebtoken")
 const fs = require("fs")
-const JWT_PRIVATE_KEY = fs.readFileSync(
-  process.env.JWT_PRIVATE_KEY_FILENAME,
-  "utf8"
-)
+// Purely for security reasons. Instead of the actual key in the env file, we read (fs) the filename of JWT_PRIVATE_KEY_FILENAME
+const JWT_PRIVATE_KEY = fs.readFileSync(process.env.JWT_PRIVATE_KEY_FILENAME, "utf8")
 
 const createError = require("http-errors")
 
@@ -51,39 +49,38 @@ router.post(`/users/reset_user_collection`, (req, res, next) => {
           )
         }
       )
-    } else {
+    }
+    else {
       res.json({ errorMessage: `User is not logged in` })
       return next(createError(401))
     }
   })
 })
 
+// In Derek's example, a token is created in here because they are automatically logged in after registering
+// In ours, the user is redirected to the Login page instead
 router.post(`/users/register`, (req, res, next) => {
-  usersModel.findOne({ email: req.body.email }, (uniqueErr, uniqueData) => {
-    if (uniqueErr) {
+  usersModel.findOne({ email: req.body.email }, (err, data) => {
+    if (err) {
       return next(err)
     }
-    if (uniqueData) {
+    if (data) {
       res.json({ errorMessage: `User already exists` })
-    } else {
-      bcrypt.hash(
-        req.body.password,
-        parseInt(process.env.SALT_ROUNDS),
-        (err, hash) => {
-          console.log("Request body:", req.body)
-          usersModel.create({ ...req.body, password: hash }, (error, data) => {
-            if (!data) {
-              res.json({ errorMessage: "User creation failed." })
-            }
-            const token = jwt.sign(
-              { email: data.email, accessLevel: data.accessLevel },
-              JWT_PRIVATE_KEY,
-              { algorithm: "HS256", expiresIn: process.env.JWT_EXPIRY }
-            )
+    } 
+    else {
+      // Hashes the user's password for security purposes
+      bcrypt.hash(req.body.password, parseInt(process.env.SALT_ROUNDS), (err, hash) => {
+        console.log("Request body:", req.body)
 
-            res.json({ name: data.firstName, token: token })
-          })
-        }
+        // password is now the hashed value when creating the user
+        usersModel.create({ ...req.body, password: hash }, (error, data) => {
+          if (!data) {
+            res.json({ errorMessage: "User creation failed." })
+          }
+
+          res.json({ name: data.firstName, token: token })
+        })
+      }
       )
     }
   })
@@ -96,16 +93,17 @@ router.post(`/users/login/:email/:password`, (req, res, next) => {
       return next(err)
     }
     if (data) {
+      // In here, we compare the hashed value of the given password to the hashed password of the email the user is logging into
+      // The hashed value will be equal to each other if the passwords are also the same
       bcrypt.compare(req.params.password, data.password, (err, result) => {
         if (err) {
           return next(err)
         }
         if (result) {
-          const token = jwt.sign(
-            { email: data.email, accessLevel: data.accessLevel },
-            JWT_PRIVATE_KEY,
-            { algorithm: "HS256", expiresIn: process.env.JWT_EXPIRY }
+          // This is where the token is created. The user's email and accessLevel is found inside the token
+          const token = jwt.sign({ email: data.email, accessLevel: data.accessLevel }, JWT_PRIVATE_KEY, { algorithm: "HS256", expiresIn: process.env.JWT_EXPIRY }
           )
+          
           res.json({
             _id: data._id,
             name: data.firstName,
@@ -114,7 +112,6 @@ router.post(`/users/login/:email/:password`, (req, res, next) => {
             token: token,
           })
         } else {
-          res.json({ errorMessage: `Incorrect password` })
           return next(createError(401))
         }
       })

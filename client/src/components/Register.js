@@ -34,6 +34,8 @@ export default class Register extends Component {
     handleSubmit = (e) => {
         e.preventDefault()
 
+        // Will be an invalid input if the user has entered a value but the value does not match the regex.
+        // If the user did not enter a value, a different error message would show
         this.setState({
             invalidEmail: this.state.email !== "" && !this.validEmail(),
             invalidPassword: this.state.password !== "" && !this.validPassword(),
@@ -43,6 +45,7 @@ export default class Register extends Component {
         })
 
         const formInputsState = this.validate()
+
         const userObject = {
             firstName: this.state.firstName,
             secondName: this.state.secondName,
@@ -53,6 +56,7 @@ export default class Register extends Component {
             confirmPassword: this.state.confirmPassword
         }
 
+        // Only proceed with the axios method if every key in this.validate() returns true
         if (Object.keys(formInputsState).every(key => formInputsState[key])) {
             axios.post(`${SERVER_HOST}/users/register`, userObject)
                 .then(res => {
@@ -72,8 +76,6 @@ export default class Register extends Component {
                     else {
                         console.log("Registration failed")
                     }
-                }).catch(err => {
-                    console.log("Error registering user: " + err)
                 })
         }
         else {
@@ -83,6 +85,7 @@ export default class Register extends Component {
         }
     }
 
+    // Reference: derek.comp.dkit.ie
     validEmail() {
         const pattern = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
 
@@ -96,6 +99,7 @@ export default class Register extends Component {
         return pattern.test(String(this.state.password))
     }
 
+    // Minimum 8 characters long
     validPassword() {
         const pattern = /^.{8,}$/
 
@@ -106,6 +110,7 @@ export default class Register extends Component {
         return (this.state.password === this.state.confirmPassword)
     }
 
+    // returns true or false depending on corresponding validation methods
     validate() {
         return {
             email: this.validEmail(),

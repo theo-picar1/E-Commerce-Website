@@ -57,6 +57,7 @@ export default class AddProduct extends Component {
         // Only do the axios method if the value of every field is NOT blank
         if (Object.values(inputs).every(value => value !== "")) {
             // headers bit makes sure that the token is not invalid. This is checked in corresponding router method
+            // Refer to Register.js , where the token is created
             axios.post(`${SERVER_HOST}/products`, productObject, { headers: { "authorization": localStorage.token } })
                 .then(res => {
                     // Check if there was any response from backend

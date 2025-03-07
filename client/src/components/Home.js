@@ -273,8 +273,7 @@ export default class Home extends Component {
       return
     }
 
-    axios
-      .delete(`${SERVER_HOST}/users/cart`, {
+    axios.delete(`${SERVER_HOST}/users/cart`, {
         data: { userId, product },
       })
       .then((response) => {
