@@ -16,6 +16,8 @@ export default class PurchaseHistory extends Component {
     }
   }
 
+  // SUBJECT TO CHANGE SO NO POINT IN COMMENTS
+
   componentDidMount() {
     axios.get(`${SERVER_HOST}/users/${localStorage.id}`)
       .then(res => {

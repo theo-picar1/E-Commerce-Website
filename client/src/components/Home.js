@@ -114,11 +114,6 @@ export default class Home extends Component {
 
   // Counter to show total items in shopping cart
   incrementCartCounter = () => {
-    if (!this.state.loggedInUser) {
-      this.setState((prevState) => ({ cartCounter: prevState.cartCounter + 1 }))
-      return
-    }
-
     this.setState({
       cartCounter: this.state.loggedInUser.cart.length,
     })
@@ -147,11 +142,13 @@ export default class Home extends Component {
     this.sortProducts(sortBy, sortType)
   }
 
+  // Activates when user clicks on a product
   scrollToTop = () => {
     const topOfPage = document.getElementById("top-of-page")
     topOfPage.scrollIntoView({ behavior: "smooth" })
   }
 
+  // Opens modal to show product details
   handleProductClick = (product) => {
     this.setState(
       {
@@ -159,25 +156,63 @@ export default class Home extends Component {
         showProductDetails: true,
       },
       () => {
+        // Scroll to the top of the page
         this.scrollToTop()
       }
     )
   }
 
+  // Got JSON.stringify from https://www.w3schools.com/js/js_json_stringify.asp
+  // Got JSON.parse from https://www.w3schools.com/js/js_json_parse.asp
+
+  // Add product to guest user's cart
   addProductToUnLoggedUserCart = (product) => {
+    // use JSON.parse to convert string to object
+    // as localStorage only stores strings
     let user = JSON.parse(localStorage.getItem("user"))
 
+    // add product to cart
     user.cart.push(product)
 
+    // use JSON.stringify to convert object to string
+    // as localStorage only stores strings
     localStorage.setItem("user", JSON.stringify(user))
 
     console.log("Product added to cart successfully")
 
     this.setState(
-      (prevState) => ({
+      {
         loggedInUser: user,
         cartCounter: user.cart.length,
-      }),
+      },
+      () => {
+        this.incrementCartCounter()
+      }
+    )
+  }
+
+  removeProductFromUnLoggedUserCart = (product) => {
+    // use JSON.parse to convert string to object
+    // as localStorage only stores strings
+    let user = JSON.parse(localStorage.getItem("user"))
+
+    // Find the index of the product
+    const productIndex = user.cart.findIndex(
+      (cartProduct) => cartProduct.name === product.name
+    )
+
+    // removes the product from cart
+    user.cart.splice(productIndex, 1)
+
+    // use JSON.stringify to convert object to string
+    // as localStorage only stores strings
+    localStorage.setItem("user", JSON.stringify(user))
+
+    this.setState(
+      {
+        loggedInUser: user,
+        cartCounter: user.cart.length,
+      },
       () => {
         this.incrementCartCounter()
       }
@@ -185,35 +220,36 @@ export default class Home extends Component {
   }
 
   addProductToCart = (product) => {
+    // Check if user is guest
     if (this.state.loggedInUser._id === "guest") {
+      // redirect to guest cart
       this.addProductToUnLoggedUserCart(product)
       return
     }
 
+    // get user id from local storage
     const userId = localStorage.id
 
-    if (!userId) {
-      alert("User not logged in")
-      return
-    }
-
+    // passes in user id and product
     axios
       .post(`${SERVER_HOST}/users/cart`, { userId, product })
       .then((res) => {
         if (res.data) {
           if (res.data.errorMessage) {
-            alert(res.data.errorMessage)
+            console.log(res.data.errorMessage)
           } else {
             console.log("Product added to cart successfully")
 
+            // update cart
             const updatedCart = res.data.cart
+
             this.setState(
-              (prevState) => ({
+              {
                 loggedInUser: {
-                  ...prevState.loggedInUser,
+                  ...this.state.loggedInUser,
                   cart: updatedCart,
                 },
-              }),
+              },
               () => {
                 this.incrementCartCounter()
               }
@@ -226,54 +262,20 @@ export default class Home extends Component {
       })
   }
 
-  removeProductFromUnLoggedUserCart = (product) => {
-    let user = JSON.parse(localStorage.getItem("user"))
-
-    if (!user) {
-      console.error("Product removal unsuccessful")
-      return
-    }
-
-    const productIndex = user.cart.findIndex(
-      (cartProduct) => cartProduct.name === product.name
-    )
-
-    if (productIndex === -1) {
-      console.error("Product not found in cart.")
-      return
-    }
-
-    user.cart.splice(productIndex, 1)
-
-    localStorage.setItem("user", JSON.stringify(user))
-
-    this.setState(
-      (prevState) => ({
-        loggedInUser: user,
-        cartCounter: user.cart.reduce(
-          (total, item) => total + item.quantity,
-          0
-        ),
-      }),
-      () => {
-        this.incrementCartCounter()
-      }
-    )
-  }
-
   deleteProductFromCart = (product) => {
+    // Check if user is guest
     if (this.state.loggedInUser._id == "guest") {
+      // redirect to guest cart
       this.removeProductFromUnLoggedUserCart(product)
       return
     }
+
+    // get user id from local storage
     const userId = localStorage.id
 
-    if (!userId) {
-      console.error("Remove product unsuccessful")
-      return
-    }
-
-    axios.delete(`${SERVER_HOST}/users/cart`, {
+    // passes in user id and product
+    axios
+      .delete(`${SERVER_HOST}/users/cart`, {
         data: { userId, product },
       })
       .then((response) => {
@@ -282,22 +284,23 @@ export default class Home extends Component {
         } else {
           console.log("Product has been successfully removed from cart")
 
-          this.setState((prevState) => {
-            const loggedInUser = { ...prevState.loggedInUser }
+          this.setState(() => {
+            // makes a copy of the logged in user
+            const loggedInUser = { ...this.state.loggedInUser }
+
+            // makes a copy of the logged in user's cart
             const cart = [...loggedInUser.cart]
 
+            // Find the index of the product to remove
             const indexToRemove = cart.findIndex(
               (item) => item.name === product.name
             )
 
-            if (indexToRemove === -1) {
-              console.log("Product not found in client-side cart")
-              return prevState
-            }
-
+            // Remove the product from the cart
             cart.splice(indexToRemove, 1)
             loggedInUser.cart = cart
 
+            // update logged in user and cart counter
             return { loggedInUser, cartCounter: cart.length }
           })
         }
@@ -307,6 +310,7 @@ export default class Home extends Component {
       })
   }
 
+  // Close product details modal
   closeProductDetails = () => {
     this.setState({ showProductDetails: false, product: null })
   }
@@ -434,40 +438,6 @@ export default class Home extends Component {
     this.setState({
       showCustomers: false,
     })
-  }
-
-  updateLocalCart = (userId, product) => {
-    const updatedUsers = this.state.users.map((user) => {
-      if (user._id === userId) {
-        const updatedCart = [...user.cart]
-
-        const productIndex = updatedCart.findIndex(
-          (item) => item.id === product.id
-        )
-
-        if (productIndex !== -1) {
-          updatedCart[productIndex].quantity += 1
-        } else {
-          updatedCart.push({
-            ...product,
-            quantity: 1,
-          })
-        }
-
-        return { ...user, cart: updatedCart }
-      }
-      return user
-    })
-
-    this.setState(
-      {
-        users: updatedUsers,
-        originalUsers: updatedUsers,
-      },
-      () => {
-        this.incrementCartCounter()
-      }
-    )
   }
 
   createNonLoggedInUser() {
