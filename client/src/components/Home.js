@@ -42,76 +42,74 @@ export default class Home extends Component {
 
   componentDidMount() {
     // Same logic as fetch. Get all products and set the state of products to be the response data
-    axios.get(`${SERVER_HOST}/products`)
-      .then((res) => {
-        if (res.data) {
-          if (res.data.errorMessage) {
-            console.log(res.data.errorMessage)
-          } else {
-            console.log("Products have been successfully retrieved/read")
+    axios.get(`${SERVER_HOST}/products`).then((res) => {
+      if (res.data) {
+        if (res.data.errorMessage) {
+          console.log(res.data.errorMessage)
+        } else {
+          console.log("Products have been successfully retrieved/read")
 
-            let categories = []
+          let categories = []
 
-            res.data.forEach((product) => {
-              if (product["category"]) {
-                categories.push(product["category"])
-              }
-            })
+          res.data.forEach((product) => {
+            if (product["category"]) {
+              categories.push(product["category"])
+            }
+          })
 
-            let uniqueCategories = [...new Set(categories)]
+          let uniqueCategories = [...new Set(categories)]
 
-            this.setState({
-              products: res.data,
-              originalProducts: res.data,
-              categories: uniqueCategories,
-            })
-          }
+          this.setState({
+            products: res.data,
+            originalProducts: res.data,
+            categories: uniqueCategories,
+          })
         }
-      })
+      }
+    })
 
     // Same logic as getting products
-    axios.get(`${SERVER_HOST}/users`)
-      .then((res) => {
-        if (res.data) {
-          console.log(res.data)
-          if (res.data.errorMessage) {
-            console.log(res.data.errorMessage)
-          } else {
-            console.log("Users have been successfully retrieved")
+    axios.get(`${SERVER_HOST}/users`).then((res) => {
+      if (res.data) {
+        console.log(res.data)
+        if (res.data.errorMessage) {
+          console.log(res.data.errorMessage)
+        } else {
+          console.log("Users have been successfully retrieved")
 
-            this.setState({
-              users: res.data,
-              originalUsers: res.data,
-            })
+          this.setState({
+            users: res.data,
+            originalUsers: res.data,
+          })
 
-            const userId = localStorage.id
+          const userId = localStorage.id
 
-            if (userId) {
-              const loggedInUser = res.data.find((user) => user._id === userId)
+          if (userId) {
+            const loggedInUser = res.data.find((user) => user._id === userId)
 
-              this.setState(
-                {
-                  users: res.data,
-                  originalUsers: res.data,
-                  loggedInUser: loggedInUser,
-                },
-                () => {
-                  this.incrementCartCounter()
-                }
-              )
-            }
+            this.setState(
+              {
+                users: res.data,
+                originalUsers: res.data,
+                loggedInUser: loggedInUser,
+              },
+              () => {
+                this.incrementCartCounter()
+              }
+            )
           }
         }
-      })
+      }
+    })
 
     // So that guests can use shopping cart, we make a temporary user with just a generic id
     // If nothing is found, it is assumed that the user is already logged in
     if (!this.state.guestUserCreated) {
-        console.log("you are not logged in")
-        this.createNonLoggedInUser()
-      } else {
-        console.log("you are logged in")
-      }
+      console.log("you are not logged in")
+      this.createNonLoggedInUser()
+    } else {
+      console.log("you are logged in")
+    }
   }
 
   // Counter to show total items in shopping cart
@@ -199,7 +197,8 @@ export default class Home extends Component {
       return
     }
 
-    axios.post(`${SERVER_HOST}/users/cart`, { userId, product })
+    axios
+      .post(`${SERVER_HOST}/users/cart`, { userId, product })
       .then((res) => {
         if (res.data) {
           if (res.data.errorMessage) {
@@ -281,8 +280,7 @@ export default class Home extends Component {
       .then((response) => {
         if (response.data.errorMessage) {
           console.log(response.data.errorMessage)
-        }
-        else {
+        } else {
           console.log("Product has been successfully removed from cart")
 
           this.setState((prevState) => {
@@ -314,13 +312,23 @@ export default class Home extends Component {
     this.setState({ showProductDetails: false, product: null })
   }
 
-  handleFilterChange = ({ checkedInstruments = [], price, minRating, maxRating }) => {
-    this.setState({
-      checkedInstruments: Array.isArray(checkedInstruments) ? checkedInstruments : [],
-      price: price ?? 150000,
-      minRating: minRating ?? 0,
-      maxRating: maxRating ?? 5
-    }, this.applyFilters)
+  handleFilterChange = ({
+    checkedInstruments = [],
+    price,
+    minRating,
+    maxRating,
+  }) => {
+    this.setState(
+      {
+        checkedInstruments: Array.isArray(checkedInstruments)
+          ? checkedInstruments
+          : [],
+        price: price ?? 150000,
+        minRating: minRating ?? 0,
+        maxRating: maxRating ?? 5,
+      },
+      this.applyFilters
+    )
   }
 
   handleSearch = (searchValue) => {
@@ -330,7 +338,14 @@ export default class Home extends Component {
   }
 
   applyFilters = () => {
-    const { searchValue, checkedInstruments, originalProducts, price, minRating, maxRating } = this.state
+    const {
+      searchValue,
+      checkedInstruments,
+      originalProducts,
+      price,
+      minRating,
+      maxRating,
+    } = this.state
 
     if (!originalProducts || originalProducts.length === 0) {
       console.error("No products available for filtering.")
@@ -341,10 +356,18 @@ export default class Home extends Component {
     let max = parseFloat(maxRating) || 5
 
     let filteredProducts = originalProducts
-      .filter(product => !searchValue || product.name.toLowerCase().includes(searchValue.toLowerCase()))
-      .filter(product => !checkedInstruments.length || checkedInstruments.includes(product.category))
-      .filter(product => !price || product.price <= price)
-      .filter(product => product.rating >= min && product.rating <= max)
+      .filter(
+        (product) =>
+          !searchValue ||
+          product.name.toLowerCase().includes(searchValue.toLowerCase())
+      )
+      .filter(
+        (product) =>
+          !checkedInstruments.length ||
+          checkedInstruments.includes(product.category)
+      )
+      .filter((product) => !price || product.price <= price)
+      .filter((product) => product.rating >= min && product.rating <= max)
 
     this.setState({ products: filteredProducts })
   }
@@ -371,10 +394,10 @@ export default class Home extends Component {
       return
     }
 
-    let filteredUsers = originalUsers.filter(user => {
-      const fullName = `${user.firstName} ${user.secondName}`.toLowerCase()  // Combine names
+    let filteredUsers = originalUsers.filter((user) => {
+      const fullName = `${user.firstName} ${user.secondName}`.toLowerCase() // Combine names
       return fullName.includes(searchQuery) // Search full name properly
-    });
+    })
 
     console.log("Search Query:", searchQuery)
     console.log("Filtered Users:", filteredUsers)
@@ -383,15 +406,23 @@ export default class Home extends Component {
   }
 
   handleSortUsers = (sortOption) => {
-    let sortedUsers = [...this.state.users];
+    let sortedUsers = [...this.state.users]
 
     if (sortOption === "name-asc") {
-      sortedUsers.sort((a, b) => (a.firstName + " " + a.secondName).localeCompare(b.firstName + " " + b.secondName));
+      sortedUsers.sort((a, b) =>
+        (a.firstName + " " + a.secondName).localeCompare(
+          b.firstName + " " + b.secondName
+        )
+      )
     } else if (sortOption === "name-desc") {
-      sortedUsers.sort((a, b) => (b.firstName + " " + b.secondName).localeCompare(a.firstName + " " + a.secondName));
+      sortedUsers.sort((a, b) =>
+        (b.firstName + " " + b.secondName).localeCompare(
+          a.firstName + " " + a.secondName
+        )
+      )
     }
 
-    this.setState({ users: sortedUsers });
+    this.setState({ users: sortedUsers })
   }
 
   showCustomerTable = () => {
@@ -456,7 +487,7 @@ export default class Home extends Component {
 
     localStorage.setItem("user", JSON.stringify(user))
 
-    this.setState({ loggedInUser: user })
+    this.setState({ loggedInUser: user, guestUserCreated: true })
   }
 
   toggleCartVisibility = () => {
@@ -482,7 +513,6 @@ export default class Home extends Component {
       addProductToCart,
       deleteProductFromCart,
     } = this
-
 
     return (
       <div className="page-content">

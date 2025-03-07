@@ -2,11 +2,14 @@ const router = require(`express`).Router()
 const usersModel = require(`../models/users`)
 const bcrypt = require("bcryptjs")
 
-const jwt = require('jsonwebtoken')
-const fs = require('fs')
-const JWT_PRIVATE_KEY = fs.readFileSync(process.env.JWT_PRIVATE_KEY_FILENAME, 'utf8')
+const jwt = require("jsonwebtoken")
+const fs = require("fs")
+const JWT_PRIVATE_KEY = fs.readFileSync(
+  process.env.JWT_PRIVATE_KEY_FILENAME,
+  "utf8"
+)
 
-const createError = require('http-errors');
+const createError = require("http-errors")
 
 // Get all users
 router.get(`/users`, (req, res, next) => {
@@ -63,13 +66,20 @@ router.post(`/users/register`, (req, res, next) => {
     if (uniqueData) {
       res.json({ errorMessage: `User already exists` })
     } else {
-      bcrypt.hash(req.body.password, parseInt(process.env.SALT_ROUNDS), (err, hash) => {
+      bcrypt.hash(
+        req.body.password,
+        parseInt(process.env.SALT_ROUNDS),
+        (err, hash) => {
           console.log("Request body:", req.body)
           usersModel.create({ ...req.body, password: hash }, (error, data) => {
             if (!data) {
               res.json({ errorMessage: "User creation failed." })
             }
-            const token = jwt.sign({email: data.email, accessLevel:data.accessLevel}, JWT_PRIVATE_KEY, {algorithm: 'HS256', expiresIn:process.env.JWT_EXPIRY})     
+            const token = jwt.sign(
+              { email: data.email, accessLevel: data.accessLevel },
+              JWT_PRIVATE_KEY,
+              { algorithm: "HS256", expiresIn: process.env.JWT_EXPIRY }
+            )
 
             res.json({ name: data.firstName, token: token })
           })
@@ -91,13 +101,17 @@ router.post(`/users/login/:email/:password`, (req, res, next) => {
           return next(err)
         }
         if (result) {
-          const token = jwt.sign({email:data.email, accessLevel:data.accessLevel}, JWT_PRIVATE_KEY, {algorithm:'HS256', expiresIn:process.env.JWT_EXPIRY})
+          const token = jwt.sign(
+            { email: data.email, accessLevel: data.accessLevel },
+            JWT_PRIVATE_KEY,
+            { algorithm: "HS256", expiresIn: process.env.JWT_EXPIRY }
+          )
           res.json({
             _id: data._id,
             name: data.firstName,
             accessName: data.firstName + " " + data.secondName,
             accessLevel: process.env.ACCESS_LEVEL_USER,
-            token: token
+            token: token,
           })
         } else {
           res.json({ errorMessage: `Incorrect password` })
@@ -174,6 +188,46 @@ router.delete("/users/cart", (req, res) => {
 // User logout
 router.post(`/users/logout`, (req, res) => {
   res.json({})
+})
+
+// Get Pirchase History from a user
+router.get("/users/:id/purchaseHistory", (req, res) => {
+  const userId = req.params.id
+
+  usersModel.findById(userId, (findError, userData) => {
+    if (findError || !userData) {
+      return res.status(404).json({ errorMessage: "User not found" })
+    }
+
+    console.log(userData)
+
+    res.json(userData.purchaseHistory)
+  })
+})
+
+// Add to product history 
+router.post("/users/id/addToPurchaseHistory", (req, res) => {
+  const { userId, history } = req.body
+
+  if (!userId || !history) {
+    return res.status(400).json({ errorMessage: "Invalid request data" })
+  }
+
+  usersModel.findById(userId, (findError, userData) => {
+    if (findError || !userData) {
+      return res.status(404).json({ errorMessage: "User not found" })
+    }
+
+    userData.purchaseHistory.push(history)
+
+    userData.save((saveError, updatedUser) => {
+      if (saveError) {
+        return res.status(500).json({ errorMessage: "Failed to update cart" })
+      }
+
+      res.json(updatedUser)
+    })
+  })
 })
 
 module.exports = router
