@@ -5,8 +5,13 @@ const bcrypt = require("bcryptjs")
 const jwt = require("jsonwebtoken")
 const fs = require("fs")
 // Purely for security reasons. Instead of the actual key in the env file, we read (fs) the filename of JWT_PRIVATE_KEY_FILENAME
-const JWT_PRIVATE_KEY = fs.readFileSync(process.env.JWT_PRIVATE_KEY_FILENAME, "utf8")
+const JWT_PRIVATE_KEY = fs.readFileSync(
+  process.env.JWT_PRIVATE_KEY_FILENAME,
+  "utf8"
+)
 
+// Error handling
+// All error handling was from https://derek.comp.dkit.ie/ at Full Stack Development/Error Handling
 const createError = require("http-errors")
 
 // Get all users
@@ -49,8 +54,7 @@ router.post(`/users/reset_user_collection`, (req, res, next) => {
           )
         }
       )
-    }
-    else {
+    } else {
       res.json({ errorMessage: `User is not logged in` })
       return next(createError(401))
     }
@@ -66,21 +70,21 @@ router.post(`/users/register`, (req, res, next) => {
     }
     if (data) {
       res.json({ errorMessage: `User already exists` })
-    } 
-    else {
+    } else {
       // Hashes the user's password for security purposes
-      bcrypt.hash(req.body.password, parseInt(process.env.SALT_ROUNDS), (err, hash) => {
-        console.log("Request body:", req.body)
+      bcrypt.hash(
+        req.body.password,
+        parseInt(process.env.SALT_ROUNDS),
+        (err, hash) => {
+          // password is now the hashed value when creating the user
+          usersModel.create({ ...req.body, password: hash }, (error, data) => {
+            if (!data) {
+              res.json({ errorMessage: "User creation failed." })
+            }
 
-        // password is now the hashed value when creating the user
-        usersModel.create({ ...req.body, password: hash }, (error, data) => {
-          if (!data) {
-            res.json({ errorMessage: "User creation failed." })
-          }
-
-          res.json({ name: data.firstName, token: token })
-        })
-      }
+            res.json({ name: data.firstName })
+          })
+        }
       )
     }
   })
@@ -101,9 +105,12 @@ router.post(`/users/login/:email/:password`, (req, res, next) => {
         }
         if (result) {
           // This is where the token is created. The user's email and accessLevel is found inside the token
-          const token = jwt.sign({ email: data.email, accessLevel: data.accessLevel }, JWT_PRIVATE_KEY, { algorithm: "HS256", expiresIn: process.env.JWT_EXPIRY }
+          const token = jwt.sign(
+            { email: data.email, accessLevel: data.accessLevel },
+            JWT_PRIVATE_KEY,
+            { algorithm: "HS256", expiresIn: process.env.JWT_EXPIRY }
           )
-          
+
           res.json({
             _id: data._id,
             name: data.firstName,
@@ -123,60 +130,80 @@ router.post(`/users/login/:email/:password`, (req, res, next) => {
 })
 
 // Add product to user's cart
-router.post("/users/cart", (req, res) => {
+router.post("/users/cart", (req, res, next) => {
+  // get user id and product from body
   const { userId, product } = req.body
 
+  // check if user id and product are valid
   if (!product || !product._id) {
-    return res.status(400).json({ errorMessage: "Invalid product data" })
+    res.json({ errorMessage: "Invalid product data" })
+    return next(createError(400))
   }
 
+  // find user by id
   usersModel.findById(userId, (findError, userData) => {
+    // if user not found or error, return error
     if (findError || !userData) {
-      return res.status(404).json({ errorMessage: "User not found" })
+      res.json({ errorMessage: "User not found" })
+      return next(createError(404))
     }
 
+    // add product to user's cart
     userData.cart.push(product)
 
+    // save user to database
     userData.save((saveError, updatedUser) => {
       if (saveError) {
-        return res.status(500).json({ errorMessage: "Failed to update cart" })
+        res.json({ errorMessage: "Failed to update cart" })
+        return next(createError(500))
       }
 
+      // return updated user
       res.json(updatedUser)
     })
   })
 })
 
 // Remove product from user's cart
-router.delete("/users/cart", (req, res) => {
+router.delete("/users/cart", (req, res, next) => {
+  // get user id and product from body
   const { userId, product } = req.body
 
+  // check if user id and product are valid
   if (!userId || !product.name) {
-    return res
-      .status(400)
-      .json({ errorMessage: "Missing userId or productName" })
+    res.json({ errorMessage: "Missing userId or productName" })
+    return next(createError(400))
   }
 
+  // find user by id
   usersModel.findById(userId, (findError, userData) => {
     if (findError || !userData) {
-      return res.status(404).json({ errorMessage: "User not found" })
+      res.json({ errorMessage: "User not found" })
+      return next(createError(404))
     }
 
+    // remove product from user's cart
     const productIndex = userData.cart.findIndex(
       (item) => item.name === product.name
     )
 
+    // if product not found in cart, return error
     if (productIndex === -1) {
-      return res.status(404).json({ errorMessage: "Product not found in cart" })
+      res.json({ errorMessage: "Product not found in cart" })
+      return next(createError(404))
     }
 
+    // remove product from cart
     userData.cart.splice(productIndex, 1)
 
+    // save user to database
     userData.save((saveError, updatedUser) => {
       if (saveError) {
-        return res.status(500).json({ errorMessage: "Failed to update cart" })
+        res.json({ errorMessage: "Failed to update cart" })
+        return next(createError(500))
       }
 
+      // return updated user
       res.json(updatedUser)
     })
   })
@@ -187,39 +214,41 @@ router.post(`/users/logout`, (req, res) => {
   res.json({})
 })
 
-// Get Pirchase History from a user
-router.get("/users/:id/purchaseHistory", (req, res) => {
+// Get Purchase History from a user
+router.get("/users/:id/purchaseHistory", (req, res, next) => {
   const userId = req.params.id
 
   usersModel.findById(userId, (findError, userData) => {
     if (findError || !userData) {
-      return res.status(404).json({ errorMessage: "User not found" })
+      res.json({ errorMessage: "User not found" })
+      return next(createError(404))
     }
-
-    console.log(userData)
 
     res.json(userData.purchaseHistory)
   })
 })
 
-// Add to product history 
-router.post("/users/id/addToPurchaseHistory", (req, res) => {
+// Add to product history
+router.post("/users/id/addToPurchaseHistory", (req, res, next) => {
   const { userId, history } = req.body
 
   if (!userId || !history) {
-    return res.status(400).json({ errorMessage: "Invalid request data" })
+    res.json({ errorMessage: "Invalid request data" })
+    return next(createError(400))
   }
 
   usersModel.findById(userId, (findError, userData) => {
     if (findError || !userData) {
-      return res.status(404).json({ errorMessage: "User not found" })
+      res.json({ errorMessage: "User not found" })
+      return next(createError(404))
     }
 
     userData.purchaseHistory.push(history)
 
     userData.save((saveError, updatedUser) => {
       if (saveError) {
-        return res.status(500).json({ errorMessage: "Failed to update cart" })
+        res.json({ errorMessage: "Failed to update cart" })
+        return next(createError(500))
       }
 
       res.json(updatedUser)

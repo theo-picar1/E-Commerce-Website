@@ -13,6 +13,8 @@ export default class PurchaseHistory extends Component {
     }
   }
 
+  // SUBJECT TO CHANGE SO NO POINT IN COMMENTS
+
   componentDidMount() {
     this.getPurchaseHistory()
   }
