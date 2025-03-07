@@ -24,7 +24,7 @@ export default class ShoppingCart extends Component {
     }
   }
 
-  processCartItems = () => {
+  processCartItems() {
     const cartItems = {}
 
     this.props.products.forEach((product) => {
@@ -116,9 +116,13 @@ export default class ShoppingCart extends Component {
             <span>SUBTOTAL</span>
             <span id="subtotal">${this.calculateSubtotal()}</span>
           </div>
-          <BuyProducts totalPrice={this.calculateSubtotal()}>
-            <button className="checkout-btn">REVIEW &amp; PAY</button>
-          </BuyProducts>
+          {this.state.cartItems.length > 0 ?
+            <BuyProducts totalPrice={this.calculateSubtotal()} cartItems={this.state.cartItems}>
+              <button className="checkout-btn">REVIEW &amp; PAY</button>
+            </BuyProducts>
+          :
+            <p>You have 0 items in your cart. Add some items to proceed with payments!</p>
+          }
         </div>
       </div>
     )

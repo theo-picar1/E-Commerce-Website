@@ -12,8 +12,7 @@ export default class PayPalMessage extends Component {
         super(props)
 
         this.state = {
-            redirectToProductsPage: false,
-            buttonColour: "red-button"
+            redirectToProductsPage: false
         }
     }
 
@@ -22,8 +21,7 @@ export default class PayPalMessage extends Component {
         if (this.props.match.params.messageType === PayPalMessage.messageType.SUCCESS) {
             this.setState({
                 heading: "PAYPAL TRANSACTION CONFIRMATION",
-                message: "Your PayPal transaction was successful.",
-                buttonColour: "green-button"
+                message: "Your PayPal transaction was successful."
             })
         }
         else if (this.props.match.params.messageType === PayPalMessage.messageType.CANCEL) {
@@ -64,7 +62,7 @@ export default class PayPalMessage extends Component {
                         <p className="message">{this.props.match.params.message}</p>
                         <p>{this.state.message}</p>
                         {this.props.match.params.messageType === PayPalMessage.messageType.SUCCESS ? <p>Your PayPal payment confirmation is <span id="payPalPaymentID">{this.props.match.params.payPalPaymentID}</span></p> : null}
-                        <Link className={this.state.buttonColour} to={"/"}><button>CONTINUE</button></Link>
+                        <Link to={"/"}><button>CONTINUE</button></Link>
                     </div>
                 </div>
             </div>

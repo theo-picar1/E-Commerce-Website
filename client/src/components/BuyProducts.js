@@ -18,12 +18,12 @@ export default class BuyCar extends Component {
         }
     }
 
-
+    // For total price that user is planning to buy
     createOrder = (data, actions) => {
         return actions.order.create({ purchase_units: [{ amount: { value: this.props.totalPrice } }] })
     }
 
-
+    // Executed when the PayPal payment is successful
     onApprove = paymentData => {
         axios.post(`${SERVER_HOST}/sales/${paymentData.orderID}/${this.props.carID}/${this.props.totalPrice}`, { headers: { "authorization": localStorage.token, "Content-type": "multipart/form-data" } })
             .then(res => {
@@ -41,7 +41,7 @@ export default class BuyCar extends Component {
             })
     }
 
-
+    // Executed when the PayPal payment is not successful
     onError = errorData => {
         this.setState({
             messageType: PayPalMessage.messageType.ERROR,

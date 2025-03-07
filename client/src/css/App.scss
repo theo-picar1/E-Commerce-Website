@@ -207,9 +207,9 @@ p {
 
         #user-status-container {
           @include flex-direction(row, unset, center, 20px);
-          z-index: 2000;
 
           div {
+
             #user-options-button {
               display: flex;
               flex-direction: row;
@@ -232,6 +232,7 @@ p {
               width: 150px;
               top: 85px;
               right: 32px;
+              z-index: 5;
 
               div {
                 padding: 5px 10px;
