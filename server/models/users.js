@@ -18,10 +18,10 @@ let purchasedProductSchema = new mongoose.Schema({
 })
 
 let purchaseHistory = new mongoose.Schema({
-  orderId: { type: String, required: true  },
-  date: { type: String, required: true  },
+  orderId: { type: String, required: true },
+  date: { type: String, required: true },
   items: { type: [purchasedProductSchema], default: [] },
-  totalAmount: { type: Number, required: true  },
+  totalAmount: { type: Number, required: true },
 })
 
 let usersSchema = new mongoose.Schema(
