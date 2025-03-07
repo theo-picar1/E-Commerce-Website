@@ -23,7 +23,7 @@ const createNewSaleDocument = (req, res, next) => {
 router.post('/sales', createNewSaleDocument)
 
 router.get(`/sales/:id`, (req, res, next) => {
-  salesModel.findOne({ userId: req.params.id }, (err, data) => {
+  salesModel.find({ userId: req.params.id }, (err, data) => {
     if (err) {
       return next(err)
     }
