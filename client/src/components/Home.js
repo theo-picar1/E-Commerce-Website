@@ -281,7 +281,8 @@ export default class Home extends Component {
       .then((response) => {
         if (response.data.errorMessage) {
           console.log(response.data.errorMessage)
-        } else {
+        } 
+        else {
           console.log("Product has been successfully removed from cart")
 
           this.setState(() => {
