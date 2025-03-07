@@ -23,6 +23,21 @@ router.get(`/users`, (req, res, next) => {
   })
 })
 
+// Get one user
+router.get(`/users/:id`, (req, res, next) => {
+  usersModel.findById(req.params.id, (err, data) => {
+    if (err) {
+      return next(err)
+    }
+
+    if (!data) {
+      return next(createError(401))
+    }
+
+    res.json(data)
+  })
+})
+
 // Reset user collection (for testing purposes)
 router.post(`/users/reset_user_collection`, (req, res, next) => {
   usersModel.deleteMany({}, (err, data) => {
@@ -31,23 +46,19 @@ router.post(`/users/reset_user_collection`, (req, res, next) => {
     }
     if (data) {
       const adminPassword = `123!"£qweQWE`
-      bcrypt.hash(
-        adminPassword,
-        parseInt(process.env.SALT_ROUNDS),
-        (err, hash) => {
-          usersModel.create(
-            { name: "Administrator", email: "admin@admin.com", password: hash },
-            (createError, createData) => {
-              if (createData) {
-                res.json(createData)
-              } else {
-                res.json({
-                  errorMessage: `Failed to create Admin user for testing purposes`,
-                })
-              }
-            }
-          )
+      bcrypt.hash(adminPassword, parseInt(process.env.SALT_ROUNDS), (err, hash) => {
+        usersModel.create({ name: "Administrator", email: "admin@admin.com", password: hash }, (createError, createData) => {
+          if (createData) {
+            res.json(createData)
+          }
+          else {
+            res.json({
+              errorMessage: `Failed to create Admin user for testing purposes`,
+            })
+          }
         }
+        )
+      }
       )
     }
     else {
@@ -66,7 +77,7 @@ router.post(`/users/register`, (req, res, next) => {
     }
     if (data) {
       res.json({ errorMessage: `User already exists` })
-    } 
+    }
     else {
       // Hashes the user's password for security purposes
       bcrypt.hash(req.body.password, parseInt(process.env.SALT_ROUNDS), (err, hash) => {
@@ -78,7 +89,7 @@ router.post(`/users/register`, (req, res, next) => {
             res.json({ errorMessage: "User creation failed." })
           }
 
-          res.json({ name: data.firstName, token: token })
+          res.json({ name: data.firstName })
         })
       }
       )
@@ -101,13 +112,13 @@ router.post(`/users/login/:email/:password`, (req, res, next) => {
         }
         if (result) {
           // This is where the token is created. The user's email and accessLevel is found inside the token
-          const token = jwt.sign({ email: data.email, accessLevel: data.accessLevel }, JWT_PRIVATE_KEY, { algorithm: "HS256", expiresIn: process.env.JWT_EXPIRY }
-          )
-          
+          const token = jwt.sign({ email: data.email, accessLevel: data.accessLevel }, JWT_PRIVATE_KEY, { algorithm: "HS256", expiresIn: process.env.JWT_EXPIRY })
+
           res.json({
             _id: data._id,
-            name: data.firstName,
-            accessName: data.firstName + " " + data.secondName,
+            accessFirstName: data.firstName,
+            accessSecondName: data.secondName,
+            email: data.email,
             accessLevel: process.env.ACCESS_LEVEL_USER,
             token: token,
           })
@@ -185,46 +196,6 @@ router.delete("/users/cart", (req, res) => {
 // User logout
 router.post(`/users/logout`, (req, res) => {
   res.json({})
-})
-
-// Get Pirchase History from a user
-router.get("/users/:id/purchaseHistory", (req, res) => {
-  const userId = req.params.id
-
-  usersModel.findById(userId, (findError, userData) => {
-    if (findError || !userData) {
-      return res.status(404).json({ errorMessage: "User not found" })
-    }
-
-    console.log(userData)
-
-    res.json(userData.purchaseHistory)
-  })
-})
-
-// Add to product history 
-router.post("/users/id/addToPurchaseHistory", (req, res) => {
-  const { userId, history } = req.body
-
-  if (!userId || !history) {
-    return res.status(400).json({ errorMessage: "Invalid request data" })
-  }
-
-  usersModel.findById(userId, (findError, userData) => {
-    if (findError || !userData) {
-      return res.status(404).json({ errorMessage: "User not found" })
-    }
-
-    userData.purchaseHistory.push(history)
-
-    userData.save((saveError, updatedUser) => {
-      if (saveError) {
-        return res.status(500).json({ errorMessage: "Failed to update cart" })
-      }
-
-      res.json(updatedUser)
-    })
-  })
 })
 
 module.exports = router

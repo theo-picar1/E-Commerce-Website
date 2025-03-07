@@ -25,7 +25,14 @@ export default class BuyCar extends Component {
 
     // Executed when the PayPal payment is successful
     onApprove = paymentData => {
-        axios.post(`${SERVER_HOST}/sales/${paymentData.orderID}/${this.props.carID}/${this.props.totalPrice}`, { headers: { "authorization": localStorage.token, "Content-type": "multipart/form-data" } })
+        const salesObject = {
+            paypalPaymentID: paymentData.orderID,
+            cartItems: this.props.cartItems,
+            totalPrice: this.props.totalPrice,
+            userId: localStorage.id
+        }
+
+        axios.post(`${SERVER_HOST}/sales`, salesObject)
             .then(res => {
                 this.setState({
                     messageType: PayPalMessage.messageType.SUCCESS,

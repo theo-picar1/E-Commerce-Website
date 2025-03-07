@@ -1,37 +1,40 @@
 const router = require(`express`).Router()
 
 const salesModel = require(`../models/sales`)
-const productsModel = require(`../models/products`)
-
 
 const createNewSaleDocument = (req, res, next) => {              
     let saleDetails = new Object()
 
-    saleDetails.paypalPaymentID = req.params.paymentID
-    saleDetails.cartItems = req.params.cartItems
-    saleDetails.totalPrice = req.params.totalPrice
-    saleDetails.firstName = req.params.firstName
-    saleDetails.secondName = req.params.secondName
-    saleDetails.email = req.params.email
-
-
-    // productsModel.findByIdAndUpdate({ _id: req.params.carID }, { sold: true }, (err, data) => {
-    //     if (err) {
-    //         return next(err)
-    //     }
-    // })
+    saleDetails.paypalPaymentID = req.body.paypalPaymentID
+    saleDetails.cartItems = req.body.cartItems
+    saleDetails.totalPrice = req.body.totalPrice
+    saleDetails.userId = req.body.userId
 
     salesModel.create(saleDetails, (err, data) => {
         if (err) {
             return next(err)
         }
-    })
 
-    return res.json({ success: true })
+        console.log("Created sale object!")
+    })
 }
 
-
 // Save a record of each Paypal payment
-router.post('/sales/:paymentID/:carID/:price/:customerName/:customerEmail', createNewSaleDocument)
+router.post('/sales', createNewSaleDocument)
+
+router.get(`/sales/:id`, (req, res, next) => {
+  salesModel.findOne({ userId: req.params.id }, (err, data) => {
+    if (err) {
+      return next(err)
+    }
+
+    if (!data) {
+      return next(createError(401))
+    }
+
+    console.log("Found sales with matching user ID!")
+    res.json(data)
+  })
+})
 
 module.exports = router

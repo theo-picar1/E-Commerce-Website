@@ -9,7 +9,7 @@ let productsSchema = new mongoose.Schema(
     rating: { type: Number, required: true },
     noOfReviews: { type: Number, required: true },
     stockQuantity: { type: Number, required: true },
-    productImgs: { type: [String], default: [] },
+    productImgs: { type: [String], default: [] }
   },
   {
     collection: `products`,
