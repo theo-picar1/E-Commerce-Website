@@ -28,6 +28,21 @@ router.get(`/users`, (req, res, next) => {
   })
 })
 
+// Get one user
+router.get(`/users/:id`, (req, res, next) => {
+  usersModel.findById(req.params.id, (err, data) => {
+    if (err) {
+      return next(err)
+    }
+
+    if (!data) {
+      return next(createError(401))
+    }
+
+    res.json(data)
+  })
+})
+
 // Reset user collection (for testing purposes)
 router.post(`/users/reset_user_collection`, (req, res, next) => {
   usersModel.deleteMany({}, (err, data) => {
@@ -36,23 +51,19 @@ router.post(`/users/reset_user_collection`, (req, res, next) => {
     }
     if (data) {
       const adminPassword = `123!"£qweQWE`
-      bcrypt.hash(
-        adminPassword,
-        parseInt(process.env.SALT_ROUNDS),
-        (err, hash) => {
-          usersModel.create(
-            { name: "Administrator", email: "admin@admin.com", password: hash },
-            (createError, createData) => {
-              if (createData) {
-                res.json(createData)
-              } else {
-                res.json({
-                  errorMessage: `Failed to create Admin user for testing purposes`,
-                })
-              }
-            }
-          )
+      bcrypt.hash(adminPassword, parseInt(process.env.SALT_ROUNDS), (err, hash) => {
+        usersModel.create({ name: "Administrator", email: "admin@admin.com", password: hash }, (createError, createData) => {
+          if (createData) {
+            res.json(createData)
+          }
+          else {
+            res.json({
+              errorMessage: `Failed to create Admin user for testing purposes`,
+            })
+          }
         }
+        )
+      }
       )
     } else {
       res.json({ errorMessage: `User is not logged in` })
@@ -70,12 +81,16 @@ router.post(`/users/register`, (req, res, next) => {
     }
     if (data) {
       res.json({ errorMessage: `User already exists` })
-    } else {
+    }
+    else {
       // Hashes the user's password for security purposes
-      bcrypt.hash(
-        req.body.password,
-        parseInt(process.env.SALT_ROUNDS),
-        (err, hash) => {
+      bcrypt.hash(req.body.password, parseInt(process.env.SALT_ROUNDS), (err, hash) => {
+        // password is now the hashed value when creating the user
+        usersModel.create({ ...req.body, password: hash }, (error, data) => {
+          if (!data) {
+            res.json({ errorMessage: "User creation failed." })
+          }
+
           // password is now the hashed value when creating the user
           usersModel.create({ ...req.body, password: hash }, (error, data) => {
             if (!data) {
@@ -85,7 +100,8 @@ router.post(`/users/register`, (req, res, next) => {
             res.json({ name: data.firstName })
           })
         }
-      )
+        )
+      })
     }
   })
 })
@@ -105,16 +121,13 @@ router.post(`/users/login/:email/:password`, (req, res, next) => {
         }
         if (result) {
           // This is where the token is created. The user's email and accessLevel is found inside the token
-          const token = jwt.sign(
-            { email: data.email, accessLevel: data.accessLevel },
-            JWT_PRIVATE_KEY,
-            { algorithm: "HS256", expiresIn: process.env.JWT_EXPIRY }
-          )
+          const token = jwt.sign({ email: data.email, accessLevel: data.accessLevel }, JWT_PRIVATE_KEY, { algorithm: "HS256", expiresIn: process.env.JWT_EXPIRY })
 
           res.json({
             _id: data._id,
-            name: data.firstName,
-            accessName: data.firstName + " " + data.secondName,
+            accessFirstName: data.firstName,
+            accessSecondName: data.secondName,
+            email: data.email,
             accessLevel: process.env.ACCESS_LEVEL_USER,
             token: token,
           })
@@ -212,48 +225,6 @@ router.delete("/users/cart", (req, res, next) => {
 // User logout
 router.post(`/users/logout`, (req, res) => {
   res.json({})
-})
-
-// Get Purchase History from a user
-router.get("/users/:id/purchaseHistory", (req, res, next) => {
-  const userId = req.params.id
-
-  usersModel.findById(userId, (findError, userData) => {
-    if (findError || !userData) {
-      res.json({ errorMessage: "User not found" })
-      return next(createError(404))
-    }
-
-    res.json(userData.purchaseHistory)
-  })
-})
-
-// Add to product history
-router.post("/users/id/addToPurchaseHistory", (req, res, next) => {
-  const { userId, history } = req.body
-
-  if (!userId || !history) {
-    res.json({ errorMessage: "Invalid request data" })
-    return next(createError(400))
-  }
-
-  usersModel.findById(userId, (findError, userData) => {
-    if (findError || !userData) {
-      res.json({ errorMessage: "User not found" })
-      return next(createError(404))
-    }
-
-    userData.purchaseHistory.push(history)
-
-    userData.save((saveError, updatedUser) => {
-      if (saveError) {
-        res.json({ errorMessage: "Failed to update cart" })
-        return next(createError(500))
-      }
-
-      res.json(updatedUser)
-    })
-  })
 })
 
 module.exports = router
