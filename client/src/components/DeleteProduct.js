@@ -31,6 +31,8 @@ export default class DeleteProduct extends Component {
         } else {
           console.log("Record not deleted")
         }
+      }).catch((err) => {
+        alert("Error in deleting product")
       })
   }
 

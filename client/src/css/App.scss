@@ -1273,3 +1273,58 @@ p {
     }
   }
 }
+
+// PayPal message page
+.paypal-message-container {
+  @extend .form-container;
+
+  .paypal-content {
+    @include flex-direction(column, unset, center, 20px);
+    background-color: $website-white;
+    border-radius: 5px;
+    padding: 40px;
+    width: max-content;
+
+    #website-title {
+      @include flex-direction(row, unset, center, 10px);
+
+      #superments {
+        @include flex-direction(row, unset, center, 0);
+
+        .title {
+          font-size: 45px;
+        }
+
+        #super {
+          color: $website-red;
+        }
+      }
+    }
+
+    .message-content {
+      @include flex-direction(column, unset, center, 15px);
+      border: thin solid $website-black;
+      padding: 20px;
+
+      .message-header {
+        @extend .title;
+      }
+
+      button {
+        appearance: none;
+        outline: none;
+        border: none;
+        width: 250px;
+        padding: 12px 0px;
+        color: $website-white;
+        background-color: $website-red;
+        font-weight: 800;
+
+        &:hover {
+          cursor: pointer;
+          filter: opacity(0.8);
+        }
+      }
+    }
+  }
+}
