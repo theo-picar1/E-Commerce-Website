@@ -77,6 +77,10 @@ router.put(`/products/:id`, (req, res, next) => {
 router.delete(`/products/:id`, (req, res, next) => {
   jwt.verify(req.headers.authorization, JWT_PRIVATE_KEY, { algorithm: "HS256" }, (err, decodedToken) => {
     if (err) {
+      if (err.name === 'TokenExpiredError') {
+        return next(createError(401, 'Token has expired'));
+      }
+
       return next(createError(401))
     }
     else {
