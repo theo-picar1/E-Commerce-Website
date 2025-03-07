@@ -30,6 +30,7 @@ export default class Login extends Component {
     })
 
     if (this.state.email !== "" && this.state.password !== "") {
+      // Method to login user to DB with passed in email and password
       axios.post(`${SERVER_HOST}/users/login/${this.state.email}/${this.state.password}`)
         .then((res) => {
           console.log(res.data)
@@ -45,6 +46,7 @@ export default class Login extends Component {
               localStorage.accessLevel = res.data.accessLevel
               localStorage.id = res.data._id
               localStorage.token = res.data.token
+              // Remove the temporary guest object when login is successful
               localStorage.removeItem("user")
 
               this.setState({
@@ -56,8 +58,6 @@ export default class Login extends Component {
             console.log("Login failed")
             return
           }
-        }).catch((err) => {
-          console.log("Error logging in: " + err)
         })
     }
   }

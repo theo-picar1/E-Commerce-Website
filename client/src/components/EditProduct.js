@@ -86,8 +86,6 @@ export default class EditProduct extends Component {
                 else {
                     console.log(`Record not updated`)
                 }
-            }).catch(err => {
-                console.log("Error updating record: " + err)
             })
     }
 
