@@ -93,6 +93,7 @@ export default class PurchaseHistory extends Component {
                       <div className="product-details">
                         <p>{item.name}</p>
                         <p>€{item.price}</p>
+                        <p>x{item.quantity} bought</p>
                       </div>
                     </div>
                   ))}

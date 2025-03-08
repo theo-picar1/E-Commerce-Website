@@ -167,15 +167,13 @@ export default class Home extends Component {
 
   // Add product to guest user's cart
   addProductToUnLoggedUserCart = (product) => {
-    // use JSON.parse to convert string to object
-    // as localStorage only stores strings
+    // use JSON.parse to convert string to object as localStorage only stores strings
     let user = JSON.parse(localStorage.getItem("user"))
 
     // add product to cart
     user.cart.push(product)
 
-    // use JSON.stringify to convert object to string
-    // as localStorage only stores strings
+    // use JSON.stringify to convert object to string as localStorage only stores strings
     localStorage.setItem("user", JSON.stringify(user))
 
     console.log("Product added to cart successfully")
@@ -192,8 +190,7 @@ export default class Home extends Component {
   }
 
   removeProductFromUnLoggedUserCart = (product) => {
-    // use JSON.parse to convert string to object
-    // as localStorage only stores strings
+    // use JSON.parse to convert string to object as localStorage only stores strings
     let user = JSON.parse(localStorage.getItem("user"))
 
     // Find the index of the product
