@@ -33,7 +33,8 @@ export default class ShoppingCart extends Component {
 
       if (cartItems[productName]) {
         cartItems[productName].quantity += 1
-      } else {
+      } 
+      else {
         cartItems[productName] = {
           ...product,
           quantity: 1,

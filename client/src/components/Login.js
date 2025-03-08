@@ -42,16 +42,16 @@ export default class Login extends Component {
             else {
               console.log("User logged in")
 
-              localStorage.name = res.data.accessName
               localStorage.accessLevel = res.data.accessLevel
               localStorage.id = res.data._id
               localStorage.token = res.data.token
+              
               // Remove the temporary guest object when login is successful
               localStorage.removeItem("user")
 
               this.setState({
                 isLoggedIn: true,
-                name: res.data.name,
+                name: res.data.accessFirstName
               })
             }
           } else {
