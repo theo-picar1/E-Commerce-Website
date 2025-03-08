@@ -5,17 +5,14 @@ const bcrypt = require("bcryptjs")
 const jwt = require("jsonwebtoken")
 const fs = require("fs")
 // Purely for security reasons. Instead of the actual key in the env file, we read (fs) the filename of JWT_PRIVATE_KEY_FILENAME
-const JWT_PRIVATE_KEY = fs.readFileSync(
-  process.env.JWT_PRIVATE_KEY_FILENAME,
-  "utf8"
-)
+const JWT_PRIVATE_KEY = fs.readFileSync(process.env.JWT_PRIVATE_KEY_FILENAME, "utf8")
 
 // Error handling
 // All error handling was from https://derek.comp.dkit.ie/ at Full Stack Development/Error Handling
 const createError = require("http-errors")
 
 // Get all users
-router.get(`/users`, (req, res, next) => {
+const getAllUsers = (req, res, next) => {
   usersModel.find((err, data) => {
     if (err) {
       return next(err)
@@ -26,10 +23,9 @@ router.get(`/users`, (req, res, next) => {
     }
     res.json(data)
   })
-})
+}
 
-// Get one user
-router.get(`/users/:id`, (req, res, next) => {
+const getOneUser = (req, res, next) => {
   usersModel.findById(req.params.id, (err, data) => {
     if (err) {
       return next(err)
@@ -41,7 +37,7 @@ router.get(`/users/:id`, (req, res, next) => {
 
     res.json(data)
   })
-})
+}
 
 // Reset user collection (for testing purposes)
 router.post(`/users/reset_user_collection`, (req, res, next) => {
@@ -72,119 +68,100 @@ router.post(`/users/reset_user_collection`, (req, res, next) => {
   })
 })
 
-// In Derek's example, a token is created in here because they are automatically logged in after registering
-// In ours, the user is redirected to the Login page instead
-router.post(`/users/register`, (req, res, next) => {
+// Check if user already exists function
+const checkUserExistsForRegister = (req, res, next) => {
   usersModel.findOne({ email: req.body.email }, (err, data) => {
     if (err) {
       return next(err)
     }
     if (data) {
-      res.json({ errorMessage: `User already exists` })
+      return res.json({ errorMessage: `User already exists` })
     }
-    else {
-      // Hashes the user's password for security purposes
-      bcrypt.hash(req.body.password, parseInt(process.env.SALT_ROUNDS), (err, hash) => {
-        // password is now the hashed value when creating the user
-        usersModel.create({ ...req.body, password: hash }, (error, data) => {
-          if (!data) {
-            res.json({ errorMessage: "User creation failed." })
-          }
 
-          // password is now the hashed value when creating the user
-          usersModel.create({ ...req.body, password: hash }, (error, data) => {
-            if (!data) {
-              res.json({ errorMessage: "User creation failed." })
-            }
-
-            res.json({ name: data.firstName })
-          })
-        }
-        )
-      })
-    }
+    next()
   })
-})
+}
 
-// Similar to register function above. Only difference is that we assign an access 
-router.post(`/users/register/checkout`, (req, res, next) => {
-  usersModel.findOne({ email: req.body.email }, (err, data) => {
+// Hash user's password and create the new user function
+const hashPassword = (req, res, next) => {
+  bcrypt.hash(req.body.password, parseInt(process.env.SALT_ROUNDS), (err, hash) => {
     if (err) {
       return next(err)
     }
-    if (data) {
-      res.json({ errorMessage: `User already exists` })
-    }
-    else {
-      // Hashes the user's password for security purposes
-      bcrypt.hash(req.body.password, parseInt(process.env.SALT_ROUNDS), (err, hash) => {
-        // password is now the hashed value when creating the user
-        usersModel.create({ ...req.body, password: hash }, (error, data) => {
-          if (!data) {
-            res.json({ errorMessage: "User creation failed." })
-          }
-
-          // password is now the hashed value when creating the user
-          usersModel.create({ ...req.body, password: hash }, (error, data) => {
-            if (!data) {
-              res.json({ errorMessage: "User creation failed." })
-            }
-
-            res.json({ name: data.firstName })
-          })
-        }
-        )
-      })
-    }
+    req.hashedPassword = hash
+    next()
   })
-})
+}
 
-// User login
-router.post(`/users/login/:email/:password`, (req, res, next) => {
+const createNewUser = (req, res, next) => {
+  usersModel.create({ ...req.body, password: req.hashedPassword }, (error, data) => {
+    if (error || !data) {
+      return res.json({ errorMessage: "User creation failed." })
+    }
+    res.json({ name: data.firstName })
+  })
+}
+
+// Middleware to find the user by email
+const findUserByEmail = (req, res, next) => {
   usersModel.findOne({ email: req.params.email }, (err, data) => {
     if (err) {
       return next(err)
     }
-    if (data) {
-      // In here, we compare the hashed value of the given password to the hashed password of the email the user is logging into
-      // The hashed value will be equal to each other if the passwords are also the same
-      bcrypt.compare(req.params.password, data.password, (err, result) => {
-        if (err) {
-          return next(err)
-        }
-        if (result) {
-          // This is where the token is created. The user's email and accessLevel is found inside the token
-          const token = jwt.sign({ email: data.email, accessLevel: data.accessLevel }, JWT_PRIVATE_KEY, { algorithm: "HS256", expiresIn: process.env.JWT_EXPIRY })
-
-          res.json({
-            _id: data._id,
-            accessFirstName: data.firstName,
-            accessSecondName: data.secondName,
-            email: data.email,
-            accessLevel: process.env.ACCESS_LEVEL_USER,
-            token: token,
-          })
-        } else {
-          return next(createError(401))
-        }
-      })
-    } else {
+    if (!data) {
       res.json({ errorMessage: `Email has not been registered yet` })
       return next(createError(401))
     }
+    // For next middleware to use because data would not be defined in middleware below
+    req.user = data
+    next()
   })
-})
+}
 
-// Add product to user's cart
-router.post("/users/cart", (req, res, next) => {
+// Compare the values of two hashed passwords for logging in
+const compareHashedPasswords = (req, res, next) => {
+  bcrypt.compare(req.params.password, req.user.password, (err, result) => {
+    if (err) {
+      return next(err)
+    }
+    if (!result) {
+      return next(createError(401))
+    }
+    next()
+  })
+}
+
+const createTokenAndSendBackDetails = (req, res) => {
+  const token = jwt.sign({ email: req.user.email, accessLevel: req.user.accessLevel }, JWT_PRIVATE_KEY, { algorithm: "HS256", expiresIn: process.env.JWT_EXPIRY }
+  )
+
+  res.json({
+    _id: req.user._id,
+    accessFirstName: req.user.firstName,
+    accessSecondName: req.user.secondName,
+    email: req.user.email,
+    accessLevel: process.env.ACCESS_LEVEL_USER,
+    token: token,
+  })
+}
+
+// Middleware to check if user id and product are valid
+const validateProducts = (req, res, next) => {
   // get user id and product from body
-  const { userId, product } = req.body
+  const { product } = req.body
 
   // check if user id and product are valid
   if (!product || !product._id) {
     res.json({ errorMessage: "Invalid product data" })
     return next(createError(400))
   }
+
+  next()
+}
+
+// Middleware to find user by id
+const findUserByIdForCart = (req, res, next) => {
+  const { userId } = req.body
 
   // find user by id
   usersModel.findById(userId, (findError, userData) => {
@@ -194,70 +171,83 @@ router.post("/users/cart", (req, res, next) => {
       return next(createError(404))
     }
 
-    // add product to user's cart
-    userData.cart.push(product)
-
-    // save user to database
-    userData.save((saveError, updatedUser) => {
-      if (saveError) {
-        res.json({ errorMessage: "Failed to update cart" })
-        return next(createError(500))
-      }
-
-      // return updated user
-      res.json(updatedUser)
-    })
+    req.user = userData
+    next()
   })
-})
+}
 
-// Remove product from user's cart
-router.delete("/users/cart", (req, res, next) => {
-  // get user id and product from body
-  const { userId, product } = req.body
+// Middleware to add product to user's cart and save
+const addProductToCart = (req, res, next) => {
+  const { product } = req.body
 
-  // check if user id and product are valid
-  if (!userId || !product.name) {
-    res.json({ errorMessage: "Missing userId or productName" })
-    return next(createError(400))
+  // add product to user's cart
+  req.user.cart.push(product)
+
+  // save user to database
+  req.user.save((saveError, updatedUser) => {
+    if (saveError) {
+      res.json({ errorMessage: "Failed to update cart" })
+      return next(createError(500))
+    }
+
+    // return updated user
+    res.json(updatedUser)
+  })
+}
+
+const deleteProductFromCart = (req, res, next) => {
+  const { product } = req.body
+
+  // remove product from user's cart
+  const productIndex = req.user.cart.findIndex(
+    (item) => item.name === product.name
+  )
+
+  // if product not found in cart, return error
+  if (productIndex === -1) {
+    res.json({ errorMessage: "Product not found in cart" })
+    return next(createError(404))
   }
 
-  // find user by id
-  usersModel.findById(userId, (findError, userData) => {
-    if (findError || !userData) {
-      res.json({ errorMessage: "User not found" })
-      return next(createError(404))
+  // remove product from cart
+  req.user.cart.splice(productIndex, 1)
+
+  // save user to database
+  req.user.save((saveError, updatedUser) => {
+    if (saveError) {
+      res.json({ errorMessage: "Failed to update cart" })
+      return next(createError(500))
     }
 
-    // remove product from user's cart
-    const productIndex = userData.cart.findIndex(
-      (item) => item.name === product.name
-    )
-
-    // if product not found in cart, return error
-    if (productIndex === -1) {
-      res.json({ errorMessage: "Product not found in cart" })
-      return next(createError(404))
-    }
-
-    // remove product from cart
-    userData.cart.splice(productIndex, 1)
-
-    // save user to database
-    userData.save((saveError, updatedUser) => {
-      if (saveError) {
-        res.json({ errorMessage: "Failed to update cart" })
-        return next(createError(500))
-      }
-
-      // return updated user
-      res.json(updatedUser)
-    })
+    // return updated user
+    res.json(updatedUser)
   })
-})
+}
 
 // User logout
-router.post(`/users/logout`, (req, res) => {
+const logout = (req, res) => {
   res.json({})
-})
+}
+
+// Get all users
+router.get(`/users`, getAllUsers)
+
+// Get one user
+router.get(`/users/:id`, getOneUser)
+
+// Register function
+router.post(`/users/register`, checkUserExistsForRegister, hashPassword, createNewUser)
+
+// Login function
+router.post(`/users/login/:email/:password`, findUserByEmail, compareHashedPasswords, createTokenAndSendBackDetails)
+
+// Add product to user's cart
+router.post("/users/cart", validateProducts, findUserByIdForCart, addProductToCart)
+
+// Delete a product from the user's cart
+router.delete("/users/cart", validateProducts, findUserByIdForCart, deleteProductFromCart)
+
+// User logout
+router.post(`/users/logout`, logout)
 
 module.exports = router
