@@ -231,8 +231,7 @@ export default class Home extends Component {
     const userId = localStorage.id
 
     // passes in user id and product
-    axios
-      .post(`${SERVER_HOST}/users/cart`, { userId, product })
+    axios.post(`${SERVER_HOST}/users/cart`, { userId, product })
       .then((res) => {
         if (res.data) {
           if (res.data.errorMessage) {

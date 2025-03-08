@@ -63,22 +63,46 @@ export default class PurchaseHistory extends Component {
 
   render() {
     return (
-      <div className="purchase-history-container">
-        <div className="purchase-history-scrollable-content">
-          {this.state.purchaseDetails.map(order => (
-            <div>
-              <h1>ORDER ID: {order.paypalPaymentID}</h1>
-
-              {order.cartItems.map(item => (
-                <div className="order-items">
-                    <p>{item.name}</p>
+      <React.Fragment>
+        <Header />
+        <div className="purchase-history-container">
+          <div className="purchase-history-scrollable-content">
+            {this.state.purchaseDetails.map(order => (
+              <div className="order-container">
+                <div className="order-header">
+                  <div className="left-content">
+                    <div>
+                      <p className="header">DATE ORDERED</p>
+                      <p className="body">N/A</p>
+                    </div>
+                    <div>
+                      <p className="header">TOTAL AMOUNT</p>
+                      <p className="body">€{order.totalPrice}</p>
+                    </div>
+                    <div>
+                      <p className="header">ORDER OWNER</p>
+                      <p className="body">{this.state.firstName} {this.state.secondName}</p>
+                    </div>
+                  </div>
+                  <p className="order-id"> ORDER # {order.paypalPaymentID}</p>
                 </div>
-              ))}
-            </div>
-          ))}
+                <div className="order-items-container">
+                  {order.cartItems.map(item => (
+                    <div className="order-items">
+                      <img src={item.productImgs[0]} className="product-image" />
+                      <div className="product-details">
+                        <p>{item.name}</p>
+                        <p>€{item.price}</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
         <Footer />
-      </div>
+      </React.Fragment>
     )
   }
 }
