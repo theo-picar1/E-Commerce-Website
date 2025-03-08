@@ -106,6 +106,39 @@ router.post(`/users/register`, (req, res, next) => {
   })
 })
 
+// Similar to register function above. Only difference is that we assign an access 
+router.post(`/users/register/checkout`, (req, res, next) => {
+  usersModel.findOne({ email: req.body.email }, (err, data) => {
+    if (err) {
+      return next(err)
+    }
+    if (data) {
+      res.json({ errorMessage: `User already exists` })
+    }
+    else {
+      // Hashes the user's password for security purposes
+      bcrypt.hash(req.body.password, parseInt(process.env.SALT_ROUNDS), (err, hash) => {
+        // password is now the hashed value when creating the user
+        usersModel.create({ ...req.body, password: hash }, (error, data) => {
+          if (!data) {
+            res.json({ errorMessage: "User creation failed." })
+          }
+
+          // password is now the hashed value when creating the user
+          usersModel.create({ ...req.body, password: hash }, (error, data) => {
+            if (!data) {
+              res.json({ errorMessage: "User creation failed." })
+            }
+
+            res.json({ name: data.firstName })
+          })
+        }
+        )
+      })
+    }
+  })
+})
+
 // User login
 router.post(`/users/login/:email/:password`, (req, res, next) => {
   usersModel.findOne({ email: req.params.email }, (err, data) => {
