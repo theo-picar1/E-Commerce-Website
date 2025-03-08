@@ -2,6 +2,7 @@ import React, { Component } from "react"
 import { Link } from "react-router-dom"
 
 import BuyProducts from "./BuyProducts"
+import { ACCESS_LEVEL_GUEST } from "../config/global_constants"
 
 export default class ShoppingCart extends Component {
   constructor(props) {
@@ -33,7 +34,7 @@ export default class ShoppingCart extends Component {
 
       if (cartItems[productName]) {
         cartItems[productName].quantity += 1
-      } 
+      }
       else {
         cartItems[productName] = {
           ...product,
@@ -87,19 +88,13 @@ export default class ShoppingCart extends Component {
                   <h4>{product.name}</h4>
                   <p>${product.price.toFixed(2)}</p>
                   <div className="quantity">
-                    <button
-                      className="qty-btn minus-btn"
-                      onClick={() => this.props.deleteProductFromCart(product)}
-                    >
-                      -
-                    </button>
+                    <button className="qty-btn minus-btn" onClick={() => this.props.deleteProductFromCart(product)}>-</button>
                     <span className="qty-number">{product.quantity}</span>
-                    <button
-                      className="qty-btn plus-btn"
-                      onClick={() => this.props.addProductToCart(product)}
-                    >
-                      +
-                    </button>
+                    {product.quantity < product.stockQuantity ?
+                      <button className="qty-btn plus-btn" onClick={() => this.props.addProductToCart(product)}>+</button>
+                      :
+                      null
+                    }
                   </div>
                 </div>
                 <button
@@ -118,10 +113,11 @@ export default class ShoppingCart extends Component {
             <span id="subtotal">${this.calculateSubtotal()}</span>
           </div>
           {this.state.cartItems.length > 0 ?
-            <BuyProducts totalPrice={this.calculateSubtotal()} cartItems={this.state.cartItems}>
-              <button className="checkout-btn">REVIEW &amp; PAY</button>
-            </BuyProducts>
-          :
+            localStorage.accessLevel <= ACCESS_LEVEL_GUEST ?
+              <p>You need to log in to buy these items</p>
+              :
+              <BuyProducts totalPrice={this.calculateSubtotal()} cartItems={this.state.cartItems}></BuyProducts>
+            :
             <p>You have 0 items in your cart. Add some items to proceed with payments!</p>
           }
         </div>

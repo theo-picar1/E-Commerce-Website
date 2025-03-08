@@ -8,7 +8,8 @@ let cartItemsSchema = new mongoose.Schema({
     rating: { type: Number, required: true },
     noOfReviews: { type: Number, required: true },
     stockQuantity: { type: Number, required: true },
-    productImgs: { type: [String], default: [] }
+    productImgs: { type: [String], default: [] },
+    quantity: {type: Number, default: 0}
 })
 
 let salesSchema = new mongoose.Schema({

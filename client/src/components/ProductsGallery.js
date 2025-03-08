@@ -51,10 +51,7 @@ export default class ProductsGallery extends Component {
                             <div className="product-details">
                                 <p className="product-name">{product["name"]}</p>
                                 <p className="product-price">€{product["price"]}.99</p>
-                                <button
-                                    className="add-to-cart-button"
-                                    onClick={() => this.props.addProductToCart(product)}
-                                >
+                                <button className="add-to-cart-button" onClick={() => this.props.addProductToCart(product)}>
                                     <img src="/images/shopping-cart.png" />
                                     <p>ADD TO CART</p>
                                 </button>
