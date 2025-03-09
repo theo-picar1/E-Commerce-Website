@@ -196,6 +196,22 @@ const addProductToCart = (req, res, next) => {
   })
 }
 
+
+// Find a product by the passed in id and delete it
+const findUserByIdAndDelete = (req, res, next) => {
+  usersModel.findByIdAndRemove(req.params.id, (err, data) => {
+    if (err) {
+      return next(err)
+    }
+
+    if (!data) {
+      return next(createError(404))
+    }
+
+    res.json(data)
+  })
+}
+
 // Same logic but we're deleting a product from the mathcing user's cart
 const deleteProductFromCart = (req, res, next) => {
   const { product } = req.body
@@ -248,6 +264,9 @@ router.post("/users/cart", validateProducts, findUserByIdForCart, addProductToCa
 
 // Delete a product from the user's cart
 router.delete("/users/cart", validateProducts, findUserByIdForCart, deleteProductFromCart)
+
+// Delete one record
+router.delete(`/users/:id`, findUserByIdAndDelete)
 
 // User logout
 router.post(`/users/logout`, logout)
