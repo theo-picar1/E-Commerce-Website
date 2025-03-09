@@ -34,9 +34,6 @@ export default class UserFilters extends Component {
                         <option value="name-asc">Name (A-Z)</option>
                         <option value="name-desc">Name (Z-A)</option>
                     </select>
-                    <div id="action-buttons">
-                        <button className="del-button">DELETE USERS</button>
-                    </div>
                 </div>
                 {/* <div id="filter-results">
                     <p>Showing 0 result of {this.props.users.length} items</p>
