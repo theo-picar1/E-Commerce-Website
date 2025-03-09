@@ -32,10 +32,7 @@ let usersSchema = new mongoose.Schema(
     password: { type: String, required: true },
     houseAddress: { type: String, default: "" },
     telephoneNo: { type: String, required: true },
-    accessLevel: {
-      type: Number,
-      default: parseInt(process.env.ACCESS_LEVEL_USER),
-    },
+    accessLevel: { type: Number, default: parseInt(process.env.ACCESS_LEVEL_USER), },
     profilePhotoFilename: { type: String, default: "" },
     cart: { type: [productsSchema], default: [] },
     purchaseHistory: { type: [purchaseHistory], default: [] },

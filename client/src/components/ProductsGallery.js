@@ -1,6 +1,6 @@
 import React, { Component } from "react"
 import { Link } from "react-router-dom"
-import { ACCESS_LEVEL_GUEST } from "../config/global_constants"
+import { ACCESS_LEVEL_ADMIN } from "../config/global_constants"
 
 export default class ProductsGallery extends Component {
     render() {
@@ -18,7 +18,7 @@ export default class ProductsGallery extends Component {
                             <option value="rating-desc">Highest Rating</option>
                             <option value="rating-asc">Lowest Rating</option>
                         </select>
-                        {localStorage.accessLevel > ACCESS_LEVEL_GUEST ?
+                        {localStorage.accessLevel >= ACCESS_LEVEL_ADMIN ?
                             <Link to={"/add-product"}><button className="add-button">ADD PRODUCT</button></Link>
                             :
                             null}
@@ -27,7 +27,7 @@ export default class ProductsGallery extends Component {
                 <div id="products-gallery">
                     {this.props.products.map((product) => (
                         <div className="product" key={product._id}>
-                            {localStorage.accessLevel > ACCESS_LEVEL_GUEST ?
+                            {localStorage.accessLevel >= ACCESS_LEVEL_ADMIN ?
                                 <div className="action-buttons">
                                     <Link to={"/edit-product/" + product._id}><button className="edit-button"><img src="images/edit-icon.png" className="website-icon" /></button></Link>
                                     <Link to={"/delete-product/" + product._id}><button className="delete-button"><img src="images/delete-icon.png" className="website-icon" /></button></Link>
@@ -51,10 +51,14 @@ export default class ProductsGallery extends Component {
                             <div className="product-details">
                                 <p className="product-name">{product["name"]}</p>
                                 <p className="product-price">€{product["price"]}.99</p>
-                                <button className="add-to-cart-button" onClick={() => this.props.addProductToCart(product)}>
-                                    <img src="/images/shopping-cart.png" />
-                                    <p>ADD TO CART</p>
-                                </button>
+                                {localStorage.accessLevel < ACCESS_LEVEL_ADMIN ?
+                                    <button className="add-to-cart-button" onClick={() => this.props.addProductToCart(product)}>
+                                        <img src="/images/shopping-cart.png" />
+                                        <p>ADD TO CART</p>
+                                    </button>
+                                    :
+                                    null
+                                }
                             </div>
                         </div>
                     ))}

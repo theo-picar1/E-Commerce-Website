@@ -40,33 +40,33 @@ const getOneUser = (req, res, next) => {
 }
 
 // Reset user collection (for testing purposes and not actually used)
-router.post(`/users/reset_user_collection`, (req, res, next) => {
-  usersModel.deleteMany({}, (err, data) => {
-    if (err) {
-      return next(err)
-    }
-    if (data) {
-      const adminPassword = `123!"£qweQWE`
-      bcrypt.hash(adminPassword, parseInt(process.env.SALT_ROUNDS), (err, hash) => {
-        usersModel.create({ name: "Administrator", email: "admin@admin.com", password: hash }, (createError, createData) => {
-          if (createData) {
-            res.json(createData)
-          }
-          else {
-            res.json({
-              errorMessage: `Failed to create Admin user for testing purposes`,
-            })
-          }
-        }
-        )
-      }
-      )
-    } else {
-      res.json({ errorMessage: `User is not logged in` })
-      return next(createError(401))
-    }
-  })
-})
+// router.post(`/users/reset_user_collection`, (req, res, next) => {
+//   usersModel.deleteMany({}, (err, data) => {
+//     if (err) {
+//       return next(err)
+//     }
+//     if (data) {
+//       const adminPassword = `123!"£qweQWE`
+//       bcrypt.hash(adminPassword, parseInt(process.env.SALT_ROUNDS), (err, hash) => {
+//         usersModel.create({ name: "Administrator", email: "admin@admin.com", password: hash }, (createError, createData) => {
+//           if (createData) {
+//             res.json(createData)
+//           }
+//           else {
+//             res.json({
+//               errorMessage: `Failed to create Admin user for testing purposes`,
+//             })
+//           }
+//         }
+//         )
+//       }
+//       )
+//     } else {
+//       res.json({ errorMessage: `User is not logged in` })
+//       return next(createError(401))
+//     }
+//   })
+// })
 
 // Check if user already exists for registering a user
 const checkUserExistsForRegister = (req, res, next) => {
@@ -93,6 +93,7 @@ const hashPassword = (req, res, next) => {
   })
 }
 
+// For creating the user if they pass all previous checks
 const createNewUser = (req, res, next) => {
   usersModel.create({ ...req.body, password: req.hashedPassword }, (error, data) => {
     if (error || !data) {
@@ -133,15 +134,14 @@ const compareHashedPasswords = (req, res, next) => {
 
 // For creating the token when the user successfully logs in
 const createTokenAndSendBackDetails = (req, res) => {
-  const token = jwt.sign({ email: req.user.email, accessLevel: req.user.accessLevel }, JWT_PRIVATE_KEY, { algorithm: "HS256", expiresIn: process.env.JWT_EXPIRY }
-  )
+  const token = jwt.sign({ email: req.user.email, accessLevel: req.user.accessLevel }, JWT_PRIVATE_KEY, { algorithm: "HS256", expiresIn: process.env.JWT_EXPIRY })
 
   res.json({
     _id: req.user._id,
     accessFirstName: req.user.firstName,
     accessSecondName: req.user.secondName,
     email: req.user.email,
-    accessLevel: process.env.ACCESS_LEVEL_USER,
+    accessLevel: req.user.accessLevel,
     token: token,
   })
 }

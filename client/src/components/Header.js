@@ -1,6 +1,6 @@
 import React, { Component } from "react"
 import { Link } from "react-router-dom"
-import { ACCESS_LEVEL_GUEST } from "../config/global_constants"
+import { ACCESS_LEVEL_GUEST, ACCESS_LEVEL_ADMIN } from "../config/global_constants"
 
 export default class Header extends Component {
   handleSearchChange = (e) => {
@@ -58,32 +58,39 @@ export default class Header extends Component {
             </div>
           )}
           <div id="user-tools">
-            {!this.props.showCustomers && (
-              <div
-                onClick={() => toggleCartVisibility()}
-                id="shopping-cart-button"
-              >
-                <img src="/images/shopping-cart.png" />
-                <p>{cartCounter}</p>
-              </div>
-            )}
-            {!this.props.showCustomers ? (
-              <button
-                className="change-view-button"
-                onClick={this.props.showCustomersOnClick}
-              >
-                <img src="images/user.png" />
-                <p>CUSTOMERS</p>
-              </button>
-            ) : (
-              <button
-                className="change-view-button"
-                onClick={this.props.showProductsOnClick}
-              >
-                <img src="images/shopping-cart.png" />
-                <p>PRODUCTS</p>
-              </button>
-            )}
+            {localStorage.accessLevel < ACCESS_LEVEL_ADMIN ?
+              !this.props.showCustomers && (
+                <div
+                  onClick={() => toggleCartVisibility()}
+                  id="shopping-cart-button"
+                >
+                  <img src="/images/shopping-cart.png" />
+                  <p>{cartCounter}</p>
+                </div>
+              )
+              :
+              null
+            }
+            {localStorage.accessLevel >= ACCESS_LEVEL_ADMIN ?
+              !this.props.showCustomers ?
+                <button
+                  className="change-view-button"
+                  onClick={this.props.showCustomersOnClick}
+                >
+                  <img src="images/user.png" />
+                  <p>CUSTOMERS</p>
+                </button>
+                :
+                <button
+                  className="change-view-button"
+                  onClick={this.props.showProductsOnClick}
+                >
+                  <img src="images/shopping-cart.png" />
+                  <p>PRODUCTS</p>
+                </button>
+
+              :
+              null}
             {localStorage.accessLevel > ACCESS_LEVEL_GUEST ? (
               <div id="user-status-container" onClick={this.toggleModal}>
                 <p id="user-status"></p>
