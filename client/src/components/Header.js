@@ -113,7 +113,7 @@ export default class Header extends Component {
                     {localStorage.accessLevel < ACCESS_LEVEL_ADMIN ?
                       <React.Fragment>
                         <div>
-                          <Link className="link" to={"/PurchaseHistory"}>
+                          <Link className="link" to={`/PurchaseHistory/${localStorage.id}`}>
                             <p id="purchaseHistoryLink">Check Purchase History</p>
                           </Link>
                         </div>

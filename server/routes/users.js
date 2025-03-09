@@ -110,7 +110,6 @@ const findUserByEmail = (req, res, next) => {
       return next(err)
     }
     if (!data) {
-      res.json({ errorMessage: `Email has not been registered yet` })
       return next(createError(401))
     }
     // For next middleware to use because data would not be defined in middleware below
