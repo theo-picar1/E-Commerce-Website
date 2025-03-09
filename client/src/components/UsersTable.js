@@ -27,15 +27,17 @@ export default class UsersTable extends Component {
                 <td>{user["houseAddress"]}</td>
                 <td>{user["telephoneNo"]}</td>
                 {localStorage.accessLevel > ACCESS_LEVEL_GUEST && (
-                  <td>
-                    <div className="action-buttons">
-                      
-                      <Link to={`/delete-user/${user._id}`}>
-                        <button className="delete-button">
-                          <img src="/images/delete-icon.png" className="website-icon" alt="Delete" />
-                        </button>
-                      </Link>
-                    </div>
+                  <td id="action-buttons">
+                    <Link to={`/delete-user/${user._id}`}>
+                      <button className="delete-button">
+                        <img src="/images/delete-icon.png" className="website-icon" alt="Delete" />
+                      </button>
+                    </Link>
+                    <Link to={"/PurchaseHistory/" +user._id}>
+                      <button className="purchase-history-button">
+                        <p>Purchase history</p>
+                      </button>
+                    </Link>
                   </td>
                 )}
               </tr>

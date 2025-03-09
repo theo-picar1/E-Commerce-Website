@@ -11,7 +11,7 @@ import ShoppingCartSidebar from "./ShoppingCartSidebar.js"
 
 import axios from "axios"
 
-import { ACCESS_LEVEL_USER } from "../config/global_constants.js"
+import { ACCESS_LEVEL_GUEST, ACCESS_LEVEL_USER } from "../config/global_constants.js"
 
 import { SERVER_HOST } from "../config/global_constants.js"
 
@@ -446,7 +446,7 @@ export default class Home extends Component {
       password: "",
       houseAddress: "",
       telephoneNo: "",
-      accessLevel: ACCESS_LEVEL_USER,
+      accessLevel: ACCESS_LEVEL_GUEST,
       profilePhotoFilename: "",
       cart: [],
     }

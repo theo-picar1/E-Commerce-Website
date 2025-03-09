@@ -42,7 +42,7 @@ export default class App extends Component {
           <Route exact path="/delete-user/:id" component={DeleteUser} />
           <Route exact path="/BuyProducts/:id" component={BuyProducts} />
           <Route exact path="/PayPalMessage/:messageType/:payPalPaymentID" component={PayPalMessage} />
-          <Route exact path="/PurchaseHistory" component={PurchaseHistory} />
+          <Route exact path="/PurchaseHistory/:id" component={PurchaseHistory} />
           <Route path="*" component={NoSuchPage} />
         </Switch>
       </BrowserRouter>

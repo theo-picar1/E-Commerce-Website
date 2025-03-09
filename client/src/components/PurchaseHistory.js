@@ -18,7 +18,7 @@ export default class PurchaseHistory extends Component {
 
   componentDidMount() {
     // Mainly for getting the users email, first name and second name
-    axios.get(`${SERVER_HOST}/users/${localStorage.id}`)
+    axios.get(`${SERVER_HOST}/users/${this.props.match.params.id}`)
       .then(res => {
         if (res.data) {
           if (res.data.errorMessage) {
@@ -41,7 +41,7 @@ export default class PurchaseHistory extends Component {
       })
 
     // to find all the purchases made by the user currently logged in (by using localStorage.id)
-    axios.get(`${SERVER_HOST}/sales/${localStorage.id}`)
+    axios.get(`${SERVER_HOST}/sales/${this.props.match.params.id}`)
       .then(res => {
         if (res.data) {
           if (res.data.errorMessage) {

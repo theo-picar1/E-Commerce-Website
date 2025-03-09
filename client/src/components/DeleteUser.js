@@ -34,6 +34,6 @@ export default class DeleteUser extends Component {
   }
 
   render() {
-    return <div>{this.state.redirectToPage ? <Redirect to="/users" /> : null}</div>
+    return <div>{this.state.redirectToPage ? <Redirect to="/" /> : null}</div>
   }
 }

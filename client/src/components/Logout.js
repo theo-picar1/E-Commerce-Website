@@ -26,6 +26,8 @@ export default class Logout extends Component {
                     console.log("User logged out")
                     // Clear everything in localStorage. App.js will handle the empty values
                     localStorage.clear()
+                    localStorage.accessLevel = ACCESS_LEVEL_GUEST
+                    localStorage.token = null
                     
                     this.setState({ isLoggedIn: false })
                 }
