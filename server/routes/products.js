@@ -33,7 +33,7 @@ const checkTokenAccessLevel = (req, res, next) => {
   if (req.decodedToken.accessLevel >= process.env.ACCESS_LEVEL_ADMIN) {
     return next()
   }
-  return next(createError(403, 'Forbidden'))
+  return next(createError(403, 'You are not authorised to use this functionality!'))
 }
 
 // Get all products
