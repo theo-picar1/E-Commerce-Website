@@ -110,12 +110,18 @@ export default class Header extends Component {
                       <p>Edit profile</p>
                     </div>
                     <hr />
-                    <div>
-                      <Link className="link" to={"/PurchaseHistory"}>
-                        <p id="purchaseHistoryLink">Check Purchase History</p>
-                      </Link>
-                    </div>
-                    <hr />
+                    {localStorage.accessLevel < ACCESS_LEVEL_ADMIN ?
+                      <React.Fragment>
+                        <div>
+                          <Link className="link" to={"/PurchaseHistory"}>
+                            <p id="purchaseHistoryLink">Check Purchase History</p>
+                          </Link>
+                        </div>
+                        <hr />
+                      </React.Fragment>
+                      :
+                      null
+                    }
                     <div>
                       <Link className="link" to={"/logout"}>
                         <p id="sign-out">Sign out</p>
