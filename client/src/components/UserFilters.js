@@ -35,9 +35,7 @@ export default class UserFilters extends Component {
                         <option value="name-desc">Name (Z-A)</option>
                     </select>
                     <div id="action-buttons">
-                        <button className="add-button">ADD USER</button>
-                        <button className="edit-button">EDIT USER</button>
-                        <button className="delete-button">DELETE USERS</button>
+                        <button className="del-button">DELETE USERS</button>
                     </div>
                 </div>
                 {/* <div id="filter-results">
