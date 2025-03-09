@@ -7,7 +7,6 @@ const fs = require("fs")
 // Purely for security reasons. Instead of the actual key in the env file, we read (fs) the filename of JWT_PRIVATE_KEY_FILENAME
 const JWT_PRIVATE_KEY = fs.readFileSync(process.env.JWT_PRIVATE_KEY_FILENAME, "utf8")
 
-// Error handling
 // All error handling was from https://derek.comp.dkit.ie/ at Full Stack Development/Error Handling
 const createError = require("http-errors")
 
@@ -25,6 +24,7 @@ const getAllUsers = (req, res, next) => {
   })
 }
 
+// Get one user by id
 const getOneUser = (req, res, next) => {
   usersModel.findById(req.params.id, (err, data) => {
     if (err) {
@@ -39,7 +39,7 @@ const getOneUser = (req, res, next) => {
   })
 }
 
-// Reset user collection (for testing purposes)
+// Reset user collection (for testing purposes and not actually used)
 router.post(`/users/reset_user_collection`, (req, res, next) => {
   usersModel.deleteMany({}, (err, data) => {
     if (err) {
@@ -68,7 +68,7 @@ router.post(`/users/reset_user_collection`, (req, res, next) => {
   })
 })
 
-// Check if user already exists function
+// Check if user already exists for registering a user
 const checkUserExistsForRegister = (req, res, next) => {
   usersModel.findOne({ email: req.body.email }, (err, data) => {
     if (err) {
@@ -82,7 +82,7 @@ const checkUserExistsForRegister = (req, res, next) => {
   })
 }
 
-// Hash user's password and create the new user function
+// Hash user's password. Mainly for registering
 const hashPassword = (req, res, next) => {
   bcrypt.hash(req.body.password, parseInt(process.env.SALT_ROUNDS), (err, hash) => {
     if (err) {
@@ -102,7 +102,7 @@ const createNewUser = (req, res, next) => {
   })
 }
 
-// Middleware to find the user by email
+// Find user by email. Mainly for logging in
 const findUserByEmail = (req, res, next) => {
   usersModel.findOne({ email: req.params.email }, (err, data) => {
     if (err) {
@@ -131,6 +131,7 @@ const compareHashedPasswords = (req, res, next) => {
   })
 }
 
+// For creating the token when the user successfully logs in
 const createTokenAndSendBackDetails = (req, res) => {
   const token = jwt.sign({ email: req.user.email, accessLevel: req.user.accessLevel }, JWT_PRIVATE_KEY, { algorithm: "HS256", expiresIn: process.env.JWT_EXPIRY }
   )
@@ -145,7 +146,7 @@ const createTokenAndSendBackDetails = (req, res) => {
   })
 }
 
-// Middleware to check if user id and product are valid
+// Checks to see if user id and product are valid
 const validateProducts = (req, res, next) => {
   // get user id and product from body
   const { product } = req.body
@@ -159,7 +160,7 @@ const validateProducts = (req, res, next) => {
   next()
 }
 
-// Middleware to find user by id
+// Used to find a user by id. Mainly for the shopping cart
 const findUserByIdForCart = (req, res, next) => {
   const { userId } = req.body
 
@@ -176,7 +177,7 @@ const findUserByIdForCart = (req, res, next) => {
   })
 }
 
-// Middleware to add product to user's cart and save
+// For adding passed product to matching user's cart
 const addProductToCart = (req, res, next) => {
   const { product } = req.body
 
@@ -195,6 +196,7 @@ const addProductToCart = (req, res, next) => {
   })
 }
 
+// Same logic but we're deleting a product from the mathcing user's cart
 const deleteProductFromCart = (req, res, next) => {
   const { product } = req.body
 
