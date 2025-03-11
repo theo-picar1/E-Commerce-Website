@@ -104,10 +104,14 @@ export default class Home extends Component {
 
     // So that guests can use shopping cart, we make a temporary user with just a generic id
     // If nothing is found, it is assumed that the user is already logged in
-    if (!this.state.guestUserCreated) {
+    if (!localStorage.getItem("user")) {
       console.log("you are not logged in")
       this.createNonLoggedInUser()
     } else {
+      this.setState({ loggedInUser: JSON.parse(localStorage.getItem("user")) },
+      () => {
+        this.incrementCartCounter()
+      })
       console.log("you are logged in")
     }
   }
